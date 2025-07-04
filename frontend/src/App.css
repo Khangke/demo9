@@ -1101,12 +1101,12 @@ body {
   border-radius: 30px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex: 1;
   font-size: 0.95rem;
   box-shadow: 
-    0 6px 20px rgba(244, 208, 63, 0.3),
-    0 3px 10px rgba(244, 208, 63, 0.2);
+    0 3px 12px rgba(244, 208, 63, 0.2),
+    0 1px 6px rgba(244, 208, 63, 0.15);
   letter-spacing: 0.02em;
   position: relative;
   overflow: hidden;

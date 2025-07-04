@@ -103,14 +103,7 @@ body {
   opacity: 0.6;
 }
 
-@keyframes brandGlow {
-  0% { 
-    filter: drop-shadow(0 0 5px rgba(244, 208, 63, 0.3));
-  }
-  100% { 
-    filter: drop-shadow(0 0 15px rgba(244, 208, 63, 0.6));
-  }
-}
+/* Logo animations removed for subtle elegance */
 
 @keyframes sparkle {
   0%, 100% { 

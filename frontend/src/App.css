@@ -1534,16 +1534,7 @@ body {
 
 
 
-@keyframes brandFooterUnderline {
-  0%, 100% { 
-    opacity: 0.4;
-    transform: scaleX(0.7);
-  }
-  50% { 
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
+
 
 .footer-brand .tagline {
   color: #D4AF37;

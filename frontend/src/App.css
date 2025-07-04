@@ -134,8 +134,14 @@ body {
   transform: translateY(-1px);
 }
 
-.header-icon-btn .icon {
+.header-icon-btn .icon,
+.header-icon-btn ion-icon {
   font-size: 1.2rem;
+  color: inherit;
+}
+
+.header-icon-btn ion-icon {
+  --ionicon-stroke-width: 32px;
 }
 
 .header-icon-btn .badge {

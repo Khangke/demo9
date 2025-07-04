@@ -341,8 +341,7 @@ function App() {
                 <h3>Mua 2 Tặng 1</h3>
                 <p>Áp dụng cho sản phẩm trầm hương sáng</p>
                 <div className="promo-buttons">
-                  <button className="promo-btn promo-btn-secondary">Xem Chi Tiết</button>
-                  <button className="promo-btn">Mua Ngay</button>
+                  <button className="promo-btn promo-btn-primary">Mua Ngay</button>
                 </div>
               </div>
             </div>
@@ -352,8 +351,7 @@ function App() {
                 <h3>Miễn Phí Vận Chuyển</h3>
                 <p>Cho đơn hàng trên 1 triệu đồng</p>
                 <div className="promo-buttons">
-                  <button className="promo-btn promo-btn-secondary">Xem Chi Tiết</button>
-                  <button className="promo-btn">Mua Ngay</button>
+                  <button className="promo-btn promo-btn-primary">Mua Ngay</button>
                 </div>
               </div>
             </div>

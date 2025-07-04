@@ -1547,25 +1547,7 @@ body {
   letter-spacing: 0.2px;
 }
 
-@keyframes taglineFooterShimmer {
-  0%, 100% { 
-    background-position: 0% 50%;
-  }
-  50% { 
-    background-position: 100% 50%;
-  }
-}
 
-@keyframes taglineFooterSweep {
-  0%, 100% { 
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  50% { 
-    transform: translateX(100%);
-    opacity: 1;
-  }
-}
 
 .footer-section h4 {
   color: #F4D03F;

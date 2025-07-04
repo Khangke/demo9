@@ -253,9 +253,26 @@ function App() {
             <div className="footer-section">
               <h4>Theo Dõi Chúng Tôi</h4>
               <div className="social-links">
-                <a href="#" aria-label="Facebook">Facebook</a>
-                <a href="#" aria-label="Instagram">Instagram</a>
-                <a href="#" aria-label="Zalo">Zalo</a>
+                <a href="#" aria-label="Facebook" className="social-facebook">
+                  <span className="social-icon">📘</span>
+                  <span className="social-text">Facebook</span>
+                </a>
+                <a href="#" aria-label="Instagram" className="social-instagram">
+                  <span className="social-icon">📷</span>
+                  <span className="social-text">Instagram</span>
+                </a>
+                <a href="#" aria-label="Zalo" className="social-zalo">
+                  <span className="social-icon">💬</span>
+                  <span className="social-text">Zalo</span>
+                </a>
+                <a href="#" aria-label="YouTube" className="social-youtube">
+                  <span className="social-icon">🎥</span>
+                  <span className="social-text">YouTube</span>
+                </a>
+                <a href="#" aria-label="TikTok" className="social-tiktok">
+                  <span className="social-icon">🎵</span>
+                  <span className="social-text">TikTok</span>
+                </a>
               </div>
             </div>
           </div>

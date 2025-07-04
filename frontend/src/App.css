@@ -1569,32 +1569,14 @@ body {
 }
 
 .footer-brand .tagline {
-  background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  font-size: 1.1rem;
+  color: #D4AF37;
+  font-size: 1.05rem;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 2.5rem;
-  opacity: 0.95;
+  opacity: 0.9;
   line-height: 1.7;
-  letter-spacing: 0.3px;
-  animation: taglineFooterShimmer 5s ease-in-out infinite;
-  position: relative;
-}
-
-.footer-brand .tagline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, transparent, rgba(244, 208, 63, 0.1), transparent);
-  animation: taglineFooterSweep 4s ease-in-out infinite;
-  pointer-events: none;
+  letter-spacing: 0.2px;
 }
 
 @keyframes taglineFooterShimmer {

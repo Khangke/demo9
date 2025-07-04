@@ -1064,16 +1064,16 @@ body {
   min-width: 65px;
   font-size: 1rem;
   box-shadow: 
-    inset 0 2px 4px rgba(0, 0, 0, 0.3),
-    0 2px 8px rgba(0, 0, 0, 0.1);
+    inset 0 2px 4px rgba(0, 0, 0, 0.2),
+    0 1px 4px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  animation: timerPulse 2s ease-in-out infinite;
+  animation: gentleTimerPulse 3s ease-in-out infinite;
 }
 
-@keyframes timerPulse {
+@keyframes gentleTimerPulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.01); }
   100% { transform: scale(1); }
 }
 

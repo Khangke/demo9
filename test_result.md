@@ -204,7 +204,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Compact Header with Updated Navigation"
+    - "Giảm độ lóe và tăng độ nét của icon"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

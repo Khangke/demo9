@@ -279,8 +279,8 @@ body {
 }
 
 .cta-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 208, 63, 0.25);
   background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
 }
 

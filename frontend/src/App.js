@@ -262,16 +262,6 @@ function App() {
               <div className="review-date">3 tuần trước</div>
             </div>
           </div>
-
-          <div className="certifications">
-            <h3>Chứng Nhận & Giải Thưởng</h3>
-            <div className="cert-list">
-              <div className="cert-item">🏅 Chứng nhận sản phẩm an toàn</div>
-              <div className="cert-item">🏆 Top 10 thương hiệu trầm hương uy tín</div>
-              <div className="cert-item">✅ Chứng nhận chất lượng ISO</div>
-              <div className="cert-item">🌟 Giải thưởng sản phẩm xanh</div>
-            </div>
-          </div>
         </div>
       </section>
 

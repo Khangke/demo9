@@ -933,12 +933,12 @@ body {
 .featured-promo {
   background: 
     linear-gradient(135deg, #F4D03F 0%, #F39C12 100%),
-    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
   color: #1A1A1A;
   box-shadow: 
-    0 16px 48px rgba(244, 208, 63, 0.35),
-    0 8px 24px rgba(244, 208, 63, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 8px 24px rgba(244, 208, 63, 0.25),
+    0 4px 12px rgba(244, 208, 63, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
 }
 

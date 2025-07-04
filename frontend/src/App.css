@@ -1584,12 +1584,12 @@ body {
 .contact-icon::after {
   content: '';
   position: absolute;
-  inset: -2px;
+  inset: -1px;
   border-radius: 50%;
   background: linear-gradient(135deg, #F4D03F, #F39C12);
   z-index: -1;
-  opacity: 0.3;
-  filter: blur(8px);
+  opacity: 0.1;
+  filter: blur(2px);
 }
 
 .footer-section ul {

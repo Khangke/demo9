@@ -1136,20 +1136,20 @@ body {
 .promo-btn-secondary {
   background: transparent;
   color: #F4D03F;
-  border: 2px solid rgba(244, 208, 63, 0.8);
+  border: 2px solid rgba(244, 208, 63, 0.6);
   box-shadow: 
-    0 6px 20px rgba(244, 208, 63, 0.15),
-    inset 0 1px 0 rgba(244, 208, 63, 0.1);
+    0 3px 12px rgba(244, 208, 63, 0.1),
+    inset 0 1px 0 rgba(244, 208, 63, 0.05);
 }
 
 .promo-btn-secondary:hover {
-  background: rgba(244, 208, 63, 0.1);
-  border-color: #F4D03F;
+  background: rgba(244, 208, 63, 0.08);
+  border-color: rgba(244, 208, 63, 0.8);
   color: #F4D03F;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
   box-shadow: 
-    0 8px 28px rgba(244, 208, 63, 0.25),
-    inset 0 1px 0 rgba(244, 208, 63, 0.2);
+    0 4px 16px rgba(244, 208, 63, 0.15),
+    inset 0 1px 0 rgba(244, 208, 63, 0.1);
 }
 
 .featured-promo .promo-btn {

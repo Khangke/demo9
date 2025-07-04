@@ -105,16 +105,7 @@ body {
 
 /* Logo animations removed for subtle elegance */
 
-@keyframes sparkle {
-  0%, 100% { 
-    opacity: 0.5;
-    transform: translateY(-50%) scale(0.8);
-  }
-  50% { 
-    opacity: 1;
-    transform: translateY(-50%) scale(1.2);
-  }
-}
+
 
 @keyframes brandUnderline {
   0%, 100% { 

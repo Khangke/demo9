@@ -299,10 +299,10 @@ body {
 }
 
 .cta-secondary:hover {
-  background: rgba(244, 208, 63, 0.1);
+  background: rgba(244, 208, 63, 0.08);
   border-color: #F4D03F;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 32px rgba(244, 208, 63, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.15);
 }
 
 /* Section Header */

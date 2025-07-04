@@ -45,6 +45,41 @@ body {
   align-items: center;
 }
 
+.logo {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 1;
+}
+
+.logo:hover h1 {
+  transform: scale(1.05);
+  animation-duration: 1.5s;
+}
+
+.logo:hover .tagline {
+  transform: translateY(-2px);
+  animation-duration: 2s;
+}
+
+.logo::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  right: -20px;
+  bottom: -10px;
+  background: radial-gradient(ellipse at center, rgba(244, 208, 63, 0.1) 0%, transparent 70%);
+  border-radius: 15px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.logo:hover::before {
+  opacity: 1;
+}
+
 .logo h1 {
   background: linear-gradient(135deg, #F4D03F 0%, #F39C12 50%, #E67E22 100%);
   -webkit-background-clip: text;

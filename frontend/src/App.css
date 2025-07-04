@@ -2143,6 +2143,10 @@ body {
     font-size: 1.8rem;
   }
   
+  .feature-icon ion-icon {
+    font-size: 1.6rem;
+  }
+  
   .review-card {
     padding: 2rem;
   }

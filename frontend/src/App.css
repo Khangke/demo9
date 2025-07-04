@@ -1442,7 +1442,11 @@ body {
   
   .footer-content {
     grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
+    gap: 2rem;
+  }
+  
+  .social-links {
+    grid-template-columns: 1fr;
   }
   
   .section-header h2 {

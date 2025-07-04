@@ -181,20 +181,20 @@ frontend:
           agent: "main"
           comment: "Verified mobile navigation working perfectly. Desktop shows full navigation bar, mobile/tablet shows hamburger menu. Mobile menu opens/closes smoothly with all navigation links working correctly. Responsive breakpoints at 768px and 480px working as expected."
 
-  - task: "Compact Header with Updated Navigation"
+  - task: "Giảm độ lóe và tăng độ nét của icon"
     implemented: true
     working: true
-    file: "/app/frontend/src/App.js, /app/frontend/src/App.css"
+    file: "/app/frontend/src/App.css"
     stuck_count: 0
     priority: "high"
     needs_retesting: false
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Redesigned header to be more compact and added new navigation structure. Updated menu items from 'Về Chúng Tôi, Đánh Giá' to 'Giới Thiệu'. Added shopping cart icon with badge counter and user account icon. Reduced header padding from 1.2rem to 0.8rem, decreased logo font size from 1.75rem to 1.5rem, and optimized spacing. Added new header actions section with icons and improved mobile responsive design."
+          comment: "Đã giảm độ lóe của các icon social media và contact bằng cách giảm box-shadow blur từ 15px xuống 6px, giảm opacity từ 0.3 xuống 0.15, và giảm hiệu ứng blur ::after từ 8px xuống 2px. Tăng độ nét bằng cách tăng ionicon stroke-width từ 32px lên 40px."
         - working: true
           agent: "main"
-          comment: "Successfully implemented compact header design with updated navigation menu including Trang Chủ, Sản Phẩm, Giới Thiệu, Tin Tức, Liên Hệ. Added shopping cart icon (🛒) with red notification badge showing '0' and user account icon (👤). Header is now more compact with reduced padding and smaller logo. Mobile version properly hides icons and shows hamburger menu with all navigation items including cart and account options. Design is clean, modern, and properly responsive across all screen sizes."
+          comment: "Đã thành công trong việc giảm độ lóe và tăng độ nét của các icon. Thực hiện các thay đổi: 1) Giảm box-shadow blur effect từ 0 4px 15px rgba(244, 208, 63, 0.3) xuống 0 2px 6px rgba(244, 208, 63, 0.15). 2) Giảm hiệu ứng blur ::after từ filter: blur(8px) xuống blur(2px). 3) Tăng stroke-width của ion-icon từ 32px lên 40px để tăng độ nét. 4) Cập nhật cả .social-icon và .contact-icon để có hiệu ứng nhất quán."
 
 metadata:
   created_by: "main_agent"

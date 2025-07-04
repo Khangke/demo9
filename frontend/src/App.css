@@ -1359,17 +1359,17 @@ body {
 @media (max-width: 1024px) {
   .why-content {
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem;
   }
   
   .promotions-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
   .footer-content {
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
   }
   
   .section-header h2 {
@@ -1378,6 +1378,11 @@ body {
   
   .hero-content h1 {
     font-size: 3.5rem;
+  }
+  
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.8rem;
   }
 }
 

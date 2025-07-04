@@ -366,9 +366,9 @@ body {
 }
 
 .product-card:hover {
-  transform: translateY(-8px) scale(1);
-  box-shadow: 0 20px 60px rgba(244, 208, 63, 0.15);
-  border-color: rgba(244, 208, 63, 0.25);
+  transform: translateY(-4px) scale(1);
+  box-shadow: 0 8px 24px rgba(244, 208, 63, 0.08);
+  border-color: rgba(244, 208, 63, 0.15);
 }
 
 .product-image {

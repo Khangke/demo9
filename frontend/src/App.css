@@ -1617,28 +1617,51 @@ body {
     gap: 2rem;
   }
   
+  .footer-main {
+    padding: 3rem 0 2rem;
+  }
+  
   .footer-content {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 2.5rem;
   }
   
-  .footer-section {
-    padding: 1.2rem;
-  }
-  
-  .footer-section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .footer-section h4 {
-    font-size: 1rem;
+  .footer-brand h3 {
+    font-size: 1.6rem;
     margin-bottom: 1.2rem;
   }
   
+  .footer-brand .tagline {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+  
+  .footer-section h4 {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-item {
+    padding: 1rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+  
   .social-links {
-    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 0.8rem;
+  }
+  
+  .social-links a {
+    flex: 1;
+    min-width: calc(50% - 0.4rem);
+    padding: 1rem 0.8rem;
   }
   
   .social-text {
@@ -1646,8 +1669,7 @@ body {
   }
   
   .footer-bottom {
-    padding: 2rem 1rem 1rem;
-    margin-top: 1.5rem;
+    padding: 2rem 0 1.5rem;
   }
   
   .hero {

@@ -1499,13 +1499,28 @@ body {
     gap: 1.5rem;
   }
   
+  .footer-main {
+    padding: 4rem 0 3rem;
+  }
+  
   .footer-content {
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    gap: 3rem;
+  }
+  
+  .footer-brand h3 {
+    font-size: 1.8rem;
   }
   
   .social-links {
-    grid-template-columns: 1fr;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .social-links a {
+    flex: 1;
+    min-width: calc(50% - 0.5rem);
   }
   
   .section-header h2 {

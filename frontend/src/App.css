@@ -107,16 +107,7 @@ body {
 
 
 
-@keyframes brandUnderline {
-  0%, 100% { 
-    opacity: 0.3;
-    transform: scaleX(0.8);
-  }
-  50% { 
-    opacity: 1;
-    transform: scaleX(1);
-  }
-}
+
 
 .logo .tagline {
   color: #C0C0C0;

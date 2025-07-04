@@ -1755,7 +1755,7 @@ body {
   }
   
   .promo-buttons {
-    flex-direction: row;
+    justify-content: center;
     gap: 1rem;
   }
   
@@ -1763,6 +1763,7 @@ body {
     padding: 1rem 1.5rem;
     font-size: 0.9rem;
     min-height: 52px;
+    min-width: 180px;
   }
   
   .timer {

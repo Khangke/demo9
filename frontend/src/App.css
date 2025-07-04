@@ -958,7 +958,7 @@ body {
 
 .promo-badge {
   position: absolute;
-  top: -12px;
+  top: 38px;
   right: 24px;
   background: linear-gradient(135deg, #FF4444 0%, #CC3333 100%);
   color: #FFF;
@@ -971,13 +971,81 @@ body {
     0 4px 12px rgba(255, 68, 68, 0.2);
   letter-spacing: 0.03em;
   z-index: 10;
-  animation: badgePulse 2s ease-in-out infinite;
+  animation: hotBadgeAnimation 3s ease-in-out infinite;
+  transform-origin: center;
 }
 
-@keyframes badgePulse {
-  0% { box-shadow: 0 8px 24px rgba(255, 68, 68, 0.4), 0 4px 12px rgba(255, 68, 68, 0.2); }
-  50% { box-shadow: 0 12px 32px rgba(255, 68, 68, 0.6), 0 6px 16px rgba(255, 68, 68, 0.4); }
-  100% { box-shadow: 0 8px 24px rgba(255, 68, 68, 0.4), 0 4px 12px rgba(255, 68, 68, 0.2); }
+@keyframes hotBadgeAnimation {
+  0% { 
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 8px 24px rgba(255, 68, 68, 0.4), 0 4px 12px rgba(255, 68, 68, 0.2);
+    filter: brightness(1) saturate(1);
+  }
+  25% { 
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 12px 32px rgba(255, 68, 68, 0.6), 0 6px 16px rgba(255, 68, 68, 0.4);
+    filter: brightness(1.1) saturate(1.2);
+  }
+  50% { 
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 16px 40px rgba(255, 68, 68, 0.8), 0 8px 20px rgba(255, 68, 68, 0.6);
+    filter: brightness(1.2) saturate(1.3);
+  }
+  75% { 
+    transform: scale(1.1) rotate(-1deg);
+    box-shadow: 0 12px 32px rgba(255, 68, 68, 0.6), 0 6px 16px rgba(255, 68, 68, 0.4);
+    filter: brightness(1.1) saturate(1.2);
+  }
+  100% { 
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 8px 24px rgba(255, 68, 68, 0.4), 0 4px 12px rgba(255, 68, 68, 0.2);
+    filter: brightness(1) saturate(1);
+  }
+}
+
+.promo-badge::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #FF6B6B, #FF4444, #CC3333, #FF4444);
+  border-radius: 27px;
+  z-index: -1;
+  opacity: 0.7;
+  animation: hotGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes hotGlow {
+  0% {
+    opacity: 0.7;
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(6px);
+  }
+}
+
+.promo-badge::after {
+  content: '🔥';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 0.9rem;
+  animation: fireIcon 2s ease-in-out infinite;
+}
+
+@keyframes fireIcon {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.3) rotate(15deg);
+    opacity: 1;
+  }
 }
 
 .promo-content h3 {

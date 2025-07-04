@@ -1096,9 +1096,11 @@ body {
 
 /* Footer */
 .footer {
-  background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
-  padding: 5rem 0 2.5rem;
-  border-top: 1px solid rgba(244, 208, 63, 0.2);
+  background: 
+    linear-gradient(180deg, rgba(0, 0, 0, 0.95) 0%, rgba(10, 10, 10, 0.98) 50%, #000000 100%),
+    radial-gradient(ellipse at center top, rgba(244, 208, 63, 0.06) 0%, transparent 70%);
+  padding: 0;
+  border: none;
   position: relative;
   overflow: hidden;
 }
@@ -1109,14 +1111,15 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 1px;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    rgba(244, 208, 63, 0.1) 20%, 
-    rgba(244, 208, 63, 0.4) 50%, 
-    rgba(244, 208, 63, 0.1) 80%, 
+    rgba(244, 208, 63, 0.3) 20%, 
+    rgba(244, 208, 63, 0.8) 50%, 
+    rgba(244, 208, 63, 0.3) 80%, 
     transparent 100%
   );
+  box-shadow: 0 0 20px rgba(244, 208, 63, 0.4);
 }
 
 .footer::after {
@@ -1126,20 +1129,27 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: 
-    radial-gradient(ellipse at top center, rgba(244, 208, 63, 0.04) 0%, transparent 60%),
-    radial-gradient(ellipse at bottom left, rgba(244, 208, 63, 0.02) 0%, transparent 50%),
-    radial-gradient(ellipse at bottom right, rgba(244, 208, 63, 0.02) 0%, transparent 50%);
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(244, 208, 63, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(244, 208, 63, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 50% 100%, rgba(244, 208, 63, 0.04) 0%, transparent 60%);
   pointer-events: none;
+}
+
+.footer-main {
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.8) 0%, rgba(15, 15, 15, 0.9) 100%);
+  padding: 6rem 0 4rem;
+  position: relative;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(244, 208, 63, 0.1);
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: 2.5fr 1fr 1fr 1.2fr;
-  gap: 4rem;
-  margin-bottom: 3.5rem;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 5rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .footer-section {

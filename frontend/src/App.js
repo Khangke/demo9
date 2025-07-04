@@ -85,14 +85,22 @@ function App() {
               <ul>
                 <li><a href="#home">Trang Chủ</a></li>
                 <li><a href="#products">Sản Phẩm</a></li>
-                <li><a href="#about">Về Chúng Tôi</a></li>
-                <li><a href="#reviews">Đánh Giá</a></li>
-                <li><a href="#blog">Tin Tức</a></li>
+                <li><a href="#about">Giới Thiệu</a></li>
+                <li><a href="#news">Tin Tức</a></li>
                 <li><a href="#contact">Liên Hệ</a></li>
               </ul>
             </nav>
 
-            <div className="header-cta">
+            <div className="header-actions">
+              <div className="header-icons">
+                <button className="header-icon-btn" aria-label="Giỏ hàng">
+                  <span className="icon">🛒</span>
+                  <span className="badge">0</span>
+                </button>
+                <button className="header-icon-btn" aria-label="Tài khoản">
+                  <span className="icon">👤</span>
+                </button>
+              </div>
               <button className="header-cta-btn">Liên Hệ Ngay</button>
             </div>
 
@@ -110,10 +118,11 @@ function App() {
               <ul>
                 <li><a href="#home" onClick={toggleMobileMenu}>Trang Chủ</a></li>
                 <li><a href="#products" onClick={toggleMobileMenu}>Sản Phẩm</a></li>
-                <li><a href="#about" onClick={toggleMobileMenu}>Về Chúng Tôi</a></li>
-                <li><a href="#reviews" onClick={toggleMobileMenu}>Đánh Giá</a></li>
-                <li><a href="#blog" onClick={toggleMobileMenu}>Tin Tức</a></li>
+                <li><a href="#about" onClick={toggleMobileMenu}>Giới Thiệu</a></li>
+                <li><a href="#news" onClick={toggleMobileMenu}>Tin Tức</a></li>
                 <li><a href="#contact" onClick={toggleMobileMenu}>Liên Hệ</a></li>
+                <li><a href="#cart" onClick={toggleMobileMenu}>Giỏ Hàng</a></li>
+                <li><a href="#account" onClick={toggleMobileMenu}>Tài Khoản</a></li>
               </ul>
             </nav>
           )}

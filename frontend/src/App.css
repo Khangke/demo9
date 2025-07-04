@@ -81,27 +81,15 @@ body {
 }
 
 .logo h1 {
-  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 50%, #E67E22 100%);
+  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 1.8rem;
-  font-weight: 800;
+  font-size: 1.9rem;
+  font-weight: 700;
   margin-bottom: 0.1rem;
-  text-shadow: 0 2px 8px rgba(244, 208, 63, 0.4);
   letter-spacing: -0.02em;
   position: relative;
-  animation: brandGlow 3s ease-in-out infinite alternate;
-}
-
-.logo h1::before {
-  content: '✨';
-  position: absolute;
-  left: -1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.2rem;
-  animation: sparkle 2s ease-in-out infinite;
 }
 
 .logo h1::after {
@@ -109,10 +97,10 @@ body {
   position: absolute;
   bottom: -2px;
   left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #F4D03F, #F39C12, transparent);
-  animation: brandUnderline 2s ease-in-out infinite;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, #F4D03F, transparent);
+  opacity: 0.6;
 }
 
 @keyframes brandGlow {

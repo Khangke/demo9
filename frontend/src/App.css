@@ -1576,6 +1576,16 @@ body {
     gap: 1.5rem;
   }
   
+  .promo-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .promo-btn {
+    padding: 0.9rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
   .footer-main {
     padding: 4rem 0 3rem;
   }

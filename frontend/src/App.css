@@ -1597,13 +1597,52 @@ body {
 }
 
 .footer-brand .tagline {
-  color: #D4AF37;
-  font-size: 1rem;
+  background: linear-gradient(135deg, #D4AF37 0%, #F4D03F 50%, #D4AF37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  font-size: 1.1rem;
   font-style: italic;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 2.5rem;
-  opacity: 0.9;
-  line-height: 1.6;
+  opacity: 0.95;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  animation: taglineFooterShimmer 5s ease-in-out infinite;
+  position: relative;
+}
+
+.footer-brand .tagline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(244, 208, 63, 0.1), transparent);
+  animation: taglineFooterSweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes taglineFooterShimmer {
+  0%, 100% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes taglineFooterSweep {
+  0%, 100% { 
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% { 
+    transform: translateX(100%);
+    opacity: 1;
+  }
 }
 
 .footer-section h4 {

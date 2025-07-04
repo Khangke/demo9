@@ -180,7 +180,7 @@ function App() {
                       )}
                     </div>
                     <div className="product-rating">
-                      <div className="stars">⭐⭐⭐⭐⭐</div>
+                      <div className="stars">★★★★★</div>
                       <span className="rating-text">(4.9/5)</span>
                     </div>
                     <button className="add-to-cart-btn">Thêm Vào Giỏ Hàng</button>

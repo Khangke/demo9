@@ -2042,6 +2042,10 @@ body {
     font-size: 1.1rem;
   }
   
+  .contact-icon ion-icon {
+    font-size: 0.9rem;
+  }
+  
   .social-links {
     flex-direction: row;
     flex-wrap: wrap;

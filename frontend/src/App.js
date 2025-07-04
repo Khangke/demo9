@@ -315,9 +315,10 @@ function App() {
                 <div className="promo-timer">
                   <span className="timer-text">Còn lại:</span>
                   <div className="timer">
-                    <span className="timer-unit">10<small>ngày</small></span>
-                    <span className="timer-unit">15<small>giờ</small></span>
-                    <span className="timer-unit">30<small>phút</small></span>
+                    <span className="timer-unit">{timeLeft.days}<small>ngày</small></span>
+                    <span className="timer-unit">{timeLeft.hours}<small>giờ</small></span>
+                    <span className="timer-unit">{timeLeft.minutes}<small>phút</small></span>
+                    <span className="timer-unit">{timeLeft.seconds}<small>giây</small></span>
                   </div>
                 </div>
                 <div className="promo-buttons">

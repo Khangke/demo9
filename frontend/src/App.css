@@ -2276,6 +2276,10 @@ body {
     font-size: 1rem;
   }
   
+  .social-icon ion-icon {
+    font-size: 0.8rem;
+  }
+  
   .footer-bottom {
     padding: 1.5rem 0 1rem;
     font-size: 0.8rem;

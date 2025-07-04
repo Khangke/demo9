@@ -53,13 +53,13 @@ body {
 }
 
 .logo:hover h1 {
-  transform: scale(1.05);
-  animation-duration: 1.5s;
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
 }
 
 .logo:hover .tagline {
-  transform: translateY(-2px);
-  animation-duration: 2s;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
 .logo::before {

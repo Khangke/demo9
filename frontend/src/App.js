@@ -206,7 +206,7 @@ function App() {
             </div>
             <div className="why-features">
               <div className="feature-item">
-                <div className="feature-icon">🌿</div>
+                <div className="feature-icon">❖</div>
                 <div className="feature-content">
                   <h3>100% Tự Nhiên</h3>
                   <p>Được khai thác từ rừng tự nhiên Việt Nam, không chất bảo quản, không hóa chất độc hại</p>
@@ -214,7 +214,7 @@ function App() {
               </div>
 
               <div className="feature-item">
-                <div className="feature-icon">🏆</div>
+                <div className="feature-icon">◆</div>
                 <div className="feature-content">
                   <h3>Chất Lượng Cao</h3>
                   <p>Quy trình tuyển chọn nghiêm ngặt, chỉ chọn những cây trầm già cỗi có độ dầu cao</p>
@@ -222,7 +222,7 @@ function App() {
               </div>
 
               <div className="feature-item">
-                <div className="feature-icon">🎯</div>
+                <div className="feature-icon">▲</div>
                 <div className="feature-content">
                   <h3>Kinh Nghiệm Lâu Năm</h3>
                   <p>Hơn 15 năm kinh nghiệm trong ngành, được hàng nghìn khách hàng tin tưởng</p>
@@ -230,7 +230,7 @@ function App() {
               </div>
 
               <div className="feature-item">
-                <div className="feature-icon">✨</div>
+                <div className="feature-icon">✦</div>
                 <div className="feature-content">
                   <h3>Hương Thơm Đặc Trưng</h3>
                   <p>Hương thơm tinh tế, bền lâu, mang lại cảm giác thư giãn và thanh tịnh</p>

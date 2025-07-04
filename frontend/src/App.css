@@ -593,7 +593,7 @@ body {
     font-size: 1rem;
   }
   
-  .intro h2, .featured-products h2, .all-products h2 {
+  .intro h2, .featured-products h2, .about-us h2 {
     font-size: 2rem;
   }
   
@@ -614,8 +614,25 @@ body {
     height: 80vh;
   }
   
-  .featured-products, .all-products, .intro {
+  .featured-products, .about-us, .intro {
     padding: 2rem 0;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-features {
+    gap: 1.5rem;
+  }
+
+  .feature-item {
+    padding: 1rem;
+  }
+
+  .about-cta {
+    padding: 2rem 1rem;
   }
 }
 

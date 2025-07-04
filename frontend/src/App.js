@@ -331,8 +331,7 @@ function App() {
                   </div>
                 </div>
                 <div className="promo-buttons">
-                  <button className="promo-btn promo-btn-secondary">Xem Chi Tiết</button>
-                  <button className="promo-btn">Mua Ngay</button>
+                  <button className="promo-btn promo-btn-primary">Mua Ngay</button>
                 </div>
               </div>
             </div>

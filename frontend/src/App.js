@@ -253,13 +253,13 @@ function App() {
             <div className="review-card">
               <div className="review-header">
                 <div className="reviewer-info">
-                  <div className="reviewer-avatar">👤</div>
+                  <div className="reviewer-avatar">◉</div>
                   <div className="reviewer-details">
                     <h4>Nguyễn Văn A</h4>
                     <span className="reviewer-location">Hà Nội</span>
                   </div>
                 </div>
-                <div className="review-rating">⭐⭐⭐⭐⭐</div>
+                <div className="review-rating">★★★★★</div>
               </div>
               <p className="review-text">
                 "Trầm hương ở đây thật sự rất chất lượng! Hương thơm rất đặc trưng và bền lâu. 
@@ -271,13 +271,13 @@ function App() {
             <div className="review-card">
               <div className="review-header">
                 <div className="reviewer-info">
-                  <div className="reviewer-avatar">👤</div>
+                  <div className="reviewer-avatar">◉</div>
                   <div className="reviewer-details">
                     <h4>Trần Thị B</h4>
                     <span className="reviewer-location">TP. Hồ Chí Minh</span>
                   </div>
                 </div>
-                <div className="review-rating">⭐⭐⭐⭐⭐</div>
+                <div className="review-rating">★★★★★</div>
               </div>
               <p className="review-text">
                 "Dịch vụ tuyệt vời, sản phẩm đúng như mô tả. Trầm hương có mùi rất thơm và tự nhiên. 
@@ -289,13 +289,13 @@ function App() {
             <div className="review-card">
               <div className="review-header">
                 <div className="reviewer-info">
-                  <div className="reviewer-avatar">👤</div>
+                  <div className="reviewer-avatar">◉</div>
                   <div className="reviewer-details">
                     <h4>Lê Văn C</h4>
                     <span className="reviewer-location">Đà Nẵng</span>
                   </div>
                 </div>
-                <div className="review-rating">⭐⭐⭐⭐⭐</div>
+                <div className="review-rating">★★★★★</div>
               </div>
               <p className="review-text">
                 "Chất lượng xuất sắc, đóng gói cẩn thận. Giao hàng nhanh chóng. 

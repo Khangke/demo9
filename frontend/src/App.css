@@ -1519,25 +1519,81 @@ body {
 }
 
 .footer-brand h3 {
-  color: #F4D03F;
-  font-size: 2.2rem;
-  font-weight: 800;
+  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 30%, #E67E22 60%, #F4D03F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  font-size: 2.5rem;
+  font-weight: 900;
   margin-bottom: 1.5rem;
-  letter-spacing: -0.03em;
-  text-shadow: 0 0 30px rgba(244, 208, 63, 0.3);
+  letter-spacing: -0.04em;
   position: relative;
+  animation: brandFooterGlow 4s ease-in-out infinite, brandFooterSlide 6s ease-in-out infinite;
+  text-shadow: 0 0 40px rgba(244, 208, 63, 0.4);
+}
+
+.footer-brand h3::before {
+  content: '👑';
+  position: absolute;
+  left: -3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  animation: crownBounce 3s ease-in-out infinite;
 }
 
 .footer-brand h3::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  bottom: -15px;
   left: 0;
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #F4D03F 0%, #F39C12 70%, transparent 100%);
-  border-radius: 2px;
-  box-shadow: 0 0 15px rgba(244, 208, 63, 0.5);
+  width: 120px;
+  height: 6px;
+  background: linear-gradient(90deg, #F4D03F 0%, #F39C12 50%, #E67E22 70%, transparent 100%);
+  border-radius: 3px;
+  box-shadow: 0 0 20px rgba(244, 208, 63, 0.6);
+  animation: brandFooterUnderline 3s ease-in-out infinite;
+}
+
+@keyframes brandFooterGlow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 8px rgba(244, 208, 63, 0.3));
+  }
+  50% { 
+    filter: drop-shadow(0 0 20px rgba(244, 208, 63, 0.7));
+  }
+}
+
+@keyframes brandFooterSlide {
+  0%, 100% { 
+    background-position: 0% 50%;
+  }
+  50% { 
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes crownBounce {
+  0%, 100% { 
+    transform: translateY(-50%) scale(0.9);
+    opacity: 0.7;
+  }
+  50% { 
+    transform: translateY(-60%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes brandFooterUnderline {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scaleX(0.7);
+  }
+  50% { 
+    opacity: 1;
+    transform: scaleX(1);
+  }
 }
 
 .footer-brand .tagline {

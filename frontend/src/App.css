@@ -825,7 +825,7 @@ body {
 /* Promotions */
 .promotions {
   background: linear-gradient(135deg, #141414 0%, #1E1E1E 100%);
-  padding: 7rem 0;
+  padding: 6rem 0;
   position: relative;
 }
 
@@ -842,13 +842,13 @@ body {
 .promotions-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .promotion-card {
   background: linear-gradient(135deg, #1E1E1E 0%, #141414 100%);
-  padding: 2.5rem;
-  border-radius: 24px;
+  padding: 2rem;
+  border-radius: 20px;
   border: 1px solid rgba(244, 208, 63, 0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
@@ -868,9 +868,9 @@ body {
 }
 
 .promotion-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   border-color: rgba(244, 208, 63, 0.15);
-  box-shadow: 0 16px 48px rgba(244, 208, 63, 0.08);
+  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.08);
 }
 
 .promotion-card:hover::before {
@@ -880,7 +880,7 @@ body {
 .featured-promo {
   background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
   color: #1A1A1A;
-  box-shadow: 0 16px 48px rgba(244, 208, 63, 0.25);
+  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.25);
 }
 
 .featured-promo::before {
@@ -895,8 +895,8 @@ body {
 
 .promo-badge {
   position: absolute;
-  top: -12px;
-  right: 24px;
+  top: -8px;
+  right: 20px;
   background: linear-gradient(135deg, #FF4444 0%, #CC3333 100%);
   color: #FFF;
   padding: 0.4rem 1rem;
@@ -905,49 +905,51 @@ body {
   font-weight: 700;
   box-shadow: 0 4px 16px rgba(255, 68, 68, 0.3);
   letter-spacing: 0.02em;
+  z-index: 10;
 }
 
 .promo-content h3 {
   color: #F4D03F;
-  font-size: 1.3rem;
-  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.7rem;
   font-weight: 700;
   letter-spacing: -0.01em;
 }
 
 .promo-content p {
   color: #B8B8B8;
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
+  margin-bottom: 1.8rem;
+  font-size: 0.85rem;
   font-weight: 400;
   line-height: 1.6;
 }
 
 .promo-timer {
-  margin-bottom: 2rem;
+  margin-bottom: 1.8rem;
 }
 
 .timer-text {
   color: #1A1A1A;
   font-weight: 600;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.7rem;
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 .timer {
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .timer-unit {
   background: rgba(0, 0, 0, 0.15);
-  padding: 0.8rem;
-  border-radius: 12px;
+  padding: 0.7rem;
+  border-radius: 10px;
   font-weight: 700;
   color: #1A1A1A;
   text-align: center;
-  min-width: 60px;
+  min-width: 55px;
+  font-size: 0.9rem;
 }
 
 .timer-unit small {
@@ -962,13 +964,13 @@ body {
   background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
   color: #1A1A1A;
   border: none;
-  padding: 1rem 2rem;
-  border-radius: 30px;
+  padding: 0.9rem 1.8rem;
+  border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   box-shadow: 0 4px 16px rgba(244, 208, 63, 0.25);
   letter-spacing: 0.01em;
 }
@@ -981,11 +983,11 @@ body {
 
 .promo-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(244, 208, 63, 0.35);
+  box-shadow: 0 6px 24px rgba(244, 208, 63, 0.35);
 }
 
 .featured-promo .promo-btn:hover {
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
 
 /* Blog */

@@ -204,10 +204,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Homepage design with hero banner"
-    - "Product grid and cards"
-    - "Mobile-responsive navigation"
-    - "Elegant CSS styling"
+    - "Enhanced Promotions Section UI/UX"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -218,6 +215,7 @@ test_plan:
     - "Product grid and cards"
     - "Mobile-responsive navigation"
     - "Elegant CSS styling"
+    - "Enhanced Promotions Section UI/UX"
 
 agent_communication:
     - agent: "main"

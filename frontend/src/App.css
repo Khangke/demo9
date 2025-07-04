@@ -2152,7 +2152,7 @@ body {
   }
   
   .promo-buttons {
-    flex-direction: column;
+    justify-content: center;
     gap: 1rem;
     margin-top: 1.2rem;
   }
@@ -2162,6 +2162,7 @@ body {
     font-size: 0.85rem;
     min-height: 48px;
     border-radius: 25px;
+    min-width: 140px;
   }
   
   .promo-badge {

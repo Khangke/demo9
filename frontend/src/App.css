@@ -522,21 +522,19 @@ body {
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 100%;
   font-size: 0.9rem;
-  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.25);
+  box-shadow: 0 2px 8px rgba(244, 208, 63, 0.15);
   letter-spacing: 0.01em;
   position: relative;
   overflow: hidden;
-  animation: pulseGlow 3s ease-in-out infinite;
 }
 
 .add-to-cart-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 32px rgba(244, 208, 63, 0.35);
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.25);
   background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
-  animation: none;
 }
 
 .add-to-cart-btn::before {

@@ -219,7 +219,7 @@ test_plan:
     - "Mobile-responsive navigation"
     - "Elegant CSS styling"
     - "Enhanced Promotions Section UI/UX"
-    - "Nâng cấp CSS UX/UI thương hiệu để bắt mắt và nổi bật hơn"
+    - "Tinh chỉnh CSS UX/UI thương hiệu để elegant và nổi bật nhưng không chói mắt"
 
 agent_communication:
     - agent: "main"

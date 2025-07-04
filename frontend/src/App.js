@@ -287,7 +287,10 @@ function App() {
                     <span className="timer-unit">30<small>phút</small></span>
                   </div>
                 </div>
-                <button className="promo-btn">Mua Ngay</button>
+                <div className="promo-buttons">
+                  <button className="promo-btn promo-btn-secondary">Xem Chi Tiết</button>
+                  <button className="promo-btn">Mua Ngay</button>
+                </div>
               </div>
             </div>
 
@@ -295,7 +298,10 @@ function App() {
               <div className="promo-content">
                 <h3>Mua 2 Tặng 1</h3>
                 <p>Áp dụng cho sản phẩm trầm hương sáng</p>
-                <button className="promo-btn">Xem Chi Tiết</button>
+                <div className="promo-buttons">
+                  <button className="promo-btn promo-btn-secondary">Xem Chi Tiết</button>
+                  <button className="promo-btn">Mua Ngay</button>
+                </div>
               </div>
             </div>
 
@@ -303,7 +309,10 @@ function App() {
               <div className="promo-content">
                 <h3>Miễn Phí Vận Chuyển</h3>
                 <p>Cho đơn hàng trên 1 triệu đồng</p>
-                <button className="promo-btn">Mua Ngay</button>
+                <div className="promo-buttons">
+                  <button className="promo-btn promo-btn-secondary">Xem Chi Tiết</button>
+                  <button className="promo-btn">Mua Ngay</button>
+                </div>
               </div>
             </div>
           </div>

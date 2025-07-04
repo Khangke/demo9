@@ -232,12 +232,12 @@ body {
 }
 
 /* Products Section */
-.featured-products, .all-products {
+.featured-products, .about-us {
   background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
   padding: 4rem 0;
 }
 
-.featured-products h2, .all-products h2 {
+.featured-products h2, .about-us h2 {
   color: #FFD700;
   font-size: 2.5rem;
   text-align: center;

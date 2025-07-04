@@ -216,7 +216,7 @@ test_plan:
     - "Mobile-responsive navigation"
     - "Elegant CSS styling"
     - "Enhanced Promotions Section UI/UX"
-    - "Compact Header with Updated Navigation"
+    - "Giảm độ lóe và tăng độ nét của icon"
 
 agent_communication:
     - agent: "main"

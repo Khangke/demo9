@@ -1939,7 +1939,7 @@ body {
   }
   
   .promo-buttons {
-    flex-direction: column;
+    justify-content: center;
     gap: 1rem;
     margin-top: 1.5rem;
   }
@@ -1948,6 +1948,7 @@ body {
     padding: 1.1rem 1.5rem;
     font-size: 0.9rem;
     min-height: 52px;
+    min-width: 160px;
   }
   
   .promo-badge {

@@ -1712,7 +1712,7 @@ body {
 .social-icon ion-icon {
   font-size: 0.9rem;
   color: #1A1A1A;
-  --ionicon-stroke-width: 32px;
+  --ionicon-stroke-width: 40px;
 }
 
 .social-text {

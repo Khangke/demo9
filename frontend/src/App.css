@@ -739,6 +739,13 @@ body {
   flex-shrink: 0;
   box-shadow: 0 8px 24px rgba(244, 208, 63, 0.25);
   position: relative;
+  color: #1A1A1A;
+}
+
+.feature-icon ion-icon {
+  font-size: 2rem;
+  color: #1A1A1A;
+  --ionicon-stroke-width: 32px;
 }
 
 .feature-icon::after {

@@ -145,36 +145,81 @@ function App() {
         </div>
       </section>
 
-      {/* All Products Section */}
-      <section className="all-products">
+      {/* About Us Section */}
+      <section className="about-us">
         <div className="container">
-          <h2>Tất Cả Sản Phẩm</h2>
+          <h2>Về Chúng Tôi</h2>
           
-          <div className="products-grid">
-            {products.map(product => (
-              <div key={product.id} className="product-card">
-                <div className="product-image">
-                  <img src={product.image_url} alt={product.name} />
-                  <div className="product-overlay">
-                    <button className="quick-view-btn">Xem Nhanh</button>
-                  </div>
-                </div>
-                <div className="product-info">
-                  <h3>{product.name}</h3>
-                  <p className="product-description">{product.description}</p>
-                  <div className="product-price">
-                    <span className="current-price">{formatPrice(product.price)}</span>
-                    {product.original_price && (
-                      <span className="original-price">{formatPrice(product.original_price)}</span>
-                    )}
-                  </div>
-                  <div className="product-actions">
-                    <button className="add-to-cart-btn">Thêm Vào Giỏ</button>
-                    <button className="buy-now-btn">Mua Ngay</button>
-                  </div>
+          <div className="about-content">
+            <div className="about-text">
+              <div className="about-section">
+                <h3>Câu Chuyện Của Chúng Tôi</h3>
+                <p>
+                  Khang Trầm Hương được thành lập với niềm đam mê mang đến những sản phẩm trầm hương 
+                  chất lượng cao nhất từ rừng Việt Nam. Chúng tôi hiểu rằng trầm hương không chỉ là 
+                  một loại hương thơm, mà còn là cầu nối giữa con người với thiên nhiên, giữa hiện tại 
+                  và truyền thống.
+                </p>
+              </div>
+
+              <div className="about-section">
+                <h3>Cam Kết Chất Lượng</h3>
+                <p>
+                  Mỗi sản phẩm trầm hương của chúng tôi đều được tuyển chọn kỹ lưỡng từ những cây 
+                  trầm già cỗi trong rừng tự nhiên. Chúng tôi áp dụng phương pháp chế biến truyền thống 
+                  kết hợp với công nghệ hiện đại để bảo toàn hương thơm tinh tế và chất lượng vượt trội.
+                </p>
+              </div>
+
+              <div className="about-section">
+                <h3>Sứ Mệnh</h3>
+                <p>
+                  Chúng tôi mong muốn mang đến cho khách hàng những trải nghiệm tuyệt vời nhất với 
+                  trầm hương cao cấp, góp phần bảo tồn và phát triển nền văn hóa trầm hương Việt Nam. 
+                  Sự hài lòng của khách hàng chính là động lực để chúng tôi không ngừng cải tiến và phát triển.
+                </p>
+              </div>
+            </div>
+
+            <div className="about-features">
+              <div className="feature-item">
+                <div className="feature-icon">🌿</div>
+                <div className="feature-content">
+                  <h4>Nguồn Gốc Tự Nhiên</h4>
+                  <p>100% từ rừng tự nhiên Việt Nam</p>
                 </div>
               </div>
-            ))}
+
+              <div className="feature-item">
+                <div className="feature-icon">🏆</div>
+                <div className="feature-content">
+                  <h4>Chất Lượng Cao</h4>
+                  <p>Tuyển chọn và chế biến theo tiêu chuẩn nghiêm ngặt</p>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">🎯</div>
+                <div className="feature-content">
+                  <h4>Uy Tín Đáng Tin</h4>
+                  <p>Nhiều năm kinh nghiệm trong ngành trầm hương</p>
+                </div>
+              </div>
+
+              <div className="feature-item">
+                <div className="feature-icon">🚚</div>
+                <div className="feature-content">
+                  <h4>Giao Hàng Nhanh</h4>
+                  <p>Đóng gói cẩn thận, giao hàng toàn quốc</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="about-cta">
+            <h3>Khám Phá Bộ Sưu Tập Trầm Hương Của Chúng Tôi</h3>
+            <p>Trải nghiệm hương thơm tinh tế từ thiên nhiên</p>
+            <button className="cta-button">Xem Sản Phẩm</button>
           </div>
         </div>
       </section>

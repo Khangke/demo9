@@ -464,15 +464,21 @@ function App() {
                 <p className="tagline">Tinh hoa trầm hương Việt Nam - Chất lượng vượt trội từ thiên nhiên</p>
                 <div className="footer-contact">
                   <div className="contact-item">
-                    <span className="contact-icon">✉</span>
+                    <span className="contact-icon">
+                      <ion-icon name="mail-outline"></ion-icon>
+                    </span>
                     <span>contact@khangtramhuong.vn</span>
                   </div>
                   <div className="contact-item">
-                    <span className="contact-icon">☎</span>
+                    <span className="contact-icon">
+                      <ion-icon name="call-outline"></ion-icon>
+                    </span>
                     <span>(+84) 123 456 789</span>
                   </div>
                   <div className="contact-item">
-                    <span className="contact-icon">⌖</span>
+                    <span className="contact-icon">
+                      <ion-icon name="location-outline"></ion-icon>
+                    </span>
                     <span>Việt Nam</span>
                   </div>
                 </div>

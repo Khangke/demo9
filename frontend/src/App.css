@@ -1809,7 +1809,7 @@ body {
     display: none;
   }
   
-  .header-cta {
+  .header-actions {
     display: none;
   }
   
@@ -2004,7 +2004,7 @@ body {
   
   .hero {
     height: 85vh;
-    margin-top: 85px;
+    margin-top: 70px;
   }
   
   .container {
@@ -2013,6 +2013,18 @@ body {
   
   .featured-products, .why-choose-us, .reviews, .promotions, .blog {
     padding: 5rem 0;
+  }
+
+  .header {
+    padding: 0.7rem 0;
+  }
+
+  .logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .logo .tagline {
+    font-size: 0.65rem;
   }
 }
 

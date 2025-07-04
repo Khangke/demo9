@@ -1528,14 +1528,7 @@ body {
   opacity: 0.8;
 }
 
-@keyframes brandFooterGlow {
-  0%, 100% { 
-    filter: drop-shadow(0 0 8px rgba(244, 208, 63, 0.3));
-  }
-  50% { 
-    filter: drop-shadow(0 0 20px rgba(244, 208, 63, 0.7));
-  }
-}
+/* Footer animations removed for elegant simplicity */
 
 @keyframes brandFooterSlide {
   0%, 100% { 

@@ -135,17 +135,12 @@ body {
 }
 
 .logo .tagline {
-  background: linear-gradient(135deg, #B8B8B8 0%, #F4D03F 50%, #B8B8B8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: 0.75rem;
+  color: #C0C0C0;
+  font-size: 0.8rem;
   font-style: italic;
-  font-weight: 500;
-  opacity: 0.95;
-  letter-spacing: 0.5px;
-  text-shadow: 0 1px 3px rgba(244, 208, 63, 0.2);
-  animation: taglineShimmer 4s ease-in-out infinite;
+  font-weight: 400;
+  opacity: 0.85;
+  letter-spacing: 0.3px;
 }
 
 @keyframes taglineShimmer {

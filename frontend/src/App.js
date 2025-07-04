@@ -94,11 +94,11 @@ function App() {
             <div className="header-actions">
               <div className="header-icons">
                 <button className="header-icon-btn" aria-label="Giỏ hàng">
-                  <span className="icon">♦</span>
+                  <ion-icon name="bag-outline" class="icon"></ion-icon>
                   <span className="badge">0</span>
                 </button>
                 <button className="header-icon-btn" aria-label="Tài khoản">
-                  <span className="icon">◉</span>
+                  <ion-icon name="person-outline" class="icon"></ion-icon>
                 </button>
               </div>
               <button className="header-cta-btn">Liên Hệ Ngay</button>

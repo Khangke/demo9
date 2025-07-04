@@ -1135,6 +1135,7 @@ body {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
+  justify-content: center;
 }
 
 .promo-btn {
@@ -1146,8 +1147,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  flex: 1;
-  font-size: 0.95rem;
+  font-size: 1rem;
   box-shadow: 
     0 3px 12px rgba(244, 208, 63, 0.2),
     0 1px 6px rgba(244, 208, 63, 0.15);
@@ -1160,6 +1160,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 200px;
+}
+
+.promo-btn-primary {
+  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
+  color: #1A1A1A;
+  box-shadow: 
+    0 4px 16px rgba(244, 208, 63, 0.3),
+    0 2px 8px rgba(244, 208, 63, 0.2);
 }
 
 .promo-btn::before {

@@ -204,7 +204,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Giảm độ lóe và tăng độ nét của icon"
+    - "Nâng cấp CSS UX/UI thương hiệu để bắt mắt và nổi bật hơn"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

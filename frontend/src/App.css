@@ -1659,17 +1659,32 @@ body {
   
   .promotions-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
+  }
+  
+  .promotion-card {
+    padding: 2rem;
   }
   
   .promo-buttons {
-    flex-direction: column;
-    gap: 0.8rem;
+    flex-direction: row;
+    gap: 1rem;
   }
   
   .promo-btn {
-    padding: 0.9rem 1.2rem;
-    font-size: 0.85rem;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    min-height: 52px;
+  }
+  
+  .timer {
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  
+  .timer-unit {
+    min-width: 60px;
+    padding: 0.8rem;
   }
   
   .footer-main {

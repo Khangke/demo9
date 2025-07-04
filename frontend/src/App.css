@@ -1706,6 +1706,13 @@ body {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   z-index: 1;
+  color: #1A1A1A;
+}
+
+.social-icon ion-icon {
+  font-size: 0.9rem;
+  color: #1A1A1A;
+  --ionicon-stroke-width: 32px;
 }
 
 .social-text {

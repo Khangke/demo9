@@ -1572,6 +1572,13 @@ body {
     0 4px 15px rgba(244, 208, 63, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
+  color: #1A1A1A;
+}
+
+.contact-icon ion-icon {
+  font-size: 1rem;
+  color: #1A1A1A;
+  --ionicon-stroke-width: 32px;
 }
 
 .contact-icon::after {

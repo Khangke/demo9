@@ -9,9 +9,42 @@ function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [timeLeft, setTimeLeft] = useState({
+    days: 10,
+    hours: 15,
+    minutes: 30,
+    seconds: 45
+  });
 
   useEffect(() => {
     fetchProducts();
+    
+    // Countdown timer effect
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        let { days, hours, minutes, seconds } = prevTime;
+        
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          seconds = 59;
+          minutes--;
+        } else if (hours > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours--;
+        } else if (days > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours = 23;
+          days--;
+        }
+        
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, []);
 
   const fetchProducts = async () => {

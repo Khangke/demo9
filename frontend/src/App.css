@@ -822,11 +822,14 @@ body {
   font-weight: 400;
 }
 
-/* Promotions */
+/* Promotions - Enhanced Modern Design */
 .promotions {
-  background: linear-gradient(135deg, #141414 0%, #1E1E1E 100%);
-  padding: 6rem 0;
+  background: 
+    linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%),
+    radial-gradient(ellipse at center, rgba(244, 208, 63, 0.03) 0%, transparent 70%);
+  padding: 8rem 0;
   position: relative;
+  overflow: hidden;
 }
 
 .promotions::before {
@@ -835,24 +838,53 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(244, 208, 63, 0.3), transparent);
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(244, 208, 63, 0.3) 20%, 
+    rgba(244, 208, 63, 0.8) 50%, 
+    rgba(244, 208, 63, 0.3) 80%, 
+    transparent 100%
+  );
+  box-shadow: 0 0 20px rgba(244, 208, 63, 0.4);
+}
+
+.promotions::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(244, 208, 63, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(244, 208, 63, 0.01) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .promotions-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 2rem;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .promotion-card {
-  background: linear-gradient(135deg, #1E1E1E 0%, #141414 100%);
-  padding: 2rem;
-  border-radius: 20px;
-  border: 1px solid rgba(244, 208, 63, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: 
+    linear-gradient(135deg, rgba(30, 30, 30, 0.95) 0%, rgba(20, 20, 20, 0.98) 100%),
+    linear-gradient(45deg, rgba(244, 208, 63, 0.02) 0%, transparent 50%);
+  padding: 2.5rem;
+  border-radius: 28px;
+  border: 1px solid rgba(244, 208, 63, 0.12);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 4px 16px rgba(244, 208, 63, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .promotion-card::before {
@@ -862,29 +894,60 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(244, 208, 63, 0.02) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(244, 208, 63, 0.04) 0%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
+}
+
+.promotion-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(244, 208, 63, 0.02), transparent);
+  opacity: 0;
+  transition: all 0.8s ease;
+  transform: rotate(45deg);
 }
 
 .promotion-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(244, 208, 63, 0.15);
-  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.08);
+  transform: translateY(-8px) scale(1.01);
+  border-color: rgba(244, 208, 63, 0.25);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 10px 30px rgba(244, 208, 63, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .promotion-card:hover::before {
   opacity: 1;
 }
 
+.promotion-card:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(-30%, -30%);
+}
+
 .featured-promo {
-  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
+  background: 
+    linear-gradient(135deg, #F4D03F 0%, #F39C12 100%),
+    radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
   color: #1A1A1A;
-  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.25);
+  box-shadow: 
+    0 16px 48px rgba(244, 208, 63, 0.35),
+    0 8px 24px rgba(244, 208, 63, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
 }
 
 .featured-promo::before {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, transparent 50%);
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, transparent 50%);
+}
+
+.featured-promo::after {
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
 }
 
 .featured-promo .promo-content h3,
@@ -895,93 +958,129 @@ body {
 
 .promo-badge {
   position: absolute;
-  top: -8px;
-  right: 20px;
+  top: -12px;
+  right: 24px;
   background: linear-gradient(135deg, #FF4444 0%, #CC3333 100%);
   color: #FFF;
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.8rem;
   font-weight: 700;
-  box-shadow: 0 4px 16px rgba(255, 68, 68, 0.3);
-  letter-spacing: 0.02em;
+  box-shadow: 
+    0 8px 24px rgba(255, 68, 68, 0.4),
+    0 4px 12px rgba(255, 68, 68, 0.2);
+  letter-spacing: 0.03em;
   z-index: 10;
+  animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0% { box-shadow: 0 8px 24px rgba(255, 68, 68, 0.4), 0 4px 12px rgba(255, 68, 68, 0.2); }
+  50% { box-shadow: 0 12px 32px rgba(255, 68, 68, 0.6), 0 6px 16px rgba(255, 68, 68, 0.4); }
+  100% { box-shadow: 0 8px 24px rgba(255, 68, 68, 0.4), 0 4px 12px rgba(255, 68, 68, 0.2); }
 }
 
 .promo-content h3 {
   color: #F4D03F;
-  font-size: 1.2rem;
-  margin-bottom: 0.7rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(244, 208, 63, 0.3);
 }
 
 .promo-content p {
   color: #B8B8B8;
-  margin-bottom: 1.8rem;
-  font-size: 0.85rem;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.7;
+  opacity: 0.9;
 }
 
 .promo-timer {
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
 }
 
 .timer-text {
   color: #1A1A1A;
-  font-weight: 600;
-  margin-bottom: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .timer {
   display: flex;
-  gap: 0.8rem;
+  gap: 1rem;
+  justify-content: center;
 }
 
 .timer-unit {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 0.7rem;
-  border-radius: 10px;
-  font-weight: 700;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 16px;
+  font-weight: 800;
   color: #1A1A1A;
   text-align: center;
-  min-width: 55px;
-  font-size: 0.9rem;
+  min-width: 65px;
+  font-size: 1rem;
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  animation: timerPulse 2s ease-in-out infinite;
+}
+
+@keyframes timerPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
 .timer-unit small {
   display: block;
-  font-size: 0.65rem;
-  font-weight: 500;
-  margin-top: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 0.3rem;
   opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .promo-buttons {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .promo-btn {
   background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
   color: #1A1A1A;
   border: none;
-  padding: 1rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 600;
+  padding: 1.2rem 2rem;
+  border-radius: 30px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   flex: 1;
-  font-size: 0.9rem;
-  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.25);
-  letter-spacing: 0.01em;
+  font-size: 0.95rem;
+  box-shadow: 
+    0 6px 20px rgba(244, 208, 63, 0.3),
+    0 3px 10px rgba(244, 208, 63, 0.2);
+  letter-spacing: 0.02em;
   position: relative;
   overflow: hidden;
   text-align: center;
+  text-transform: uppercase;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .promo-btn::before {
@@ -991,7 +1090,7 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.6s ease;
 }
 
@@ -1003,28 +1102,36 @@ body {
   background: transparent;
   color: #F4D03F;
   border: 2px solid rgba(244, 208, 63, 0.8);
-  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.15);
+  box-shadow: 
+    0 6px 20px rgba(244, 208, 63, 0.15),
+    inset 0 1px 0 rgba(244, 208, 63, 0.1);
 }
 
 .promo-btn-secondary:hover {
   background: rgba(244, 208, 63, 0.1);
   border-color: #F4D03F;
   color: #F4D03F;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(244, 208, 63, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 8px 28px rgba(244, 208, 63, 0.25),
+    inset 0 1px 0 rgba(244, 208, 63, 0.2);
 }
 
 .featured-promo .promo-btn {
   background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
   color: #F4D03F;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.4),
+    0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .featured-promo .promo-btn-secondary {
   background: transparent;
   color: #1A1A1A;
   border: 2px solid rgba(26, 26, 26, 0.8);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .featured-promo .promo-btn-secondary:hover {
@@ -1034,12 +1141,16 @@ body {
 }
 
 .promo-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(244, 208, 63, 0.35);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    0 8px 28px rgba(244, 208, 63, 0.4),
+    0 4px 14px rgba(244, 208, 63, 0.3);
 }
 
 .featured-promo .promo-btn:hover {
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 
+    0 8px 28px rgba(0, 0, 0, 0.5),
+    0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 /* Blog */

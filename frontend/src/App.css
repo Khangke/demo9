@@ -1885,6 +1885,24 @@ body {
     font-size: 0.8rem;
   }
   
+  .promo-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+  }
+  
+  .promo-btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+  }
+  
+  .promo-badge {
+    bottom: 70px;
+    right: 15px;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+  }
+  
   .container {
     padding: 0 12px;
   }

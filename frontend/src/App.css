@@ -2552,30 +2552,60 @@ body {
   gap: 0.5rem;
 }
 
+/* Enhanced Clear Cart Button */
 .clear-cart-btn {
-  background: transparent;
-  border: 2px solid #FF4444;
+  background: rgba(255, 68, 68, 0.08);
+  border: 1px solid rgba(255, 68, 68, 0.2);
   color: #FF4444;
-  padding: 0.6rem 1rem;
-  border-radius: 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
 }
 
-.clear-cart-btn:hover {
-  background: #FF4444;
-  color: white;
+.clear-cart-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(231, 76, 60, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.clear-cart-btn:hover:not(:disabled) {
+  background: rgba(255, 68, 68, 0.15);
+  color: #FF6B6B;
   transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.2);
+  border-color: rgba(255, 68, 68, 0.4);
+}
+
+.clear-cart-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.clear-cart-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .clear-cart-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
+}
+
+.clear-cart-btn ion-icon {
+  font-size: 1.1rem;
 }
 
 /* Cart Items List */

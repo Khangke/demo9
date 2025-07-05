@@ -88,6 +88,22 @@ class AgarwoodAPITester:
         self.test_create_product()
         self.test_get_product_by_id()
         self.test_update_product()
+        
+        # Shopping Cart API tests
+        print("\n=== Testing Shopping Cart APIs ===\n")
+        self.test_get_cart()
+        self.test_add_to_cart()
+        self.test_update_cart_item()
+        self.test_remove_from_cart()
+        self.test_clear_cart()
+        
+        # Order Management API tests
+        print("\n=== Testing Order Management APIs ===\n")
+        self.test_create_order()
+        self.test_get_order_by_id()
+        self.test_get_order_by_number()
+        
+        # Clean up
         self.test_delete_product()
         
         self.print_summary()

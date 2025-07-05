@@ -253,7 +253,8 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tối ưu lại chi tiết sản phẩm với UX/UI tốt hơn và direct product navigation"
+    - "Shopping Cart API endpoints"
+    - "Order Management API endpoints"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -267,6 +268,7 @@ test_plan:
     - "Enhanced Promotions Section UI/UX"
     - "Tinh chỉnh CSS UX/UI thương hiệu để elegant và nổi bật nhưng không chói mắt"
     - "Tối ưu phần chi tiết sản phẩm với size options và pricing"
+    - "Tối ưu lại chi tiết sản phẩm với UX/UI tốt hơn và direct product navigation"
 
 agent_communication:
     - agent: "main"

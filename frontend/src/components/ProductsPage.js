@@ -658,6 +658,104 @@ const ProductsPage = () => {
           </div>
         </div>
       )}
+
+      {/* Related Products Section */}
+      <section className="related-products">
+        <div className="container">
+          <div className="section-header">
+            <h2>Sản Phẩm Liên Quan</h2>
+            <p>Khám phá thêm những sản phẩm trầm hương chất lượng cao khác</p>
+          </div>
+          
+          {!loading && filteredProducts.length > 0 && (
+            <div className="related-products-grid">
+              {products
+                .filter(product => 
+                  selectedCategory !== 'all' 
+                    ? product.category === selectedCategory 
+                    : product.featured
+                )
+                .slice(0, 4)
+                .map(product => (
+                  <article key={`related-${product.id}`} className="related-product-card">
+                    <div className="related-product-image">
+                      <img 
+                        src={product.image_url} 
+                        alt={`${product.name} - Trầm hương ${product.category} cao cấp`}
+                        loading="lazy"
+                        width="280"
+                        height="200"
+                      />
+                      {product.featured && <div className="product-badge">Nổi Bật</div>}
+                      {product.original_price && (
+                        <div className="discount-badge">
+                          -{Math.round(((product.original_price - product.price) / product.original_price) * 100)}%
+                        </div>
+                      )}
+                      <div className="related-product-overlay">
+                        <button 
+                          className="quick-view-btn"
+                          onClick={() => openProductModal(product)}
+                          aria-label={`Xem chi tiết ${product.name}`}
+                        >
+                          <ion-icon name="eye-outline"></ion-icon>
+                          Xem Chi Tiết
+                        </button>
+                      </div>
+                    </div>
+                    <div className="related-product-info">
+                      <div className="product-category">{product.category}</div>
+                      <h3>{product.name}</h3>
+                      <div className="product-rating">
+                        <div className="stars">
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                        </div>
+                        <span className="rating-text">(4.9/5)</span>
+                      </div>
+                      <div className="product-price">
+                        <span className="current-price">{formatPrice(product.price)}</span>
+                        {product.original_price && (
+                          <span className="original-price">{formatPrice(product.original_price)}</span>
+                        )}
+                      </div>
+                      <button 
+                        className="add-to-cart-btn"
+                        aria-label={`Thêm ${product.name} vào giỏ hàng`}
+                      >
+                        <ion-icon name="bag-add-outline"></ion-icon>
+                        Thêm Vào Giỏ
+                      </button>
+                    </div>
+                  </article>
+                ))}
+            </div>
+          )}
+
+          <div className="related-products-cta">
+            <Link to="/" className="view-all-btn">
+              <ion-icon name="arrow-back-outline"></ion-icon>
+              Về Trang Chủ
+            </Link>
+            <button 
+              className="view-all-btn secondary"
+              onClick={() => {
+                setSelectedCategory('all');
+                setSearchQuery('');
+                setPriceRange([0, 5000000]);
+                setSortBy('newest');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <ion-icon name="refresh-outline"></ion-icon>
+              Xem Tất Cả Sản Phẩm
+            </button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

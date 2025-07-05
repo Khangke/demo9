@@ -309,7 +309,7 @@ const Checkout = () => {
                             itemProp="addressLocality"
                             required
                           >
-                            <option value="">Chọn tỉnh/thành phố</option>
+                            <option value="">Chọn tỉnh/thành</option>
                             <option value="Hồ Chí Minh">TP. Hồ Chí Minh</option>
                             <option value="Hà Nội">Hà Nội</option>
                             <option value="Đà Nẵng">Đà Nẵng</option>

@@ -33,12 +33,7 @@ const Checkout = () => {
 
   const [errors, setErrors] = useState({});
 
-  const sessionId = localStorage.getItem('session_id') || 
-    (() => {
-      const newId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      localStorage.setItem('session_id', newId);
-      return newId;
-    })();
+  const sessionId = localStorage.getItem('session_id') || 'test_session_checkout';
 
   useEffect(() => {
     fetchCart();

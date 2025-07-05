@@ -2844,9 +2844,9 @@ body {
 }
 
 .continue-shopping-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(244, 208, 63, 0.15);
-  border-color: rgba(244, 208, 63, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(244, 208, 63, 0.25);
+  border-color: rgba(244, 208, 63, 0.5);
   color: #F7DC6F;
 }
 

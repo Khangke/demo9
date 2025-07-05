@@ -480,69 +480,71 @@ const ProductsPage = () => {
                 ) : (
                   <div className={`products-grid ${viewMode}-view`}>
                     {filteredProducts.map(product => (
-                      <article key={product.id} className={`product-card-advanced ${viewMode}-card`}>
-                        <div className="product-image-advanced">
-                          <img 
-                            src={product.image_url} 
-                            alt={`${product.name} - Trầm hương ${product.category} cao cấp`}
-                            loading="lazy"
-                            width="350"
-                            height="280"
-                          />
-                          {product.featured && <div className="product-badge">Nổi Bật</div>}
-                          {product.original_price && (
-                            <div className="discount-badge">
-                              -{Math.round(((product.original_price - product.price) / product.original_price) * 100)}%
-                            </div>
-                          )}
-                          <div className="product-overlay-advanced">
-                            <button 
-                              className="quick-view-btn-advanced"
-                              onClick={() => openProductModal(product)}
-                              aria-label={`Xem chi tiết ${product.name}`}
-                            >
-                              <ion-icon name="eye-outline"></ion-icon>
-                              Xem Chi Tiết
-                            </button>
-                            <button 
-                              className="add-to-cart-btn-advanced"
-                              aria-label={`Thêm ${product.name} vào giỏ hàng`}
-                            >
-                              <ion-icon name="bag-add-outline"></ion-icon>
-                              Thêm Giỏ Hàng
-                            </button>
-                          </div>
-                        </div>
-                        <div className="product-info-advanced">
-                          <div className="product-category-advanced">{product.category}</div>
-                          <h2 className="product-name-advanced">{product.name}</h2>
-                          <p className="product-description-advanced">{product.description}</p>
-                          <div className="product-rating-advanced" itemScope itemType="https://schema.org/AggregateRating">
-                            <div className="stars" role="img" aria-label="4.9 sao trên 5 sao">
-                              <ion-icon name="star"></ion-icon>
-                              <ion-icon name="star"></ion-icon>
-                              <ion-icon name="star"></ion-icon>
-                              <ion-icon name="star"></ion-icon>
-                              <ion-icon name="star"></ion-icon>
-                            </div>
-                            <span className="rating-text">
-                              (<span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> - <span itemProp="reviewCount">127</span> đánh giá)
-                            </span>
-                          </div>
-                          <div className="product-price-advanced" itemScope itemType="https://schema.org/Offer">
-                            <span className="current-price" itemProp="price">{formatPrice(product.price)}</span>
-                            <meta itemProp="priceCurrency" content="VND" />
-                            <meta itemProp="availability" content={product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"} />
+                      <Link key={product.id} to={`/product/${product.id}`} className="product-card-advanced-link">
+                        <article className={`product-card-advanced ${viewMode}-card`}>
+                          <div className="product-image-advanced">
+                            <img 
+                              src={product.image_url} 
+                              alt={`${product.name} - Trầm hương ${product.category} cao cấp`}
+                              loading="lazy"
+                              width="350"
+                              height="280"
+                            />
+                            {product.featured && <div className="product-badge">Nổi Bật</div>}
                             {product.original_price && (
-                              <span className="original-price">{formatPrice(product.original_price)}</span>
+                              <div className="discount-badge">
+                                -{Math.round(((product.original_price - product.price) / product.original_price) * 100)}%
+                              </div>
                             )}
+                            <div className="product-overlay-advanced">
+                              <span 
+                                className="quick-view-btn-advanced"
+                                aria-label={`Xem chi tiết ${product.name}`}
+                              >
+                                <ion-icon name="eye-outline"></ion-icon>
+                                Xem Chi Tiết
+                              </span>
+                              <button 
+                                className="add-to-cart-btn-advanced"
+                                aria-label={`Thêm ${product.name} vào giỏ hàng`}
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                <ion-icon name="bag-add-outline"></ion-icon>
+                                Thêm Giỏ Hàng
+                              </button>
+                            </div>
                           </div>
-                          <div className="product-stock">
-                            <ion-icon name="checkmark-circle-outline"></ion-icon>
-                            <span>Còn {product.stock} sản phẩm</span>
+                          <div className="product-info-advanced">
+                            <div className="product-category-advanced">{product.category}</div>
+                            <h2 className="product-name-advanced">{product.name}</h2>
+                            <p className="product-description-advanced">{product.description}</p>
+                            <div className="product-rating-advanced" itemScope itemType="https://schema.org/AggregateRating">
+                              <div className="stars" role="img" aria-label="4.9 sao trên 5 sao">
+                                <ion-icon name="star"></ion-icon>
+                                <ion-icon name="star"></ion-icon>
+                                <ion-icon name="star"></ion-icon>
+                                <ion-icon name="star"></ion-icon>
+                                <ion-icon name="star"></ion-icon>
+                              </div>
+                              <span className="rating-text">
+                                (<span itemProp="ratingValue">4.9</span>/<span itemProp="bestRating">5</span> - <span itemProp="reviewCount">127</span> đánh giá)
+                              </span>
+                            </div>
+                            <div className="product-price-advanced" itemScope itemType="https://schema.org/Offer">
+                              <span className="current-price" itemProp="price">{formatPrice(product.price)}</span>
+                              <meta itemProp="priceCurrency" content="VND" />
+                              <meta itemProp="availability" content={product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"} />
+                              {product.original_price && (
+                                <span className="original-price">{formatPrice(product.original_price)}</span>
+                              )}
+                            </div>
+                            <div className="product-stock">
+                              <ion-icon name="checkmark-circle-outline"></ion-icon>
+                              <span>Còn {product.stock} sản phẩm</span>
+                            </div>
                           </div>
-                        </div>
-                      </article>
+                        </article>
+                      </Link>
                     ))}
                   </div>
                 )}

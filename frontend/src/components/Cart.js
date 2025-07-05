@@ -149,29 +149,6 @@ const Cart = () => {
 
   return (
     <div className="cart-page">
-      {/* Breadcrumb */}
-      <div className="breadcrumb-nav">
-        <div className="container">
-          <nav>
-            <ol className="breadcrumb-list">
-              <li className="breadcrumb-item">
-                <Link to="/" className="breadcrumb-link">
-                  <ion-icon name="home-outline"></ion-icon>
-                  Trang chủ
-                </Link>
-              </li>
-              <li className="breadcrumb-separator">
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-              </li>
-              <li className="breadcrumb-current">
-                <ion-icon name="bag-outline"></ion-icon>
-                Giỏ hàng
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-
       {/* Cart Content */}
       <div className="cart-content">
         <div className="container">

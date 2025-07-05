@@ -1719,42 +1719,34 @@ body {
 @media (max-width: 1024px) {
   .checkout-layout-optimized {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.125rem;
   }
   
   .checkout-sidebar-optimized {
     position: static;
     order: -1;
   }
-  
-  .section-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 768px) {
   .checkout-header {
-    padding: 1rem 0;
+    padding: 0.75rem 0;
   }
   
   .checkout-title {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   
   .checkout-section-optimized {
-    padding: 1.5rem;
+    padding: 1.125rem;
   }
   
   .form-row {
     grid-template-columns: 1fr;
   }
   
-  .address-type-selector {
-    flex-direction: column;
-  }
-  
   .order-summary-card-optimized {
-    padding: 1.25rem;
+    padding: 1rem;
   }
 }
 

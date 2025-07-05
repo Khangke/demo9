@@ -13,6 +13,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showImageModal, setShowImageModal] = useState(false);
 
   useEffect(() => {
     fetchProduct();
@@ -76,6 +77,15 @@ const ProductDetail = () => {
     return 0;
   };
 
+  const getTotalPrice = () => {
+    return getCurrentPrice() * quantity;
+  };
+
+  const handleImageClick = (index) => {
+    setSelectedImage(index);
+    setShowImageModal(true);
+  };
+
   if (loading) {
     return (
       <div className="product-detail-loading">
@@ -107,11 +117,17 @@ const ProductDetail = () => {
         <div className="container">
           <ol className="breadcrumb-list">
             <li className="breadcrumb-item">
-              <Link to="/" className="breadcrumb-link">Trang Chủ</Link>
+              <Link to="/" className="breadcrumb-link">
+                <ion-icon name="home-outline"></ion-icon>
+                Trang Chủ
+              </Link>
             </li>
             <span className="breadcrumb-separator">›</span>
             <li className="breadcrumb-item">
-              <Link to="/products" className="breadcrumb-link">Sản Phẩm</Link>
+              <Link to="/products" className="breadcrumb-link">
+                <ion-icon name="grid-outline"></ion-icon>
+                Sản Phẩm
+              </Link>
             </li>
             <span className="breadcrumb-separator">›</span>
             <li className="breadcrumb-item">
@@ -133,10 +149,21 @@ const ProductDetail = () => {
                   src={allImages[selectedImage]} 
                   alt={product.name}
                   className="main-product-image"
+                  onClick={() => handleImageClick(selectedImage)}
                 />
                 {getDiscount() > 0 && (
-                  <div className="discount-badge-detail">-{getDiscount()}%</div>
+                  <div className="discount-badge-detail">
+                    <span className="discount-text">GIẢM</span>
+                    <span className="discount-percentage">{getDiscount()}%</span>
+                  </div>
                 )}
+                <button 
+                  className="image-zoom-btn"
+                  onClick={() => handleImageClick(selectedImage)}
+                  aria-label="Phóng to ảnh"
+                >
+                  <ion-icon name="expand-outline"></ion-icon>
+                </button>
               </div>
               
               {allImages.length > 1 && (
@@ -148,6 +175,11 @@ const ProductDetail = () => {
                       onClick={() => setSelectedImage(index)}
                     >
                       <img src={image} alt={`${product.name} ${index + 1}`} />
+                      {selectedImage === index && (
+                        <div className="thumbnail-active-indicator">
+                          <ion-icon name="checkmark-circle"></ion-icon>
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -156,20 +188,47 @@ const ProductDetail = () => {
 
             {/* Product Info */}
             <div className="product-detail-info">
-              <div className="product-category-detail">{product.category}</div>
-              <h1 className="product-title-detail">{product.name}</h1>
-              
+              <div className="product-header">
+                <div className="product-category-detail">
+                  <ion-icon name="pricetag-outline"></ion-icon>
+                  {product.category}
+                </div>
+                <h1 className="product-title-detail">{product.name}</h1>
+                
+                {/* Rating */}
+                <div className="product-rating-detail">
+                  <div className="stars">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                  </div>
+                  <span className="rating-text">(4.9/5 - 127 đánh giá)</span>
+                </div>
+              </div>
+
               {/* Price Section */}
               <div className="price-section-detail">
                 <div className="price-main">
-                  <span className="current-price-detail">{formatPrice(getCurrentPrice())}</span>
+                  <div className="current-price-detail">
+                    {formatPrice(getCurrentPrice())}
+                    {selectedSize && (
+                      <span className="price-unit">/{selectedSize.size}</span>
+                    )}
+                  </div>
                   {getCurrentOriginalPrice() && (
-                    <span className="original-price-detail">{formatPrice(getCurrentOriginalPrice())}</span>
+                    <div className="original-price-detail">
+                      {formatPrice(getCurrentOriginalPrice())}
+                    </div>
                   )}
                 </div>
                 {getDiscount() > 0 && (
                   <div className="discount-info">
-                    <span className="save-amount">Tiết kiệm {formatPrice(getCurrentOriginalPrice() - getCurrentPrice())}</span>
+                    <span className="save-amount">
+                      <ion-icon name="pricetag-outline"></ion-icon>
+                      Tiết kiệm {formatPrice(getCurrentOriginalPrice() - getCurrentPrice())}
+                    </span>
                   </div>
                 )}
               </div>
@@ -177,7 +236,10 @@ const ProductDetail = () => {
               {/* Size Selection */}
               {product.size_options && product.size_options.length > 0 && (
                 <div className="size-selection-section">
-                  <h3 className="section-title">Kích Thước:</h3>
+                  <h3 className="section-title">
+                    <ion-icon name="resize-outline"></ion-icon>
+                    Chọn Kích Thước
+                  </h3>
                   <div className="size-options">
                     {product.size_options.map((size, index) => (
                       <button
@@ -186,9 +248,18 @@ const ProductDetail = () => {
                         onClick={() => handleSizeChange(size)}
                         disabled={size.stock === 0}
                       >
-                        <span className="size-name">{size.size}</span>
-                        <span className="size-price">{formatPrice(size.price)}</span>
-                        {size.stock === 0 && <span className="out-of-stock-label">Hết hàng</span>}
+                        <div className="size-content">
+                          <span className="size-name">{size.size}</span>
+                          <span className="size-price">{formatPrice(size.price)}</span>
+                          <span className="size-stock">
+                            {size.stock > 0 ? `Còn ${size.stock}` : 'Hết hàng'}
+                          </span>
+                        </div>
+                        {selectedSize && selectedSize.size === size.size && (
+                          <div className="size-selected-indicator">
+                            <ion-icon name="checkmark-circle"></ion-icon>
+                          </div>
+                        )}
                       </button>
                     ))}
                   </div>
@@ -209,7 +280,10 @@ const ProductDetail = () => {
 
               {/* Quantity Selection */}
               <div className="quantity-section">
-                <h3 className="section-title">Số Lượng:</h3>
+                <h3 className="section-title">
+                  <ion-icon name="calculator-outline"></ion-icon>
+                  Số Lượng
+                </h3>
                 <div className="quantity-selector">
                   <button 
                     className="quantity-btn minus" 
@@ -227,6 +301,9 @@ const ProductDetail = () => {
                     <ion-icon name="add"></ion-icon>
                   </button>
                 </div>
+                <div className="quantity-total">
+                  <span>Tổng: {formatPrice(getTotalPrice())}</span>
+                </div>
               </div>
 
               {/* Action Buttons */}
@@ -236,27 +313,33 @@ const ProductDetail = () => {
                   disabled={getCurrentStock() === 0}
                 >
                   <ion-icon name="bag-add-outline"></ion-icon>
-                  Thêm Vào Giỏ Hàng
+                  <span>Thêm Vào Giỏ Hàng</span>
                 </button>
                 <button 
                   className="btn-buy-now-detail"
                   disabled={getCurrentStock() === 0}
                 >
                   <ion-icon name="flash-outline"></ion-icon>
-                  Mua Ngay
+                  <span>Mua Ngay</span>
                 </button>
               </div>
 
               {/* Product Description */}
               <div className="product-description-detail">
-                <h3 className="section-title">Mô Tả Sản Phẩm</h3>
+                <h3 className="section-title">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                  Mô Tả Sản Phẩm
+                </h3>
                 <p>{product.description}</p>
               </div>
 
               {/* Specifications */}
               {product.specifications && Object.keys(product.specifications).length > 0 && (
                 <div className="product-specifications">
-                  <h3 className="section-title">Thông Số Kỹ Thuật</h3>
+                  <h3 className="section-title">
+                    <ion-icon name="list-outline"></ion-icon>
+                    Thông Số Kỹ Thuật
+                  </h3>
                   <div className="specs-grid">
                     {Object.entries(product.specifications).map(([key, value]) => (
                       <div key={key} className="spec-item">
@@ -279,6 +362,45 @@ const ProductDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* Image Modal */}
+      {showImageModal && (
+        <div className="image-modal-overlay" onClick={() => setShowImageModal(false)}>
+          <div className="image-modal" onClick={(e) => e.stopPropagation()}>
+            <button 
+              className="image-modal-close" 
+              onClick={() => setShowImageModal(false)}
+              aria-label="Đóng"
+            >
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+            <div className="image-modal-content">
+              <img 
+                src={allImages[selectedImage]} 
+                alt={product.name}
+                className="modal-image"
+              />
+              <div className="image-modal-navigation">
+                <button 
+                  className="image-nav-btn prev"
+                  onClick={() => setSelectedImage(selectedImage > 0 ? selectedImage - 1 : allImages.length - 1)}
+                  disabled={allImages.length <= 1}
+                >
+                  <ion-icon name="chevron-back-outline"></ion-icon>
+                </button>
+                <span className="image-counter">{selectedImage + 1} / {allImages.length}</span>
+                <button 
+                  className="image-nav-btn next"
+                  onClick={() => setSelectedImage(selectedImage < allImages.length - 1 ? selectedImage + 1 : 0)}
+                  disabled={allImages.length <= 1}
+                >
+                  <ion-icon name="chevron-forward-outline"></ion-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -4974,6 +4974,17 @@ body {
 .main-image-container:hover .main-product-image {
   transform: scale(1.05);
 }
+
+.main-image-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(244, 208, 63, 0.02) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
   z-index: 1;
   pointer-events: none;
 }

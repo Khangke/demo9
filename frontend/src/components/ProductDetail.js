@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -7,6 +7,7 @@ const API = `${BACKEND_URL}/api`;
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedImage, setSelectedImage] = useState(0);
@@ -15,6 +16,14 @@ const ProductDetail = () => {
   const [error, setError] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [addingToCart, setAddingToCart] = useState(false);
+
+  const sessionId = localStorage.getItem('session_id') || 
+    (() => {
+      const newId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('session_id', newId);
+      return newId;
+    })();
 
   useEffect(() => {
     fetchProduct();

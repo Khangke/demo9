@@ -208,6 +208,53 @@ class AgarwoodAPITester:
                 if all_featured:
                     self.test_results["get_featured_products"] = True
                     print("✅ Get Featured Products: SUCCESS - All returned products are featured")
+                    
+                    # Verify featured products have all enhanced fields
+                    if products:
+                        sample_product = products[0]
+                        enhanced_fields = ["size_options", "additional_images", "specifications"]
+                        missing_fields = [field for field in enhanced_fields if field not in sample_product]
+                        
+                        if not missing_fields:
+                            print("✅ Featured Products Model: SUCCESS - All enhanced fields are present")
+                            
+                            # Check Vietnamese content
+                            vietnamese_fields = {
+                                "name": str,
+                                "description": str
+                            }
+                            
+                            all_vietnamese_valid = True
+                            for field, expected_type in vietnamese_fields.items():
+                                if field not in sample_product:
+                                    print(f"❌ Missing Vietnamese field: {field}")
+                                    all_vietnamese_valid = False
+                                elif not isinstance(sample_product.get(field), expected_type):
+                                    print(f"❌ Invalid type for {field}: Expected {expected_type.__name__}, got {type(sample_product.get(field)).__name__}")
+                                    all_vietnamese_valid = False
+                                elif not sample_product.get(field):
+                                    print(f"❌ Empty Vietnamese field: {field}")
+                                    all_vietnamese_valid = False
+                            
+                            if all_vietnamese_valid:
+                                print("✅ Vietnamese Content: SUCCESS - All Vietnamese fields are present and non-empty")
+                                print(f"  Sample Vietnamese name: {sample_product.get('name')}")
+                                print(f"  Sample Vietnamese description: {sample_product.get('description')[:50]}...")
+                            else:
+                                print("❌ Vietnamese Content: FAILED - Some Vietnamese fields are missing or empty")
+                        else:
+                            print(f"❌ Featured Products Model: FAILED - Missing fields: {', '.join(missing_fields)}")
+                    
+                    # Test non-featured products
+                    non_featured_response = requests.get(f"{self.api_url}/products?featured=false")
+                    if non_featured_response.status_code == 200:
+                        non_featured_products = non_featured_response.json()
+                        if all(not product.get("featured") for product in non_featured_products):
+                            print(f"✅ Non-Featured Products: SUCCESS - Found {len(non_featured_products)} non-featured products")
+                        else:
+                            print("❌ Non-Featured Products: FAILED - Some products marked as featured")
+                    else:
+                        print("❌ Non-Featured Products Query: FAILED")
                 else:
                     print("❌ Get Featured Products: FAILED - Some returned products are not featured")
             else:

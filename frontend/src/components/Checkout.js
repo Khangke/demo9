@@ -296,6 +296,59 @@ const Checkout = () => {
                         {errors.email && <span className="error-message-compact">{errors.email}</span>}
                       </div>
 
+                      {/* Address Type Selector */}
+                      <div className="form-group">
+                        <label className="form-label-compact">
+                          Loại địa chỉ <span className="required">*</span>
+                        </label>
+                        <div className="address-type-selector">
+                          <label className="address-type-option">
+                            <input
+                              type="radio"
+                              name="address_type"
+                              value="home"
+                              checked={formData.address_type === 'home'}
+                              onChange={handleInputChange}
+                              className="address-type-radio"
+                            />
+                            <div className="address-type-content">
+                              <div className="address-type-icon">🏠</div>
+                              <span className="address-type-text">Nhà riêng</span>
+                            </div>
+                          </label>
+                          
+                          <label className="address-type-option">
+                            <input
+                              type="radio"
+                              name="address_type"
+                              value="office"
+                              checked={formData.address_type === 'office'}
+                              onChange={handleInputChange}
+                              className="address-type-radio"
+                            />
+                            <div className="address-type-content">
+                              <div className="address-type-icon">🏢</div>
+                              <span className="address-type-text">Văn phòng</span>
+                            </div>
+                          </label>
+                          
+                          <label className="address-type-option">
+                            <input
+                              type="radio"
+                              name="address_type"
+                              value="other"
+                              checked={formData.address_type === 'other'}
+                              onChange={handleInputChange}
+                              className="address-type-radio"
+                            />
+                            <div className="address-type-content">
+                              <div className="address-type-icon">📍</div>
+                              <span className="address-type-text">Địa chỉ khác</span>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+
                       <div className="form-row">
                         <div className="form-group">
                           <label htmlFor="city" className="form-label-compact">

@@ -3962,9 +3962,15 @@ body {
 }
 
 .spec-value {
-  color: #E0E0E0;
-  font-size: 0.8rem;
-  font-weight: 400;
+  color: #C8C8C8;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: right;
+  transition: color 0.3s ease;
+}
+
+.spec-item:hover .spec-value {
+  color: #D8D8D8;
 }
 
 /* Image Modal */

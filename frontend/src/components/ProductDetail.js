@@ -135,12 +135,12 @@ const ProductDetail = () => {
 
   const addToCart = async () => {
     if (!selectedSize) {
-      showToast('Vui lòng chọn kích thước sản phẩm', 'warning');
+      showToast('⚠️ Vui lòng chọn kích thước sản phẩm', 'warning');
       return;
     }
 
     if (getCurrentStock() < quantity) {
-      showToast('Số lượng vượt quá hàng có sẵn', 'error');
+      showToast('❌ Số lượng vượt quá hàng có sẵn', 'error');
       return;
     }
 
@@ -157,14 +157,14 @@ const ProductDetail = () => {
       });
 
       if (response.ok) {
-        showToast(`Đã thêm ${product.name} (${selectedSize.size}) vào giỏ hàng!`, 'success');
+        showToast(`🛒 Đã thêm ${product.name} (${selectedSize.size}) vào giỏ hàng!`, 'success');
       } else {
         const errorData = await response.json();
-        showToast(`Lỗi: ${errorData.detail}`, 'error');
+        showToast(`❌ Lỗi: ${errorData.detail}`, 'error');
       }
     } catch (error) {
       console.error('Error adding to cart:', error);
-      showToast('Có lỗi xảy ra khi thêm vào giỏ hàng', 'error');
+      showToast('❌ Có lỗi xảy ra khi thêm vào giỏ hàng', 'error');
     } finally {
       setAddingToCart(false);
     }
@@ -172,12 +172,12 @@ const ProductDetail = () => {
 
   const buyNow = async () => {
     if (!selectedSize) {
-      showToast('Vui lòng chọn kích thước sản phẩm', 'warning');
+      showToast('⚠️ Vui lòng chọn kích thước sản phẩm', 'warning');
       return;
     }
 
     if (getCurrentStock() < quantity) {
-      showToast('Số lượng vượt quá hàng có sẵn', 'error');
+      showToast('❌ Số lượng vượt quá hàng có sẵn', 'error');
       return;
     }
 
@@ -194,17 +194,17 @@ const ProductDetail = () => {
       });
 
       if (response.ok) {
-        showToast('Đã thêm sản phẩm vào giỏ hàng. Chuyển đến thanh toán...', 'success');
+        showToast('🚀 Đã thêm sản phẩm vào giỏ hàng. Chuyển đến thanh toán...', 'success');
         setTimeout(() => {
           navigate('/checkout');
         }, 1500);
       } else {
         const errorData = await response.json();
-        showToast(`Lỗi: ${errorData.detail}`, 'error');
+        showToast(`❌ Lỗi: ${errorData.detail}`, 'error');
       }
     } catch (error) {
       console.error('Error during buy now:', error);
-      showToast('Có lỗi xảy ra khi mua hàng', 'error');
+      showToast('❌ Có lỗi xảy ra khi mua hàng', 'error');
     }
   };
 

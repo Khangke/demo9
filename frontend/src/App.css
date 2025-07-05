@@ -2085,6 +2085,19 @@ body {
   gap: 1.5rem;
 }
 
+/* Advanced Product Card Link Wrapper */
+.product-card-advanced-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.product-card-advanced-link:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Advanced Product Cards */
 .product-card-advanced {
   background: linear-gradient(135deg, #1E1E1E 0%, #141414 100%);
@@ -2095,6 +2108,7 @@ body {
   border: 1px solid rgba(244, 208, 63, 0.1);
   position: relative;
   backdrop-filter: blur(20px);
+  cursor: pointer;
 }
 
 .product-card-advanced:hover {

@@ -9,6 +9,16 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 import uuid
 from datetime import datetime
+from bson import ObjectId
+import json
+
+
+# Custom JSON encoder to handle ObjectId
+class JSONEncoder(json.JSONEncoder):
+    def default(self, o):
+        if isinstance(o, ObjectId):
+            return str(o)
+        return super().default(o)
 
 
 ROOT_DIR = Path(__file__).parent

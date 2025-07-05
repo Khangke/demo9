@@ -224,6 +224,12 @@ async def get_cart(session_id: str):
 async def add_to_cart(session_id: str, item: dict):
     """Add item to cart"""
     try:
+        # Validate required fields
+        required_fields = ["product_id", "size", "quantity"]
+        for field in required_fields:
+            if field not in item:
+                raise HTTPException(status_code=400, detail=f"Missing required field: {field}")
+        
         # Get product details
         product = await db.products.find_one({"id": item["product_id"]})
         if not product:
@@ -320,6 +326,9 @@ async def add_to_cart(session_id: str, item: dict):
         
         return {"message": "Item added to cart", "cart": updated_cart}
     
+    except HTTPException as e:
+        # Re-raise HTTP exceptions
+        raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

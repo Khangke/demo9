@@ -504,14 +504,6 @@ const ProductsPage = () => {
                                 <ion-icon name="eye-outline"></ion-icon>
                                 Xem Chi Tiết
                               </span>
-                              <button 
-                                className="add-to-cart-btn-advanced"
-                                aria-label={`Thêm ${product.name} vào giỏ hàng`}
-                                onClick={(e) => e.preventDefault()}
-                              >
-                                <ion-icon name="bag-add-outline"></ion-icon>
-                                Thêm Giỏ Hàng
-                              </button>
                             </div>
                           </div>
                           <div className="product-info-advanced">

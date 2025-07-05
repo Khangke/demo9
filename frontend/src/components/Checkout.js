@@ -36,16 +36,6 @@ const Checkout = () => {
     payment_method: 'cod'
   });
 
-  // Predefined address options
-  const addressOptions = [
-    { value: '', label: 'Chọn địa chỉ có sẵn (tùy chọn)' },
-    { value: 'home', label: '🏠 Nhà riêng', details: 'Giao hàng tận nhà' },
-    { value: 'office', label: '🏢 Văn phòng', details: 'Giao hàng giờ hành chính' },
-    { value: 'other', label: '📍 Địa chỉ khác', details: 'Nhập địa chỉ cụ thể' }
-  ];
-
-  const [selectedAddressType, setSelectedAddressType] = useState('');
-
   const [errors, setErrors] = useState({});
 
   const sessionId = localStorage.getItem('session_id') || 'test_session_checkout';

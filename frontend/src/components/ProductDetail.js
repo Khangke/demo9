@@ -100,6 +100,29 @@ const ProductDetail = () => {
     return sizeOption ? { price: sizeOption.price, original_price: sizeOption.original_price } : { price: 0, original_price: null };
   };
 
+  const getCurrentPrice = () => {
+    if (!selectedSize || !product.size_options) return product.price;
+    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    return sizeOption ? sizeOption.price : product.price;
+  };
+
+  const getCurrentOriginalPrice = () => {
+    if (!selectedSize || !product.size_options) return product.original_price;
+    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    return sizeOption ? sizeOption.original_price : product.original_price;
+  };
+
+  const getTotalPrice = () => {
+    return getCurrentPrice() * quantity;
+  };
+
+  const getDiscount = () => {
+    const currentPrice = getCurrentPrice();
+    const originalPrice = getCurrentOriginalPrice();
+    if (!originalPrice || originalPrice <= currentPrice) return 0;
+    return Math.round(((originalPrice - currentPrice) / originalPrice) * 100);
+  };
+
   const addToCart = async () => {
     if (!selectedSize) {
       alert('Vui lòng chọn kích thước sản phẩm');

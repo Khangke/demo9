@@ -1827,9 +1827,27 @@ body {
   justify-content: center;
 }
 
+/* Enhanced Search Bar Animation */
 .search-bar {
   position: relative;
   max-width: 400px;
+  width: 100%;
+}
+
+.search-bar::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #F4D03F, #F39C12);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%);
+  border-radius: 1px;
+}
+
+.search-bar:focus-within::after {
   width: 100%;
 }
 
@@ -1840,6 +1858,12 @@ body {
   transform: translateY(-50%);
   color: #F4D03F;
   font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.search-bar:focus-within ion-icon {
+  color: #F7DC6F;
+  transform: translateY(-50%) scale(1.1);
 }
 
 .search-bar input {

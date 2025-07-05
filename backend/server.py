@@ -51,6 +51,62 @@ class Product(BaseModel):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
+# Cart Models
+class CartItem(BaseModel):
+    product_id: str
+    product_name: str
+    product_image: str
+    size: str  # Selected size
+    size_price: float  # Price for selected size
+    original_price: Optional[float] = None
+    quantity: int = 1
+    total_price: float = 0
+
+class Cart(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str  # For guest users
+    items: List[CartItem] = []
+    total_amount: float = 0
+    total_items: int = 0
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+# Order Models
+class CustomerInfo(BaseModel):
+    full_name: str
+    phone: str
+    email: str
+    address: str
+    city: str
+    district: str
+    ward: str
+    notes: Optional[str] = None
+
+class OrderItem(BaseModel):
+    product_id: str
+    product_name: str
+    product_image: str
+    size: str
+    size_price: float
+    original_price: Optional[float] = None
+    quantity: int
+    total_price: float
+
+class Order(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    order_number: str = Field(default_factory=lambda: f"KTH{datetime.now().strftime('%Y%m%d')}{str(uuid.uuid4())[:8].upper()}")
+    customer_info: CustomerInfo
+    items: List[OrderItem]
+    payment_method: str  # "cod" or "bank_transfer"
+    payment_status: str = "pending"  # pending, paid, failed
+    order_status: str = "pending"  # pending, confirmed, processing, shipping, delivered, cancelled
+    subtotal: float
+    shipping_fee: float = 0
+    discount: float = 0
+    total_amount: float
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
 class ProductCreate(BaseModel):
     name: str
     name_en: str

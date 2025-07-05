@@ -181,38 +181,6 @@ const Checkout = () => {
 
   return (
     <div className="checkout-page">
-      {/* Breadcrumb */}
-      <div className="breadcrumb-nav">
-        <div className="container">
-          <nav>
-            <ol className="breadcrumb-list">
-              <li className="breadcrumb-item">
-                <span className="breadcrumb-link">
-                  <ion-icon name="home-outline"></ion-icon>
-                  Trang chủ
-                </span>
-              </li>
-              <li className="breadcrumb-separator">
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-              </li>
-              <li className="breadcrumb-item">
-                <span className="breadcrumb-link">
-                  <ion-icon name="bag-outline"></ion-icon>
-                  Giỏ hàng
-                </span>
-              </li>
-              <li className="breadcrumb-separator">
-                <ion-icon name="chevron-forward-outline"></ion-icon>
-              </li>
-              <li className="breadcrumb-current">
-                <ion-icon name="card-outline"></ion-icon>
-                Thanh toán
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-
       {/* Checkout Steps */}
       <div className="checkout-steps">
         <div className="container">

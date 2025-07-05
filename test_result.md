@@ -226,7 +226,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tinh chỉnh CSS UX/UI thương hiệu để elegant và nổi bật nhưng không chói mắt"
+    - "Tối ưu phần chi tiết sản phẩm với size options và pricing"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

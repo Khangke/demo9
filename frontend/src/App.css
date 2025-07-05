@@ -2814,14 +2814,26 @@ body {
 
 /* Product Detail Main */
 .product-detail-main {
-  padding: 1rem 0 2rem;
+  padding: 1.5rem 0 3rem;
+  animation: contentFadeUp 0.7s ease-out 0.2s both;
+}
+
+@keyframes contentFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .product-detail-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  max-width: 1000px;
+  gap: 2rem;
+  max-width: 1100px;
   margin: 0 auto;
 }
 

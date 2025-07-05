@@ -98,37 +98,39 @@ const HomePage = () => {
           ) : (
             <div className="products-grid">
               {products.filter(product => product.featured).slice(0, 3).map(product => (
-                <div key={product.id} className="product-card">
-                  <div className="product-image">
-                    <img src={product.image_url} alt={product.name} />
-                    <div className="product-badge">Nổi Bật</div>
-                    <div className="product-overlay">
-                      <Link to={`/product/${product.id}`} className="quick-view-btn">Xem Chi Tiết</Link>
-                    </div>
-                  </div>
-                  <div className="product-info">
-                    <div className="product-category">{product.category}</div>
-                    <h3>{product.name}</h3>
-                    <p className="product-description">{product.description}</p>
-                    <div className="product-price">
-                      <span className="current-price">{formatPrice(product.price)}</span>
-                      {product.original_price && (
-                        <span className="original-price">{formatPrice(product.original_price)}</span>
-                      )}
-                    </div>
-                    <div className="product-rating">
-                      <div className="stars">
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
-                        <ion-icon name="star"></ion-icon>
+                <Link key={product.id} to={`/product/${product.id}`} className="product-card-link">
+                  <div className="product-card">
+                    <div className="product-image">
+                      <img src={product.image_url} alt={product.name} />
+                      <div className="product-badge">Nổi Bật</div>
+                      <div className="product-overlay">
+                        <span className="quick-view-btn">Xem Chi Tiết</span>
                       </div>
-                      <span className="rating-text">(4.9/5)</span>
                     </div>
-                    <button className="add-to-cart-btn">Thêm Vào Giỏ Hàng</button>
+                    <div className="product-info">
+                      <div className="product-category">{product.category}</div>
+                      <h3>{product.name}</h3>
+                      <p className="product-description">{product.description}</p>
+                      <div className="product-price">
+                        <span className="current-price">{formatPrice(product.price)}</span>
+                        {product.original_price && (
+                          <span className="original-price">{formatPrice(product.original_price)}</span>
+                        )}
+                      </div>
+                      <div className="product-rating">
+                        <div className="stars">
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                          <ion-icon name="star"></ion-icon>
+                        </div>
+                        <span className="rating-text">(4.9/5)</span>
+                      </div>
+                      <button className="add-to-cart-btn" onClick={(e) => e.preventDefault()}>Thêm Vào Giỏ Hàng</button>
+                    </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           )}

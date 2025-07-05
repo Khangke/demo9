@@ -341,6 +341,32 @@ const Cart = () => {
         </div>
       </div>
       
+      {/* Confirm Clear Cart Modal */}
+      {showConfirmModal && (
+        <div className="modal-overlay" onClick={cancelClearCart}>
+          <div className="confirm-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="confirm-modal-header">
+              <ion-icon name="warning-outline"></ion-icon>
+              <h3>Xác nhận xóa giỏ hàng</h3>
+            </div>
+            <div className="confirm-modal-body">
+              <p>Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?</p>
+              <p className="confirm-modal-note">Hành động này không thể hoàn tác!</p>
+            </div>
+            <div className="confirm-modal-actions">
+              <button className="confirm-btn-cancel" onClick={cancelClearCart}>
+                <ion-icon name="close-outline"></ion-icon>
+                Hủy
+              </button>
+              <button className="confirm-btn-delete" onClick={confirmClearCart} disabled={updating}>
+                <ion-icon name="trash-outline"></ion-icon>
+                {updating ? 'Đang xóa...' : 'Xóa tất cả'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Toast Notification */}
       <Toast 
         message={toast.message} 

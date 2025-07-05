@@ -198,27 +198,7 @@ const ProductDetail = () => {
                   <ion-icon name="expand-outline"></ion-icon>
                 </button>
                 
-                {/* Auto play indicator */}
-                {allImages.length > 1 && (
-                  <div className="slideshow-controls">
-                    <button 
-                      className={`auto-play-btn ${isAutoPlaying ? 'playing' : 'paused'}`}
-                      onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                      title={isAutoPlaying ? 'Tạm dừng slideshow' : 'Bật slideshow'}
-                    >
-                      <ion-icon name={isAutoPlaying ? "pause" : "play"}></ion-icon>
-                    </button>
-                    <div className="slideshow-dots">
-                      {allImages.map((_, index) => (
-                        <button
-                          key={index}
-                          className={`slideshow-dot ${selectedImage === index ? 'active' : ''}`}
-                          onClick={() => handleThumbnailClick(index)}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
+
               </div>
               
               {allImages.length > 1 && (

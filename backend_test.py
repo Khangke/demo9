@@ -216,6 +216,36 @@ class AgarwoodAPITester:
                 product = response.json()
                 print(f"Retrieved product: {product.get('name')} ({product.get('name_en')})")
                 
+                # Verify enhanced data fields
+                enhanced_fields = {
+                    "size_options": list,
+                    "additional_images": list,
+                    "specifications": dict
+                }
+                
+                all_fields_valid = True
+                for field, expected_type in enhanced_fields.items():
+                    if field not in product:
+                        print(f"❌ Missing field: {field}")
+                        all_fields_valid = False
+                    elif not isinstance(product.get(field), expected_type):
+                        print(f"❌ Invalid type for {field}: Expected {expected_type.__name__}, got {type(product.get(field)).__name__}")
+                        all_fields_valid = False
+                
+                if all_fields_valid:
+                    print("✅ Enhanced Data Fields: SUCCESS - All new fields are present with correct types")
+                    
+                    # Check size options structure
+                    if product.get("size_options"):
+                        size_option = product.get("size_options")[0]
+                        size_fields = ["size", "price", "stock"]
+                        missing_size_fields = [field for field in size_fields if field not in size_option]
+                        
+                        if not missing_size_fields:
+                            print("✅ Size Options Structure: SUCCESS - All required fields present")
+                        else:
+                            print(f"❌ Size Options Structure: FAILED - Missing fields: {', '.join(missing_size_fields)}")
+                
                 self.test_results["get_product_by_id"] = True
                 print("✅ Get Product by ID: SUCCESS")
             else:

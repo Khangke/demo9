@@ -239,6 +239,7 @@ test_plan:
     - "Elegant CSS styling"
     - "Enhanced Promotions Section UI/UX"
     - "Tinh chỉnh CSS UX/UI thương hiệu để elegant và nổi bật nhưng không chói mắt"
+    - "Tối ưu phần chi tiết sản phẩm với size options và pricing"
 
 agent_communication:
     - agent: "main"

@@ -2814,21 +2814,48 @@ body {
 .continue-shopping-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 1rem 2rem;
-  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
-  color: #1A1A1A;
+  gap: 8px;
+  padding: 12px 24px;
+  background: rgba(244, 208, 63, 0.08);
+  color: #F4D03F;
   text-decoration: none;
-  border-radius: 25px;
+  border-radius: 12px;
   font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.3);
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(244, 208, 63, 0.2);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+}
+
+.continue-shopping-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(244, 208, 63, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .continue-shopping-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(244, 208, 63, 0.4);
-  background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(244, 208, 63, 0.15);
+  border-color: rgba(244, 208, 63, 0.4);
+  color: #F7DC6F;
+}
+
+.continue-shopping-btn:hover::before {
+  opacity: 1;
+}
+
+.continue-shopping-btn ion-icon {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
 }
 
 /* Cart Layout */

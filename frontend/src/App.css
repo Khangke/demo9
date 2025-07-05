@@ -3230,11 +3230,15 @@ body {
 /* Responsive adjustments for related products */
 @media (max-width: 768px) {
   .related-products {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
   
   .related-products .section-header h2 {
     font-size: 1.8rem;
+  }
+  
+  .related-products .section-header {
+    margin-bottom: 2rem;
   }
   
   .related-products-grid {

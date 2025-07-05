@@ -2654,6 +2654,18 @@ body {
   margin-top: 80px;
   min-height: 100vh;
   background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+  animation: pageLoadFade 0.6s ease-out;
+}
+
+@keyframes pageLoadFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .product-detail-loading,

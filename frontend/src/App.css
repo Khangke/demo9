@@ -2975,6 +2975,15 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+  .products-layout {
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+  }
+  
+  .products-sidebar {
+    padding: 1.5rem;
+  }
+  
   .products-hero h1 {
     font-size: 3rem;
   }

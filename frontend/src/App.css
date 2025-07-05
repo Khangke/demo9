@@ -1201,6 +1201,7 @@ body {
   font-size: 0.85rem;
   transition: all 0.3s ease;
   height: 40px;
+  line-height: 1.4;
 }
 
 .form-input-compact:focus {
@@ -1213,6 +1214,74 @@ body {
 .form-input-compact::placeholder {
   color: #888;
   font-size: 0.8rem;
+}
+
+/* Select dropdown specific styling */
+.form-input-compact select,
+select.form-input-compact {
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(244, 208, 63, 0.2);
+  border-radius: 8px;
+  padding: 0.625rem 0.875rem;
+  color: #E8E8E8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  height: 40px;
+  line-height: 1.4;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F4D03F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  padding-right: 2.5rem;
+}
+
+.form-input-compact select:focus,
+select.form-input-compact:focus {
+  outline: none;
+  border-color: #F4D03F;
+  box-shadow: 0 0 0 2px rgba(244, 208, 63, 0.1);
+  background: rgba(30, 30, 30, 0.9);
+}
+
+.form-input-compact select:hover,
+select.form-input-compact:hover {
+  border-color: rgba(244, 208, 63, 0.4);
+  background: rgba(30, 30, 30, 0.8);
+}
+
+/* Option styling */
+.form-input-compact select option,
+select.form-input-compact option {
+  background: #2A2A2A;
+  color: #E8E8E8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border: none;
+}
+
+.form-input-compact select option:hover,
+select.form-input-compact option:hover {
+  background: #3A3A3A;
+  color: #F4D03F;
+}
+
+.form-input-compact select option:checked,
+select.form-input-compact option:checked {
+  background: rgba(244, 208, 63, 0.2);
+  color: #F4D03F;
+  font-weight: 600;
+}
+
+/* Disabled state */
+.form-input-compact select:disabled,
+select.form-input-compact:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(30, 30, 30, 0.4);
 }
 
 .form-textarea-compact {

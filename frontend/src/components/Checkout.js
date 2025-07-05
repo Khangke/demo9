@@ -366,55 +366,82 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Step 2: Payment Method */}
-                <div className={`checkout-section ${currentStep === 2 ? 'active' : ''}`}>
-                  <div className="section-header">
+                {/* Step 2: Payment Method - Optimized */}
+                <div className={`checkout-section checkout-section-compact ${currentStep === 2 ? 'active' : ''}`}>
+                  <div className="section-header section-header-compact">
                     <h2>
                       <ion-icon name="card-outline"></ion-icon>
                       Phương thức thanh toán
                     </h2>
+                    <p className="section-subtitle">Chọn cách thức thanh toán phù hợp với bạn</p>
                   </div>
 
-                  <div className="payment-methods">
-                    <div className="payment-option">
-                      <label className="payment-option-label">
+                  <div className="payment-methods payment-methods-optimized">
+                    <div className="payment-option payment-option-enhanced">
+                      <label className="payment-option-label payment-option-label-compact">
                         <input
                           type="radio"
                           name="payment_method"
                           value="cod"
                           checked={formData.payment_method === 'cod'}
                           onChange={handleInputChange}
+                          className="payment-radio"
                         />
-                        <div className="payment-option-content">
-                          <div className="payment-icon">
+                        <div className="payment-option-content payment-content-compact">
+                          <div className="payment-icon payment-icon-subtle">
                             <ion-icon name="cash-outline"></ion-icon>
                           </div>
-                          <div className="payment-info">
-                            <h3>Thanh toán khi nhận hàng (COD)</h3>
-                            <p>Thanh toán bằng tiền mặt khi nhận hàng</p>
-                            <span className="payment-fee">Phí COD: +30.000đ</span>
+                          <div className="payment-info payment-info-compact">
+                            <h3>Thanh toán khi nhận hàng</h3>
+                            <p>Thanh toán tiền mặt khi nhận hàng tại nhà</p>
+                            <div className="payment-details">
+                              <span className="payment-fee payment-fee-compact">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                                Phí COD: 30.000đ
+                              </span>
+                              <span className="delivery-time">
+                                <ion-icon name="time-outline"></ion-icon>
+                                3-7 ngày
+                              </span>
+                            </div>
+                          </div>
+                          <div className="payment-badge payment-badge-popular">
+                            <span>Phổ biến</span>
                           </div>
                         </div>
                       </label>
                     </div>
 
-                    <div className="payment-option">
-                      <label className="payment-option-label">
+                    <div className="payment-option payment-option-enhanced">
+                      <label className="payment-option-label payment-option-label-compact">
                         <input
                           type="radio"
                           name="payment_method"
                           value="bank_transfer"
                           checked={formData.payment_method === 'bank_transfer'}
                           onChange={handleInputChange}
+                          className="payment-radio"
                         />
-                        <div className="payment-option-content">
-                          <div className="payment-icon">
+                        <div className="payment-option-content payment-content-compact">
+                          <div className="payment-icon payment-icon-subtle">
                             <ion-icon name="card-outline"></ion-icon>
                           </div>
-                          <div className="payment-info">
+                          <div className="payment-info payment-info-compact">
                             <h3>Chuyển khoản ngân hàng</h3>
-                            <p>Chuyển khoản trước khi giao hàng</p>
-                            <span className="payment-benefit">Miễn phí vận chuyển</span>
+                            <p>Chuyển khoản qua internet banking hoặc ATM</p>
+                            <div className="payment-details">
+                              <span className="payment-benefit payment-benefit-compact">
+                                <ion-icon name="checkmark-circle-outline"></ion-icon>
+                                Miễn phí vận chuyển
+                              </span>
+                              <span className="delivery-time">
+                                <ion-icon name="flash-outline"></ion-icon>
+                                Nhanh hơn
+                              </span>
+                            </div>
+                          </div>
+                          <div className="payment-badge payment-badge-recommended">
+                            <span>Khuyến nghị</span>
                           </div>
                         </div>
                       </label>
@@ -422,43 +449,51 @@ const Checkout = () => {
                   </div>
 
                   {formData.payment_method === 'bank_transfer' && (
-                    <div className="bank-info">
-                      <h4>
+                    <div className="bank-info bank-info-compact">
+                      <div className="bank-info-header">
                         <ion-icon name="information-circle-outline"></ion-icon>
-                        Thông tin chuyển khoản
-                      </h4>
-                      <div className="bank-details">
-                        <div className="bank-item">
-                          <strong>Ngân hàng:</strong> Vietcombank
+                        <h4>Thông tin chuyển khoản</h4>
+                      </div>
+                      <div className="bank-details bank-details-grid">
+                        <div className="bank-row">
+                          <span className="bank-label">Ngân hàng</span>
+                          <span className="bank-value">Vietcombank</span>
                         </div>
-                        <div className="bank-item">
-                          <strong>Số tài khoản:</strong> 1234567890
+                        <div className="bank-row">
+                          <span className="bank-label">Số tài khoản</span>
+                          <span className="bank-value bank-account">1234567890</span>
                         </div>
-                        <div className="bank-item">
-                          <strong>Chủ tài khoản:</strong> KHANG TRAM HUONG
+                        <div className="bank-row">
+                          <span className="bank-label">Chủ tài khoản</span>
+                          <span className="bank-value">KHANG TRAM HUONG</span>
                         </div>
-                        <div className="bank-item">
-                          <strong>Nội dung:</strong> Thanh toán đơn hàng [Mã đơn hàng]
+                        <div className="bank-row bank-row-highlight">
+                          <span className="bank-label">Nội dung CK</span>
+                          <span className="bank-value">Thanh toán đơn hàng [Mã đơn hàng]</span>
                         </div>
+                      </div>
+                      <div className="bank-note">
+                        <ion-icon name="bulb-outline"></ion-icon>
+                        <span>Vui lòng chuyển khoản đúng nội dung để xử lý nhanh chóng</span>
                       </div>
                     </div>
                   )}
 
-                  <div className="section-actions">
+                  <div className="section-actions section-actions-compact">
                     <button 
                       type="button" 
                       onClick={() => setCurrentStep(1)}
-                      className="prev-step-btn"
+                      className="prev-step-btn step-btn-subtle"
                     >
                       <ion-icon name="arrow-back-outline"></ion-icon>
-                      Quay lại
+                      <span>Quay lại</span>
                     </button>
                     <button 
                       type="button" 
                       onClick={() => setCurrentStep(3)}
-                      className="next-step-btn"
+                      className="next-step-btn step-btn-primary"
                     >
-                      Tiếp tục
+                      <span>Tiếp tục</span>
                       <ion-icon name="arrow-forward-outline"></ion-icon>
                     </button>
                   </div>

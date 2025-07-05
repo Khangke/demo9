@@ -5376,7 +5376,7 @@ body {
 /* Breadcrumb Navigation */
 .breadcrumb-nav {
   background: rgba(20, 20, 20, 0.95);
-  padding: 1rem 0;
+  padding: 0.7rem 0;
   border-bottom: 1px solid rgba(244, 208, 63, 0.08);
   backdrop-filter: blur(20px);
   animation: breadcrumbSlide 0.5s ease-out;
@@ -5396,8 +5396,9 @@ body {
 .breadcrumb-list {
   display: flex;
   align-items: center;
+  justify-content: center;
   list-style: none;
-  gap: 0.5rem;
+  gap: 0.4rem;
   margin: 0;
   padding: 0;
 }
@@ -5410,15 +5411,16 @@ body {
 .breadcrumb-link {
   color: #B8B8B8;
   text-decoration: none;
-  padding: 0.5rem;
-  border-radius: 8px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
-  gap: 0.3rem;
-  font-size: 0.9rem;
+  gap: 0.2rem;
+  font-size: 0.8rem;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .breadcrumb-link::before {
@@ -5428,8 +5430,9 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(244, 208, 63, 0.05), transparent);
+  background: linear-gradient(90deg, transparent, rgba(244, 208, 63, 0.1), transparent);
   transition: left 0.4s ease;
+  z-index: -1;
 }
 
 .breadcrumb-link:hover {
@@ -5444,16 +5447,16 @@ body {
 
 .breadcrumb-separator {
   color: #666;
-  margin: 0 0.5rem;
-  font-size: 0.8rem;
+  margin: 0 0.3rem;
+  font-size: 0.7rem;
   transition: color 0.3s ease;
 }
 
 .breadcrumb-current {
   color: #F4D03F;
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.5rem;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
   background: rgba(244, 208, 63, 0.05);
   border-radius: 6px;
   border: 1px solid rgba(244, 208, 63, 0.1);

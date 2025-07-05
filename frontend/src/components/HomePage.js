@@ -127,7 +127,6 @@ const HomePage = () => {
                         </div>
                         <span className="rating-text">(4.9/5)</span>
                       </div>
-                      <button className="add-to-cart-btn" onClick={(e) => e.preventDefault()}>Thêm Vào Giỏ Hàng</button>
                     </div>
                   </div>
                 </Link>

@@ -568,73 +568,85 @@ const Checkout = () => {
                 </div>
               </div>
 
-              {/* Order Summary Sidebar */}
-              <div className="checkout-sidebar">
-                <div className="order-summary-card">
-                  <h3>
-                    <ion-icon name="receipt-outline"></ion-icon>
-                    Tóm tắt đơn hàng
-                  </h3>
+              {/* Order Summary Sidebar - Optimized */}
+              <div className="checkout-sidebar checkout-sidebar-compact">
+                <div className="order-summary-card order-summary-compact">
+                  <div className="summary-header">
+                    <h3>
+                      <ion-icon name="receipt-outline"></ion-icon>
+                      Tóm tắt đơn hàng
+                    </h3>
+                    <div className="summary-stats">
+                      <span className="items-count">{cart.total_items} sản phẩm</span>
+                    </div>
+                  </div>
 
-                  <div className="order-items">
+                  <div className="order-items order-items-compact">
                     {cart.items.map((item) => (
-                      <div key={`${item.product_id}-${item.size}`} className="order-item">
-                        <div className="order-item-image">
+                      <div key={`${item.product_id}-${item.size}`} className="order-item order-item-mini">
+                        <div className="order-item-image order-image-small">
                           <img src={item.product_image} alt={item.product_name} />
-                          <span className="order-item-quantity">{item.quantity}</span>
+                          <span className="order-item-quantity quantity-badge">{item.quantity}</span>
                         </div>
-                        <div className="order-item-info">
-                          <h4>{item.product_name}</h4>
-                          <p>Kích thước: {item.size}</p>
-                          <div className="order-item-price">
-                            <span className="current-price">{formatPrice(item.total_price)}</span>
-                            {item.original_price && item.original_price > item.size_price && (
-                              <span className="discount-badge">
-                                -{getDiscountPercentage(item.size_price, item.original_price)}%
-                              </span>
-                            )}
+                        <div className="order-item-info order-info-compact">
+                          <h4 className="item-name-truncated">{item.product_name}</h4>
+                          <div className="item-details-row">
+                            <span className="item-size-compact">
+                              <ion-icon name="resize-outline"></ion-icon>
+                              {item.size}
+                            </span>
+                            <div className="item-price-compact">
+                              <span className="current-price price-compact">{formatPrice(item.total_price)}</span>
+                              {item.original_price && item.original_price > item.size_price && (
+                                <span className="discount-badge discount-mini">
+                                  -{getDiscountPercentage(item.size_price, item.original_price)}%
+                                </span>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="order-calculations">
-                    <div className="calc-row">
-                      <span>Tạm tính ({cart.total_items} sản phẩm)</span>
-                      <span>{formatPrice(cart.total_amount)}</span>
+                  <div className="order-calculations order-calc-compact">
+                    <div className="calc-row calc-row-mini">
+                      <span className="calc-label">Tạm tính</span>
+                      <span className="calc-value">{formatPrice(cart.total_amount)}</span>
                     </div>
-                    <div className="calc-row">
-                      <span>Phí vận chuyển</span>
-                      <span>{formatPrice(calculateShipping())}</span>
+                    <div className="calc-row calc-row-mini">
+                      <span className="calc-label">
+                        Phí vận chuyển
+                        {formData.payment_method === 'bank_transfer' && (
+                          <span className="shipping-note">(Miễn phí)</span>
+                        )}
+                      </span>
+                      <span className="calc-value">{formatPrice(calculateShipping())}</span>
                     </div>
-                    <div className="calc-divider"></div>
-                    <div className="calc-row total-row">
-                      <span>Tổng cộng</span>
-                      <span className="total-amount">{formatPrice(calculateTotal())}</span>
+                    <div className="calc-divider calc-divider-thin"></div>
+                    <div className="calc-row total-row calc-total-compact">
+                      <span className="total-label">Tổng cộng</span>
+                      <span className="total-amount total-amount-compact">{formatPrice(calculateTotal())}</span>
                     </div>
                   </div>
-                </div>
 
-                <div className="checkout-security">
-                  <h4>
-                    <ion-icon name="shield-checkmark-outline"></ion-icon>
-                    Bảo mật thanh toán
-                  </h4>
-                  <ul>
-                    <li>
-                      <ion-icon name="lock-closed-outline"></ion-icon>
-                      Thông tin được mã hóa SSL
-                    </li>
-                    <li>
-                      <ion-icon name="checkmark-circle-outline"></ion-icon>
-                      Đảm bảo an toàn 100%
-                    </li>
-                    <li>
-                      <ion-icon name="shield-outline"></ion-icon>
-                      Chính sách bảo mật nghiêm ngặt
-                    </li>
-                  </ul>
+                  {/* Payment Security - Compact */}
+                  <div className="payment-security payment-security-compact">
+                    <div className="security-header">
+                      <ion-icon name="shield-checkmark-outline"></ion-icon>
+                      <span>Thanh toán an toàn</span>
+                    </div>
+                    <div className="security-features">
+                      <div className="security-item">
+                        <ion-icon name="lock-closed-outline"></ion-icon>
+                        <span>Mã hóa SSL 256-bit</span>
+                      </div>
+                      <div className="security-item">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                        <span>Bảo mật thông tin</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

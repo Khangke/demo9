@@ -2838,7 +2838,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(244, 208, 63, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(244, 208, 63, 0.18) 0%, rgba(243, 156, 18, 0.12) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }

@@ -55,6 +55,10 @@ const Checkout = () => {
   }, []);
 
   const fetchCart = async () => {
+    // For demo purposes, use mock data instead of API
+    setLoading(false);
+    return;
+    
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/${sessionId}`);
       if (response.ok) {

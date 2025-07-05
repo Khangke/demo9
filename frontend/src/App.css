@@ -1175,6 +1175,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
+  min-width: 0;
 }
 
 .form-group-full {

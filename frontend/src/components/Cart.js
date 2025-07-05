@@ -92,9 +92,13 @@ const Cart = () => {
   };
 
   const clearCart = async () => {
-    if (!window.confirm('Bạn có chắc chắn muốn xóa tất cả sản phẩm trong giỏ hàng?')) return;
-    
+    setShowConfirmModal(true);
+  };
+
+  const confirmClearCart = async () => {
+    setShowConfirmModal(false);
     setUpdating(true);
+    
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/${sessionId}/clear`, {
         method: 'DELETE'
@@ -102,16 +106,20 @@ const Cart = () => {
 
       if (response.ok) {
         setCart({ items: [], total_amount: 0, total_items: 0 });
-        showToast('Đã xóa tất cả sản phẩm khỏi giỏ hàng', 'success');
+        showToast('🗑️ Đã xóa tất cả sản phẩm khỏi giỏ hàng!', 'success');
       } else {
-        showToast('Không thể xóa giỏ hàng', 'error');
+        showToast('❌ Không thể xóa giỏ hàng', 'error');
       }
     } catch (error) {
       console.error('Error clearing cart:', error);
-      showToast('Có lỗi xảy ra khi xóa giỏ hàng', 'error');
+      showToast('❌ Có lỗi xảy ra khi xóa giỏ hàng', 'error');
     } finally {
       setUpdating(false);
     }
+  };
+
+  const cancelClearCart = () => {
+    setShowConfirmModal(false);
   };
 
   const formatPrice = (price) => {

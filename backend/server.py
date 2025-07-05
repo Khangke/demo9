@@ -248,10 +248,7 @@ async def add_to_cart(session_id: str, item: dict):
         if not cart:
             cart = Cart(session_id=session_id).dict()
             await db.carts.insert_one(cart)
-        
-        # Convert MongoDB _id to string
-        if "_id" in cart:
-            cart["_id"] = str(cart["_id"])
+            cart = await db.carts.find_one({"session_id": session_id})
         
         # Create cart item
         cart_item = CartItem(
@@ -273,28 +270,55 @@ async def add_to_cart(session_id: str, item: dict):
                 existing_item = i
                 break
         
+        # Prepare update data
+        update_data = {}
+        
         if existing_item is not None:
             # Update existing item
-            cart["items"][existing_item]["quantity"] += item["quantity"]
-            cart["items"][existing_item]["total_price"] = (
-                cart["items"][existing_item]["quantity"] * size_option["price"]
-            )
+            new_quantity = cart["items"][existing_item]["quantity"] + item["quantity"]
+            new_total_price = new_quantity * size_option["price"]
+            update_data[f"items.{existing_item}.quantity"] = new_quantity
+            update_data[f"items.{existing_item}.total_price"] = new_total_price
         else:
             # Add new item
-            cart.setdefault("items", []).append(cart_item.dict())
+            update_data["$push"] = {"items": cart_item.dict()}
         
-        # Recalculate totals
-        cart["total_items"] = sum(item["quantity"] for item in cart["items"])
-        cart["total_amount"] = sum(item["total_price"] for item in cart["items"])
-        cart["updated_at"] = datetime.utcnow()
+        # Calculate new totals
+        items = cart.get("items", []).copy()
+        if existing_item is not None:
+            items[existing_item]["quantity"] += item["quantity"]
+            items[existing_item]["total_price"] = items[existing_item]["quantity"] * size_option["price"]
+        else:
+            items.append(cart_item.dict())
+        
+        total_items = sum(item["quantity"] for item in items)
+        total_amount = sum(item["total_price"] for item in items)
+        
+        # Add totals to update data
+        if "$push" in update_data:
+            update_data["$set"] = {
+                "total_items": total_items,
+                "total_amount": total_amount,
+                "updated_at": datetime.utcnow()
+            }
+        else:
+            update_data["total_items"] = total_items
+            update_data["total_amount"] = total_amount
+            update_data["updated_at"] = datetime.utcnow()
+            update_data = {"$set": update_data}
         
         # Update cart in database
         await db.carts.update_one(
             {"session_id": session_id},
-            {"$set": cart}
+            update_data
         )
         
-        return {"message": "Item added to cart", "cart": cart}
+        # Get updated cart
+        updated_cart = await db.carts.find_one({"session_id": session_id})
+        if "_id" in updated_cart:
+            updated_cart["_id"] = str(updated_cart["_id"])
+        
+        return {"message": "Item added to cart", "cart": updated_cart}
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -307,39 +331,71 @@ async def update_cart_item(session_id: str, item: dict):
         if not cart:
             raise HTTPException(status_code=404, detail="Cart not found")
         
-        # Convert MongoDB _id to string
-        if "_id" in cart:
-            cart["_id"] = str(cart["_id"])
-        
-        # Find and update item
-        item_found = False
-        for cart_item in cart["items"]:
+        # Find item index
+        item_index = None
+        for i, cart_item in enumerate(cart.get("items", [])):
             if (cart_item["product_id"] == item["product_id"] and 
                 cart_item["size"] == item["size"]):
-                
-                if item["quantity"] <= 0:
-                    cart["items"].remove(cart_item)
-                else:
-                    cart_item["quantity"] = item["quantity"]
-                    cart_item["total_price"] = cart_item["size_price"] * item["quantity"]
-                item_found = True
+                item_index = i
                 break
         
-        if not item_found:
+        if item_index is None:
             raise HTTPException(status_code=404, detail="Item not found in cart")
         
-        # Recalculate totals
-        cart["total_items"] = sum(item["quantity"] for item in cart["items"])
-        cart["total_amount"] = sum(item["total_price"] for item in cart["items"])
-        cart["updated_at"] = datetime.utcnow()
+        # Prepare update data
+        update_data = {}
+        
+        if item["quantity"] <= 0:
+            # Remove item
+            update_data["$pull"] = {
+                "items": {
+                    "product_id": item["product_id"],
+                    "size": item["size"]
+                }
+            }
+        else:
+            # Update quantity and total price
+            size_price = cart["items"][item_index]["size_price"]
+            update_data["$set"] = {
+                f"items.{item_index}.quantity": item["quantity"],
+                f"items.{item_index}.total_price": size_price * item["quantity"]
+            }
+        
+        # Calculate new totals
+        items = cart.get("items", []).copy()
+        if item["quantity"] <= 0:
+            items = [i for i in items if not (i["product_id"] == item["product_id"] and i["size"] == item["size"])]
+        else:
+            items[item_index]["quantity"] = item["quantity"]
+            items[item_index]["total_price"] = items[item_index]["size_price"] * item["quantity"]
+        
+        total_items = sum(i["quantity"] for i in items)
+        total_amount = sum(i["total_price"] for i in items)
+        
+        # Add totals to update data
+        if "$set" in update_data:
+            update_data["$set"]["total_items"] = total_items
+            update_data["$set"]["total_amount"] = total_amount
+            update_data["$set"]["updated_at"] = datetime.utcnow()
+        else:
+            update_data["$set"] = {
+                "total_items": total_items,
+                "total_amount": total_amount,
+                "updated_at": datetime.utcnow()
+            }
         
         # Update cart in database
         await db.carts.update_one(
             {"session_id": session_id},
-            {"$set": cart}
+            update_data
         )
         
-        return {"message": "Cart updated", "cart": cart}
+        # Get updated cart
+        updated_cart = await db.carts.find_one({"session_id": session_id})
+        if "_id" in updated_cart:
+            updated_cart["_id"] = str(updated_cart["_id"])
+        
+        return {"message": "Cart updated", "cart": updated_cart}
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -352,29 +408,40 @@ async def remove_from_cart(session_id: str, item: dict):
         if not cart:
             raise HTTPException(status_code=404, detail="Cart not found")
         
-        # Convert MongoDB _id to string
-        if "_id" in cart:
-            cart["_id"] = str(cart["_id"])
+        # Prepare update data
+        update_data = {
+            "$pull": {
+                "items": {
+                    "product_id": item["product_id"],
+                    "size": item["size"]
+                }
+            }
+        }
         
-        # Find and remove item
-        cart["items"] = [
-            cart_item for cart_item in cart["items"]
-            if not (cart_item["product_id"] == item["product_id"] and 
-                   cart_item["size"] == item["size"])
-        ]
+        # Calculate new totals
+        items = [i for i in cart.get("items", []) if not (i["product_id"] == item["product_id"] and i["size"] == item["size"])]
+        total_items = sum(i["quantity"] for i in items)
+        total_amount = sum(i["total_price"] for i in items)
         
-        # Recalculate totals
-        cart["total_items"] = sum(item["quantity"] for item in cart["items"])
-        cart["total_amount"] = sum(item["total_price"] for item in cart["items"])
-        cart["updated_at"] = datetime.utcnow()
+        # Add totals to update data
+        update_data["$set"] = {
+            "total_items": total_items,
+            "total_amount": total_amount,
+            "updated_at": datetime.utcnow()
+        }
         
         # Update cart in database
         await db.carts.update_one(
             {"session_id": session_id},
-            {"$set": cart}
+            update_data
         )
         
-        return {"message": "Item removed from cart", "cart": cart}
+        # Get updated cart
+        updated_cart = await db.carts.find_one({"session_id": session_id})
+        if "_id" in updated_cart:
+            updated_cart["_id"] = str(updated_cart["_id"])
+        
+        return {"message": "Item removed from cart", "cart": updated_cart}
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

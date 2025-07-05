@@ -3123,8 +3123,8 @@ body {
 }
 
 .product-header {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
   border-bottom: 1px solid rgba(244, 208, 63, 0.1);
   animation: headerFade 0.6s ease-out 0.6s both;
 }

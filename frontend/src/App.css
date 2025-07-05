@@ -1727,7 +1727,7 @@ body {
 /* Products Hero Section */
 .products-hero {
   background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
-  padding: 8rem 0 6rem;
+  padding: 6rem 0 4rem;
   position: relative;
   overflow: hidden;
 }

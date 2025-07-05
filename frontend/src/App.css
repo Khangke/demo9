@@ -2855,17 +2855,23 @@ body {
 }
 
 .continue-shopping-btn ion-icon {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   position: relative;
   z-index: 1;
   transform: translateX(0);
   transition: transform 0.3s ease;
-  opacity: 0.9;
+  opacity: 1;
+  display: block;
+  flex-shrink: 0;
 }
 
 .continue-shopping-btn:hover ion-icon {
   transform: translateX(-3px);
-  opacity: 1;
+}
+
+.continue-shopping-btn span {
+  position: relative;
+  z-index: 1;
 }
 
 /* Cart Layout */

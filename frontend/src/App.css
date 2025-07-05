@@ -2796,16 +2796,17 @@ body {
 
 .main-product-image {
   width: 100%;
-  height: 300px;
-  object-fit: contain;
+  height: 350px;
+  object-fit: cover;
   object-position: center;
   background: #1A1A1A;
   transition: transform 0.3s ease;
   cursor: zoom-in;
+  border-radius: 8px;
 }
 
 .main-product-image:hover {
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
 
 .discount-badge-detail {

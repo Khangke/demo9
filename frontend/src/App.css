@@ -3459,6 +3459,12 @@ body {
   font-size: 1.1rem;
   position: relative;
   z-index: 1;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.continue-shopping-link:hover ion-icon {
+  transform: translateX(-2px);
 }
 
 /* Cart Actions Container */

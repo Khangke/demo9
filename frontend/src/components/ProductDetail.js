@@ -180,7 +180,7 @@ const ProductDetail = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           product_id: product.id,
-          size: selectedSize,
+          size: selectedSize.size,
           quantity: quantity
         })
       });

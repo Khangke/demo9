@@ -119,6 +119,9 @@ backend:
         - working: true
           agent: "testing"
           comment: "Successfully tested all product API endpoints (GET, POST, PUT, DELETE). All endpoints are working correctly with proper response codes and data handling. Created backend_test.py to verify functionality. The API correctly handles product creation, retrieval, updating, and deletion."
+        - working: true
+          agent: "testing"
+          comment: "Successfully tested the updated backend API with new product model changes. The API correctly handles the enhanced product model with size_options, additional_images, and specifications fields. All endpoints (GET /api/products, GET /api/products/{id}, POST, PUT, DELETE) work properly with the updated model. The API structure is correctly implemented, but the sample data in the database doesn't have the enhanced fields populated with actual data."
 
   - task: "Sample product data initialization"
     implemented: true
@@ -134,6 +137,9 @@ backend:
         - working: true
           agent: "testing"
           comment: "Verified that sample data initialization is working correctly. The database is populated with 4 sample agarwood products with proper Vietnamese names, descriptions, pricing, and categories. Featured products are correctly marked and can be filtered using the API."
+        - working: true
+          agent: "testing"
+          comment: "Verified that the sample data initialization includes the enhanced product model structure with size_options, additional_images, and specifications fields. The model structure is correctly implemented, but the sample data in the database has empty arrays/objects for these fields. The API correctly handles these fields when creating or updating products."
 
 frontend:
   - task: "Homepage design with hero banner"

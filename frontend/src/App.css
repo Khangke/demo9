@@ -920,6 +920,179 @@ body {
   }
 }
 
+/* Confirm Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.confirm-modal {
+  background: linear-gradient(135deg, #2C2C2C 0%, #1E1E1E 100%);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 450px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(244, 208, 63, 0.2);
+  animation: modalSlideUp 0.3s ease-out;
+  overflow: hidden;
+}
+
+.confirm-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.1) 0%, rgba(244, 67, 54, 0.05) 100%);
+  border-bottom: 1px solid rgba(255, 68, 68, 0.2);
+}
+
+.confirm-modal-header ion-icon {
+  font-size: 2rem;
+  color: #FF4444;
+}
+
+.confirm-modal-header h3 {
+  color: #E5E5E5;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.confirm-modal-body {
+  padding: 24px;
+}
+
+.confirm-modal-body p {
+  color: #E5E5E5;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+.confirm-modal-note {
+  color: #FF6B6B;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 !important;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 12px;
+  padding: 0 24px 24px 24px;
+}
+
+.confirm-btn-cancel,
+.confirm-btn-delete {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.confirm-btn-cancel {
+  background: rgba(108, 117, 125, 0.1);
+  color: #E5E5E5;
+  border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.confirm-btn-cancel:hover {
+  background: rgba(108, 117, 125, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.2);
+}
+
+.confirm-btn-delete {
+  background: linear-gradient(135deg, #FF4444 0%, #E53E3E 100%);
+  color: white;
+  border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.confirm-btn-delete:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FF4444 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+}
+
+.confirm-btn-delete:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.confirm-btn-cancel ion-icon,
+.confirm-btn-delete ion-icon {
+  font-size: 1.2rem;
+}
+
+/* Modal animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile responsiveness for modal */
+@media (max-width: 768px) {
+  .confirm-modal {
+    width: 95%;
+    margin: 0 10px;
+  }
+  
+  .confirm-modal-header {
+    padding: 20px;
+  }
+  
+  .confirm-modal-body {
+    padding: 20px;
+  }
+  
+  .confirm-modal-actions {
+    padding: 0 20px 20px 20px;
+    flex-direction: column;
+  }
+  
+  .confirm-btn-cancel,
+  .confirm-btn-delete {
+    width: 100%;
+  }
+}
+
 /* Why Choose Us */
 .why-choose-us {
   background: linear-gradient(135deg, #141414 0%, #1E1E1E 100%);

@@ -3249,9 +3249,9 @@ body {
 /* Price Section */
 .price-section-detail {
   background: linear-gradient(135deg, #1E1E1E 0%, #141414 100%);
-  padding: 1.2rem;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
   border: 1px solid rgba(244, 208, 63, 0.12);
   position: relative;
   overflow: hidden;

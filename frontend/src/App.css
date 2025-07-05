@@ -4725,6 +4725,14 @@ body {
   background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
 }
 
+.continue-shopping-btn ion-icon {
+  transition: transform 0.3s ease;
+}
+
+.continue-shopping-btn:hover ion-icon {
+  transform: translateX(-2px);
+}
+
 .back-home-btn {
   background: transparent;
   color: #F4D03F;

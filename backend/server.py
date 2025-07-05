@@ -27,18 +27,27 @@ api_router = APIRouter(prefix="/api")
 
 
 # Define Models
+class SizeOption(BaseModel):
+    size: str  # "Nhỏ (5g)", "Vừa (10g)", "Lớn (20g)"
+    price: float
+    original_price: Optional[float] = None
+    stock: int = 0
+
 class Product(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     name_en: str
     description: str
     description_en: str
-    price: float
+    price: float  # Base price for display
     original_price: Optional[float] = None
+    size_options: List[SizeOption] = []  # Different sizes with different prices
     image_url: str
+    additional_images: List[str] = []  # Multiple product images
     category: str
     stock: int = 0
     featured: bool = False
+    specifications: dict = {}  # Product specifications like origin, quality, etc.
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 

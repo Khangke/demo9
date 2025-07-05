@@ -1367,21 +1367,21 @@ body {
 
 .form-input-compact::placeholder {
   color: #888;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
-/* Select dropdown specific styling */
+/* Improved Select dropdown styling */
 .form-input-compact select,
 select.form-input-compact {
   background: rgba(30, 30, 30, 0.7);
   border: 1px solid rgba(244, 208, 63, 0.2);
   border-radius: 8px;
-  padding: 0.625rem 2.75rem 0.625rem 0.875rem;
+  padding: 0.75rem 2.75rem 0.75rem 0.875rem;
   color: #E8E8E8;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  height: 40px;
+  min-height: 44px;
   line-height: 1.4;
   cursor: pointer;
   appearance: none;

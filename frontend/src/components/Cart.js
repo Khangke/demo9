@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Toast from './Toast';
 
 const Cart = () => {
   const [cart, setCart] = useState({ items: [], total_amount: 0, total_items: 0 });
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
   const navigate = useNavigate();
 
   const sessionId = localStorage.getItem('session_id') || 
@@ -17,6 +19,14 @@ const Cart = () => {
   useEffect(() => {
     fetchCart();
   }, []);
+
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type });
+  };
+
+  const hideToast = () => {
+    setToast({ show: false, message: '', type: 'success' });
+  };
 
   const fetchCart = async () => {
     try {

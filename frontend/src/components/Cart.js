@@ -149,10 +149,6 @@ const Cart = () => {
               <ion-icon name="bag-outline"></ion-icon>
               Giỏ hàng của bạn
             </h1>
-            <div className="cart-summary">
-              <span className="cart-count">{cart.total_items} sản phẩm</span>
-              <span className="cart-total">{formatPrice(cart.total_amount)}</span>
-            </div>
           </div>
 
           {cart.items.length === 0 ? (

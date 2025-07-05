@@ -3404,7 +3404,7 @@ body {
   }
   
   .products-hero {
-    padding: 6rem 0 4rem;
+    padding: 4rem 0 3rem;
   }
   
   .products-hero h1 {
@@ -3414,19 +3414,7 @@ body {
   
   .products-hero p {
     font-size: 1.1rem;
-    margin-bottom: 2.5rem;
-  }
-  
-  .products-stats {
-    flex-direction: column;
-    gap: 1.5rem;
-    align-items: center;
-  }
-  
-  .stat-item {
-    width: 100%;
-    max-width: 250px;
-    padding: 1.5rem;
+    margin-bottom: 2rem;
   }
   
   .filters-wrapper {

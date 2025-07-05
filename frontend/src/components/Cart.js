@@ -245,43 +245,20 @@ const Cart = () => {
               </div>
 
               <div className="cart-sidebar">
-                <div className="cart-summary-card">
-                  <h3>
-                    <ion-icon name="calculator-outline"></ion-icon>
-                    Tóm tắt đơn hàng
-                  </h3>
+                <div className="cart-actions-simple">
+                  <button 
+                    onClick={() => navigate('/checkout')}
+                    className="checkout-btn"
+                    disabled={updating}
+                  >
+                    <ion-icon name="card-outline"></ion-icon>
+                    Tiến hành thanh toán
+                  </button>
                   
-                  <div className="summary-details">
-                    <div className="summary-row">
-                      <span>Tạm tính ({cart.total_items} sản phẩm)</span>
-                      <span>{formatPrice(cart.total_amount)}</span>
-                    </div>
-                    <div className="summary-row">
-                      <span>Phí vận chuyển</span>
-                      <span className="shipping-note">Sẽ tính khi thanh toán</span>
-                    </div>
-                    <div className="summary-divider"></div>
-                    <div className="summary-row total-row">
-                      <span>Tổng cộng</span>
-                      <span className="total-amount">{formatPrice(cart.total_amount)}</span>
-                    </div>
-                  </div>
-
-                  <div className="cart-actions">
-                    <button 
-                      onClick={() => navigate('/checkout')}
-                      className="checkout-btn"
-                      disabled={updating}
-                    >
-                      <ion-icon name="card-outline"></ion-icon>
-                      Tiến hành thanh toán
-                    </button>
-                    
-                    <Link to="/products" className="continue-shopping-link">
-                      <ion-icon name="arrow-back-outline"></ion-icon>
-                      Tiếp tục mua sắm
-                    </Link>
-                  </div>
+                  <Link to="/products" className="continue-shopping-link">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                    Tiếp tục mua sắm
+                  </Link>
                 </div>
 
                 <div className="cart-benefits">

@@ -82,16 +82,96 @@ const ProductDetail = () => {
     }
   };
 
-  const getCurrentPrice = () => {
-    return selectedSize ? selectedSize.price : product.price;
-  };
-
-  const getCurrentOriginalPrice = () => {
-    return selectedSize ? selectedSize.original_price : product.original_price;
+  const calculateTotalPrice = () => {
+    if (!selectedSize) return 0;
+    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    return sizeOption ? sizeOption.price * quantity : 0;
   };
 
   const getCurrentStock = () => {
-    return selectedSize ? selectedSize.stock : product.stock;
+    if (!selectedSize || !product.size_options) return 0;
+    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    return sizeOption ? sizeOption.stock : 0;
+  };
+
+  const getSelectedSizePrice = () => {
+    if (!selectedSize || !product.size_options) return { price: 0, original_price: null };
+    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    return sizeOption ? { price: sizeOption.price, original_price: sizeOption.original_price } : { price: 0, original_price: null };
+  };
+
+  const addToCart = async () => {
+    if (!selectedSize) {
+      alert('Vui lòng chọn kích thước sản phẩm');
+      return;
+    }
+
+    if (getCurrentStock() < quantity) {
+      alert('Số lượng vượt quá hàng có sẵn');
+      return;
+    }
+
+    setAddingToCart(true);
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/${sessionId}/add`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: product.id,
+          size: selectedSize,
+          quantity: quantity
+        })
+      });
+
+      if (response.ok) {
+        alert('Đã thêm sản phẩm vào giỏ hàng!');
+        // Optionally navigate to cart
+        // navigate('/cart');
+      } else {
+        const errorData = await response.json();
+        alert(`Lỗi: ${errorData.detail}`);
+      }
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      alert('Có lỗi xảy ra khi thêm vào giỏ hàng');
+    } finally {
+      setAddingToCart(false);
+    }
+  };
+
+  const buyNow = async () => {
+    if (!selectedSize) {
+      alert('Vui lòng chọn kích thước sản phẩm');
+      return;
+    }
+
+    if (getCurrentStock() < quantity) {
+      alert('Số lượng vượt quá hàng có sẵn');
+      return;
+    }
+
+    // Add to cart first, then navigate to checkout
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/${sessionId}/add`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          product_id: product.id,
+          size: selectedSize,
+          quantity: quantity
+        })
+      });
+
+      if (response.ok) {
+        navigate('/checkout');
+      } else {
+        const errorData = await response.json();
+        alert(`Lỗi: ${errorData.detail}`);
+      }
+    } catch (error) {
+      console.error('Error during buy now:', error);
+      alert('Có lỗi xảy ra khi mua hàng');
+    }
   };
 
   const getDiscount = () => {

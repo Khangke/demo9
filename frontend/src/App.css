@@ -1829,27 +1829,27 @@ body {
 
 .search-bar {
   position: relative;
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
 }
 
 .search-bar ion-icon {
   position: absolute;
-  left: 1.2rem;
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: #F4D03F;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .search-bar input {
   width: 100%;
-  padding: 1rem 1rem 1rem 3.5rem;
+  padding: 0.8rem 0.8rem 0.8rem 3rem;
   background: linear-gradient(135deg, rgba(244, 208, 63, 0.08) 0%, rgba(244, 208, 63, 0.04) 100%);
   border: 2px solid rgba(244, 208, 63, 0.2);
-  border-radius: 50px;
+  border-radius: 40px;
   color: #E5E5E5;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
 }
@@ -1857,7 +1857,7 @@ body {
 .search-bar input:focus {
   outline: none;
   border-color: #F4D03F;
-  box-shadow: 0 0 20px rgba(244, 208, 63, 0.3);
+  box-shadow: 0 0 15px rgba(244, 208, 63, 0.25);
   background: linear-gradient(135deg, rgba(244, 208, 63, 0.12) 0%, rgba(244, 208, 63, 0.06) 100%);
 }
 
@@ -1869,33 +1869,33 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
 .filter-group {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
 }
 
 .filter-group label {
   color: #F4D03F;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   white-space: nowrap;
 }
 
 .filter-select {
-  padding: 0.7rem 1.2rem;
+  padding: 0.6rem 1rem;
   background: linear-gradient(135deg, rgba(30, 30, 30, 0.9) 0%, rgba(20, 20, 20, 0.95) 100%);
   border: 1px solid rgba(244, 208, 63, 0.2);
-  border-radius: 15px;
+  border-radius: 12px;
   color: #E5E5E5;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 150px;
+  min-width: 130px;
   backdrop-filter: blur(10px);
 }
 

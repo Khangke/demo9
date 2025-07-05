@@ -264,7 +264,24 @@ class AgarwoodAPITester:
         update_data = {
             "price": 499000,
             "stock": 25,
-            "featured": False
+            "featured": False,
+            "size_options": [
+                {"size": "Nhỏ (5g)", "price": 280000, "original_price": 320000, "stock": 12},
+                {"size": "Vừa (10g)", "price": 499000, "original_price": 580000, "stock": 8},
+                {"size": "Lớn (20g)", "price": 890000, "original_price": 980000, "stock": 4}
+            ],
+            "additional_images": [
+                "https://images.unsplash.com/photo-1613750255797-7d4f877615df",
+                "https://images.unsplash.com/photo-1600122646819-75abc00c88a6",
+                "https://images.pexels.com/photos/14146722/pexels-photo-14146722.jpeg"
+            ],
+            "specifications": {
+                "origin": "Phú Yên, Việt Nam",
+                "age": "6-8 năm",
+                "oil_content": "Cao",
+                "fragrance_notes": "Thanh nhẹ, thư giãn, hương gỗ",
+                "usage": "Xông phòng, thư giãn, thiền định"
+            }
         }
         
         try:
@@ -281,7 +298,21 @@ class AgarwoodAPITester:
                 # Verify updated fields
                 all_updated = True
                 for key, value in update_data.items():
-                    if product.get(key) != value:
+                    if key in ["size_options", "additional_images", "specifications"]:
+                        # For complex fields, just check if they exist and have the right length
+                        if key == "size_options":
+                            if len(product.get(key, [])) != len(value):
+                                all_updated = False
+                                print(f"❌ Field not updated correctly: {key} - Expected {len(value)} items, Got {len(product.get(key, []))}")
+                        elif key == "additional_images":
+                            if len(product.get(key, [])) != len(value):
+                                all_updated = False
+                                print(f"❌ Field not updated correctly: {key} - Expected {len(value)} items, Got {len(product.get(key, []))}")
+                        elif key == "specifications":
+                            if not all(k in product.get(key, {}) for k in value.keys()):
+                                all_updated = False
+                                print(f"❌ Field not updated correctly: {key} - Missing some specification keys")
+                    elif product.get(key) != value:
                         all_updated = False
                         print(f"❌ Field not updated: {key} - Expected: {value}, Got: {product.get(key)}")
                 

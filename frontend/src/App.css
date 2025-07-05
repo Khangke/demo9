@@ -2077,9 +2077,9 @@ body {
 }
 
 .product-card-advanced:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(244, 208, 63, 0.15);
-  border-color: rgba(244, 208, 63, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.12);
+  border-color: rgba(244, 208, 63, 0.2);
 }
 
 .product-card-advanced.list-card {

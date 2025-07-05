@@ -2108,9 +2108,7 @@ body {
   border: 1px solid rgba(244, 208, 63, 0.1);
   position: relative;
   backdrop-filter: blur(20px);
-  cursor: pointer;
-}
-
+.product-card-advanced-link:hover .product-card-advanced,
 .product-card-advanced:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(244, 208, 63, 0.12);

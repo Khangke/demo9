@@ -316,6 +316,10 @@ const Checkout = () => {
                             <option value="Cần Thơ">Cần Thơ</option>
                             <option value="Khánh Hòa">Khánh Hòa</option>
                             <option value="Quảng Nam">Quảng Nam</option>
+                            <option value="Bình Dương">Bình Dương</option>
+                            <option value="Đồng Nai">Đồng Nai</option>
+                            <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                            <option value="An Giang">An Giang</option>
                             <option value="Khác">Tỉnh/thành phố khác</option>
                           </select>
                           {errors.city && <span className="error-message-compact">{errors.city}</span>}

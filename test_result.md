@@ -223,7 +223,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Tối ưu phần chi tiết sản phẩm với size options và pricing"
+    - "Tối ưu lại chi tiết sản phẩm với UX/UI tốt hơn và direct product navigation"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"

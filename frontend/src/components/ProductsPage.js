@@ -266,28 +266,6 @@ const ProductsPage = () => {
         ))}
       </Helmet>
 
-      {/* Breadcrumb Navigation */}
-      <nav className="breadcrumb-nav" aria-label="Breadcrumb">
-        <div className="container">
-          <ol className="breadcrumb-list">
-            {breadcrumbs.map((crumb, index) => (
-              <li key={index} className="breadcrumb-item">
-                {index === breadcrumbs.length - 1 ? (
-                  <span className="breadcrumb-current" aria-current="page">{crumb.name}</span>
-                ) : (
-                  <>
-                    <Link to={crumb.url} className="breadcrumb-link">{crumb.name}</Link>
-                    <span className="breadcrumb-separator" aria-hidden="true">
-                      <ion-icon name="chevron-forward-outline"></ion-icon>
-                    </span>
-                  </>
-                )}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section className="products-hero">
         <div className="container">

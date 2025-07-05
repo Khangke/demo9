@@ -1465,12 +1465,16 @@ select.form-input-compact:disabled {
   background: rgba(30, 30, 30, 0.7);
   border: 1px solid rgba(244, 208, 63, 0.2);
   border-radius: 8px;
-  padding: 0.625rem 0.875rem;
+  padding: 0.75rem 0.875rem;
   color: #E8E8E8;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   transition: all 0.3s ease;
   resize: vertical;
-  min-height: 50px;
+  min-height: 80px;
+  line-height: 1.4;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-textarea-compact:focus {

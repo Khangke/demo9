@@ -2704,71 +2704,172 @@ body {
   border: 1px solid rgba(244, 208, 63, 0.2);
 }
 
+/* Enhanced Cart Quantity Controls */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(244, 208, 63, 0.05);
+  border: 1px solid rgba(244, 208, 63, 0.15);
+  border-radius: 12px;
+  padding: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.quantity-controls::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(244, 208, 63, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.quantity-controls:hover::before {
+  opacity: 1;
+}
+
 .quantity-btn {
-  background: none;
+  background: transparent;
   border: none;
   color: #F4D03F;
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.quantity-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(244, 208, 63, 0.15);
+  opacity: 0;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  border-radius: 10px;
 }
 
 .quantity-btn:hover:not(:disabled) {
-  background: rgba(244, 208, 63, 0.2);
+  color: #F7DC6F;
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.2);
+}
+
+.quantity-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.quantity-btn:active:not(:disabled) {
+  transform: scale(0.95);
 }
 
 .quantity-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
 }
 
 .quantity-display {
+  min-width: 45px;
+  text-align: center;
   color: #F4D03F;
   font-weight: 700;
-  min-width: 30px;
-  text-align: center;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
+  padding: 0 8px;
+  background: rgba(244, 208, 63, 0.08);
+  border-radius: 8px;
+  margin: 0 2px;
+  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced Remove Item Button */
+.remove-item-btn {
+  background: rgba(255, 68, 68, 0.08);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  color: #FF4444;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.1rem;
+  position: relative;
+  overflow: hidden;
+  margin-left: 8px;
+}
+
+.remove-item-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, rgba(231, 76, 60, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.remove-item-btn:hover:not(:disabled) {
+  background: rgba(255, 68, 68, 0.15);
+  color: #FF6B6B;
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 68, 68, 0.25);
+  border-color: rgba(255, 68, 68, 0.4);
+}
+
+.remove-item-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.remove-item-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.remove-item-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Cart Item Controls Container */
+.cart-item-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-width: 280px;
 }
 
 .cart-item-total {
   color: #F4D03F;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.01em;
-}
-
-.remove-item-btn {
-  background: rgba(255, 68, 68, 0.1);
-  border: 1px solid rgba(255, 68, 68, 0.3);
-  color: #FF4444;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-}
-
-.remove-item-btn:hover:not(:disabled) {
-  background: #FF4444;
-  color: white;
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
-}
-
-.remove-item-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  min-width: 120px;
+  text-align: right;
 }
 
 /* Cart Sidebar */

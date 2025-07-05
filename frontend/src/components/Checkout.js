@@ -3,7 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 const Checkout = () => {
-  const [cart, setCart] = useState({ items: [], total_amount: 0, total_items: 0 });
+  const [cart, setCart] = useState({ 
+    items: [
+      {
+        product_id: "09553d01-665a-449b-a2ec-6fed738291f3",
+        product_name: "Trầm Hương Kỳ Nam Cao Cấp",
+        product_image: "https://images.unsplash.com/photo-1613750255797-7d4f877615df",
+        size: "Vừa (10g)",
+        size_price: 2500000.0,
+        original_price: 3000000.0,
+        quantity: 1,
+        total_price: 2500000.0
+      }
+    ], 
+    total_amount: 2500000.0, 
+    total_items: 1 
+  });
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);

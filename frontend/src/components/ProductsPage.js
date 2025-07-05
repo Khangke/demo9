@@ -294,20 +294,7 @@ const ProductsPage = () => {
           <div className="products-hero-content">
             <h1>Bộ Sưu Tập Trầm Hương Cao Cấp</h1>
             <p>Khám phá đầy đủ các sản phẩm trầm hương cao cấp với chất lượng vượt trội từ rừng tự nhiên Việt Nam. Kỳ Nam, Sáng, Truyền Thống và nhiều loại khác.</p>
-            <div className="products-stats">
-              <div className="stat-item">
-                <span className="stat-number">{products.length}</span>
-                <span className="stat-label">Sản Phẩm</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">{getCategories().length}</span>
-                <span className="stat-label">Danh Mục</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">15+</span>
-                <span className="stat-label">Năm Kinh Nghiệm</span>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>

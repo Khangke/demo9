@@ -1284,10 +1284,25 @@ body {
   box-sizing: border-box;
 }
 
+/* Compact Form Styles */
+.form-grid-compact {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 0.75rem;
+  gap: 1rem;
+}
+
+/* Improved responsive design */
+@media (max-width: 1024px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1295,13 +1310,18 @@ body {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
+  
+  .form-grid-compact {
+    gap: 0.875rem;
+  }
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
+  gap: 0.5rem;
   min-width: 0;
+  width: 100%;
 }
 
 .form-group-full {

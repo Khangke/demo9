@@ -555,6 +555,7 @@ body {
   filter: brightness(0.9);
 }
 
+.product-card-link:hover .product-image img,
 .product-card:hover .product-image img {
   transform: scale(1.05);
   filter: brightness(1);

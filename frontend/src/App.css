@@ -2915,59 +2915,80 @@ body {
 
 .discount-badge-detail {
   position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
+  top: 1rem;
+  left: 1rem;
   background: linear-gradient(135deg, #FF4444 0%, #CC3333 100%);
   color: white;
-  padding: 0.3rem 0.6rem;
-  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
   font-weight: 700;
-  box-shadow: 0 3px 8px rgba(255, 68, 68, 0.3);
+  box-shadow: 
+    0 4px 16px rgba(255, 68, 68, 0.25),
+    0 2px 8px rgba(255, 68, 68, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 40px;
+  min-width: 45px;
   font-size: 0.7rem;
+  z-index: 2;
+  animation: badgeFloat 3s ease-in-out infinite;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes badgeFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
 }
 
 .discount-text {
   font-size: 0.5rem;
   letter-spacing: 0.1em;
   margin-bottom: 0.1rem;
+  opacity: 0.9;
 }
 
 .discount-percentage {
   font-size: 0.8rem;
   font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .image-zoom-btn {
   position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
+  top: 1rem;
+  right: 1rem;
   background: rgba(0, 0, 0, 0.7);
   border: none;
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .main-image-container:hover .image-zoom-btn {
   opacity: 1;
+  transform: scale(1.05);
 }
 
 .image-zoom-btn:hover {
   background: rgba(244, 208, 63, 0.9);
   color: #1A1A1A;
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.3);
 }
 
 

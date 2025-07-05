@@ -77,6 +77,27 @@ const Checkout = () => {
     }
   };
 
+  const handleAddressTypeChange = (type) => {
+    setSelectedAddressType(type);
+    
+    if (type === 'home') {
+      setFormData(prev => ({
+        ...prev,
+        address: 'Nhà riêng'
+      }));
+    } else if (type === 'office') {
+      setFormData(prev => ({
+        ...prev,
+        address: 'Văn phòng'
+      }));
+    } else if (type === 'other') {
+      setFormData(prev => ({
+        ...prev,
+        address: ''
+      }));
+    }
+  };
+
   const validateForm = () => {
     const newErrors = {};
 

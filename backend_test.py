@@ -28,7 +28,7 @@ class AgarwoodAPITester:
         self.created_product_id = None
         self.created_order_id = None
         self.created_order_number = None
-        self.test_session_id = "test_session_123"
+        self.test_session_id = "test_session_001"
         self.test_results = {
             "health_check": False,
             "get_products": False,

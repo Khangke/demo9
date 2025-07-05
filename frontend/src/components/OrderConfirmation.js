@@ -327,7 +327,7 @@ const OrderConfirmation = () => {
 
               <div className="order-actions">
                 <Link to="/products" className="continue-shopping-btn">
-                  <ion-icon name="bag-outline"></ion-icon>
+                  <ion-icon name="arrow-back-outline"></ion-icon>
                   Tiếp tục mua sắm
                 </Link>
                 <Link to="/" className="back-home-btn">

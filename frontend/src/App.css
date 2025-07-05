@@ -1236,6 +1236,9 @@ select.form-input-compact {
   background-position: right 0.75rem center;
   background-size: 1rem;
   padding-right: 2.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .form-input-compact select:focus,
@@ -1252,28 +1255,39 @@ select.form-input-compact:hover {
   background: rgba(30, 30, 30, 0.8);
 }
 
-/* Option styling */
+/* Option styling for better visibility */
 .form-input-compact select option,
 select.form-input-compact option {
-  background: #2A2A2A;
-  color: #E8E8E8;
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.5rem 0.75rem;
-  border: none;
+  background-color: #2A2A2A !important;
+  color: #E8E8E8 !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  padding: 8px 12px !important;
+  border: none !important;
+  line-height: 1.4 !important;
+  min-height: 32px !important;
 }
 
 .form-input-compact select option:hover,
 select.form-input-compact option:hover {
-  background: #3A3A3A;
-  color: #F4D03F;
+  background-color: #3A3A3A !important;
+  color: #F4D03F !important;
 }
 
 .form-input-compact select option:checked,
-select.form-input-compact option:checked {
-  background: rgba(244, 208, 63, 0.2);
-  color: #F4D03F;
-  font-weight: 600;
+.form-input-compact select option:selected,
+select.form-input-compact option:checked,
+select.form-input-compact option:selected {
+  background-color: rgba(244, 208, 63, 0.2) !important;
+  color: #F4D03F !important;
+  font-weight: 600 !important;
+}
+
+/* Ensure first option (placeholder) is styled correctly */
+.form-input-compact select option[value=""],
+select.form-input-compact option[value=""] {
+  color: #888 !important;
+  font-style: italic;
 }
 
 /* Disabled state */
@@ -1282,6 +1296,14 @@ select.form-input-compact:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   background: rgba(30, 30, 30, 0.4);
+}
+
+/* Fix for webkit browsers dropdown */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .form-input-compact select {
+    background-color: rgba(30, 30, 30, 0.7) !important;
+    color: #E8E8E8 !important;
+  }
 }
 
 .form-textarea-compact {

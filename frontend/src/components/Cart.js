@@ -190,7 +190,7 @@ const Cart = () => {
                 <p>Hãy thêm những sản phẩm trầm hương tuyệt vời vào giỏ hàng của bạn</p>
                 <Link to="/products" className="continue-shopping-btn">
                   <ion-icon name="arrow-back-outline"></ion-icon>
-                  Tiếp tục mua sắm
+                  <span>Tiếp tục mua sắm</span>
                 </Link>
               </div>
             </div>

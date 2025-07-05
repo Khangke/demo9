@@ -1,9 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const location = useLocation();
+
+  const sessionId = localStorage.getItem('session_id') || 
+    (() => {
+      const newId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      localStorage.setItem('session_id', newId);
+      return newId;
+    })();
+
+  useEffect(() => {
+    fetchCartCount();
+    // Update cart count when navigating
+    const interval = setInterval(fetchCartCount, 2000);
+    return () => clearInterval(interval);
+  }, [location.pathname]);
+
+  const fetchCartCount = async () => {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/cart/${sessionId}`);
+      if (response.ok) {
+        const cartData = await response.json();
+        setCartCount(cartData.total_items || 0);
+      }
+    } catch (error) {
+      console.error('Error fetching cart count:', error);
+    }
+  };
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -35,10 +62,10 @@ const Header = () => {
 
           <div className="header-actions">
             <div className="header-icons">
-              <button className="header-icon-btn" aria-label="Giỏ hàng">
+              <Link to="/cart" className="header-icon-btn" aria-label="Giỏ hàng">
                 <ion-icon name="bag-outline" class="icon"></ion-icon>
-                <span className="badge">0</span>
-              </button>
+                {cartCount > 0 && <span className="badge">{cartCount}</span>}
+              </Link>
               <button className="header-icon-btn" aria-label="Tài khoản">
                 <ion-icon name="person-outline" class="icon"></ion-icon>
               </button>

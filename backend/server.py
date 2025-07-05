@@ -484,6 +484,18 @@ async def create_order(order_data: dict):
             if field not in order_data:
                 raise HTTPException(status_code=400, detail=f"Missing required field: {field}")
         
+        # Validate customer_info fields
+        if "customer_info" in order_data:
+            customer_info = order_data["customer_info"]
+            required_customer_fields = ["full_name", "phone", "email", "address", "city", "district", "ward"]
+            for field in required_customer_fields:
+                if field not in customer_info:
+                    raise HTTPException(status_code=400, detail=f"Missing required customer info field: {field}")
+        
+        # Validate items
+        if "items" in order_data and not order_data["items"]:
+            raise HTTPException(status_code=400, detail="Order must contain at least one item")
+        
         # Calculate totals
         subtotal = sum(item["total_price"] for item in order_data["items"])
         shipping_fee = 30000 if order_data.get("payment_method") == "cod" else 0  # COD fee
@@ -517,6 +529,9 @@ async def create_order(order_data: dict):
         
         return order
     
+    except HTTPException as e:
+        # Re-raise HTTP exceptions
+        raise e
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

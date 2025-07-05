@@ -167,14 +167,31 @@ async def startup_event():
                 "id": str(uuid.uuid4()),
                 "name": "Trầm Hương Kỳ Nam Cao Cấp",
                 "name_en": "Premium Kynam Agarwood",
-                "description": "Trầm hương Kỳ Nam đặc biệt với hương thơm nồng nàn, quý hiếm. Sản phẩm cao cấp từ rừng tự nhiên.",
+                "description": "Trầm hương Kỳ Nam đặc biệt với hương thơm nồng nàn, quý hiếm. Sản phẩm cao cấp từ rừng tự nhiên với chất lượng vượt trội.",
                 "description_en": "Premium Kynam Agarwood with intense fragrance, rare and precious. High-quality product from natural forests.",
                 "price": 2500000,
                 "original_price": 3000000,
+                "size_options": [
+                    {"size": "Nhỏ (5g)", "price": 1200000, "original_price": 1500000, "stock": 8},
+                    {"size": "Vừa (10g)", "price": 2500000, "original_price": 3000000, "stock": 5},
+                    {"size": "Lớn (20g)", "price": 4800000, "original_price": 5800000, "stock": 3}
+                ],
                 "image_url": "https://images.unsplash.com/photo-1613750255797-7d4f877615df",
+                "additional_images": [
+                    "https://images.unsplash.com/photo-1652719647182-094f5c442abc",
+                    "https://images.unsplash.com/photo-1600122646819-75abc00c88a6",
+                    "https://images.pexels.com/photos/14146722/pexels-photo-14146722.jpeg"
+                ],
                 "category": "Kỳ Nam",
-                "stock": 5,
+                "stock": 16,
                 "featured": True,
+                "specifications": {
+                    "origin": "Khánh Hòa, Việt Nam",
+                    "age": "15-20 năm",
+                    "oil_content": "Cao",
+                    "fragrance_notes": "Ngọt, ấm, phức hợp",
+                    "certification": "Chứng nhận tự nhiên"
+                },
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             },
@@ -182,14 +199,31 @@ async def startup_event():
                 "id": str(uuid.uuid4()),
                 "name": "Trầm Hương Tự Nhiên",
                 "name_en": "Natural Agarwood",
-                "description": "Trầm hương tự nhiên chất lượng cao, hương thơm tinh tế và bền lâu. Phù hợp cho thưởng thức hàng ngày.",
-                "description_en": "High-quality natural agarwood with delicate and long-lasting fragrance. Perfect for daily enjoyment.",
+                "description": "Trầm hương tự nhiên chất lượng cao, hương thơm tinh tế và bền lâu. Phù hợp cho thưởng thức hàng ngày và thiền định.",
+                "description_en": "High-quality natural agarwood with delicate and long-lasting fragrance. Perfect for daily enjoyment and meditation.",
                 "price": 800000,
                 "original_price": 1000000,
+                "size_options": [
+                    {"size": "Nhỏ (5g)", "price": 400000, "original_price": 500000, "stock": 12},
+                    {"size": "Vừa (10g)", "price": 800000, "original_price": 1000000, "stock": 10},
+                    {"size": "Lớn (20g)", "price": 1500000, "original_price": 1900000, "stock": 6}
+                ],
                 "image_url": "https://images.unsplash.com/photo-1652719647182-094f5c442abc",
+                "additional_images": [
+                    "https://images.unsplash.com/photo-1613750255797-7d4f877615df",
+                    "https://images.pexels.com/photos/14146722/pexels-photo-14146722.jpeg",
+                    "https://images.unsplash.com/photo-1600122646819-75abc00c88a6"
+                ],
                 "category": "Tự Nhiên",
-                "stock": 10,
+                "stock": 28,
                 "featured": True,
+                "specifications": {
+                    "origin": "Quảng Nam, Việt Nam",
+                    "age": "10-15 năm",
+                    "oil_content": "Trung bình",
+                    "fragrance_notes": "Ngọt nhẹ, thanh khiết",
+                    "certification": "Chứng nhận nguồn gốc"
+                },
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             },
@@ -197,13 +231,29 @@ async def startup_event():
                 "id": str(uuid.uuid4()),
                 "name": "Trầm Hương Truyền Thống",
                 "name_en": "Traditional Agarwood",
-                "description": "Trầm hương theo phương pháp truyền thống, được chế biến cẩn thận với hương thơm đậm đà.",
-                "description_en": "Traditional agarwood processed with care, featuring rich and deep fragrance.",
+                "description": "Trầm hương theo phương pháp truyền thống, được chế biến cẩn thận với hương thơm đậm đà, mang đậm văn hóa Việt Nam.",
+                "description_en": "Traditional agarwood processed with care, featuring rich and deep fragrance with Vietnamese cultural heritage.",
                 "price": 1200000,
+                "size_options": [
+                    {"size": "Nhỏ (5g)", "price": 600000, "stock": 10},
+                    {"size": "Vừa (10g)", "price": 1200000, "stock": 8},
+                    {"size": "Lớn (20g)", "price": 2300000, "stock": 4}
+                ],
                 "image_url": "https://images.pexels.com/photos/14146722/pexels-photo-14146722.jpeg",
+                "additional_images": [
+                    "https://images.unsplash.com/photo-1652719647182-094f5c442abc",
+                    "https://images.unsplash.com/photo-1613750255797-7d4f877615df"
+                ],
                 "category": "Truyền Thống",
-                "stock": 8,
+                "stock": 22,
                 "featured": False,
+                "specifications": {
+                    "origin": "Gia Lai, Việt Nam",
+                    "age": "8-12 năm",
+                    "oil_content": "Trung bình cao",
+                    "fragrance_notes": "Đậm đà, truyền thống",
+                    "processing": "Phương pháp cổ truyền"
+                },
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             },
@@ -211,13 +261,29 @@ async def startup_event():
                 "id": str(uuid.uuid4()),
                 "name": "Trầm Hương Sáng",
                 "name_en": "Light Agarwood",
-                "description": "Trầm hương sáng với hương thơm nhẹ nhàng, thanh thoát. Lý tưởng cho không gian yên tĩnh.",
-                "description_en": "Light agarwood with gentle, pure fragrance. Ideal for peaceful spaces.",
+                "description": "Trầm hương sáng với hương thơm nhẹ nhàng, thanh thoát. Lý tưởng cho không gian yên tĩnh và thư giãn.",
+                "description_en": "Light agarwood with gentle, pure fragrance. Ideal for peaceful spaces and relaxation.",
                 "price": 600000,
+                "size_options": [
+                    {"size": "Nhỏ (5g)", "price": 300000, "stock": 15},
+                    {"size": "Vừa (10g)", "price": 600000, "stock": 15},
+                    {"size": "Lớn (20g)", "price": 1100000, "stock": 8}
+                ],
                 "image_url": "https://images.unsplash.com/photo-1600122646819-75abc00c88a6",
+                "additional_images": [
+                    "https://images.pexels.com/photos/14146722/pexels-photo-14146722.jpeg",
+                    "https://images.unsplash.com/photo-1613750255797-7d4f877615df"
+                ],
                 "category": "Sáng",
-                "stock": 15,
+                "stock": 38,
                 "featured": True,
+                "specifications": {
+                    "origin": "Đắk Lắk, Việt Nam",
+                    "age": "5-8 năm",
+                    "oil_content": "Nhẹ",
+                    "fragrance_notes": "Nhẹ nhàng, tinh khiết",
+                    "usage": "Thư giãn, thiền định"
+                },
                 "created_at": datetime.utcnow(),
                 "updated_at": datetime.utcnow()
             }

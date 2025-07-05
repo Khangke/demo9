@@ -496,6 +496,7 @@ const ProductDetail = () => {
                 <button 
                   className="btn-add-cart-detail"
                   disabled={getCurrentStock() === 0}
+                  onClick={addToCart}
                 >
                   <ion-icon name="bag-add-outline"></ion-icon>
                   <span>Thêm Vào Giỏ Hàng</span>
@@ -503,6 +504,7 @@ const ProductDetail = () => {
                 <button 
                   className="btn-buy-now-detail"
                   disabled={getCurrentStock() === 0}
+                  onClick={buyNow}
                 >
                   <ion-icon name="flash-outline"></ion-icon>
                   <span>Mua Ngay</span>

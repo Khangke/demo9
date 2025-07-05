@@ -14,10 +14,27 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showImageModal, setShowImageModal] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
     fetchProduct();
   }, [id]);
+
+  // Auto slideshow effect
+  useEffect(() => {
+    if (!product || !isAutoPlaying) return;
+    
+    const allImages = [product.image_url, ...(product.additional_images || [])];
+    if (allImages.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setSelectedImage(current => 
+        current >= allImages.length - 1 ? 0 : current + 1
+      );
+    }, 2000); // Change every 2 seconds
+
+    return () => clearInterval(interval);
+  }, [product, isAutoPlaying]);
 
   const fetchProduct = async () => {
     try {
@@ -84,6 +101,18 @@ const ProductDetail = () => {
   const handleImageClick = (index) => {
     setSelectedImage(index);
     setShowImageModal(true);
+    setIsAutoPlaying(false); // Stop auto play when modal opens
+  };
+
+  const handleThumbnailClick = (index) => {
+    setSelectedImage(index);
+    setIsAutoPlaying(false); // Stop auto play when user manually selects
+    // Resume auto play after 5 seconds of inactivity
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  const handleImageHover = (hovering) => {
+    setIsAutoPlaying(!hovering);
   };
 
   if (loading) {
@@ -144,7 +173,11 @@ const ProductDetail = () => {
             
             {/* Product Images */}
             <div className="product-detail-images">
-              <div className="main-image-container">
+              <div 
+                className="main-image-container"
+                onMouseEnter={() => handleImageHover(true)}
+                onMouseLeave={() => handleImageHover(false)}
+              >
                 <img 
                   src={allImages[selectedImage]} 
                   alt={product.name}
@@ -164,6 +197,28 @@ const ProductDetail = () => {
                 >
                   <ion-icon name="expand-outline"></ion-icon>
                 </button>
+                
+                {/* Auto play indicator */}
+                {allImages.length > 1 && (
+                  <div className="slideshow-controls">
+                    <button 
+                      className={`auto-play-btn ${isAutoPlaying ? 'playing' : 'paused'}`}
+                      onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+                      title={isAutoPlaying ? 'Tạm dừng slideshow' : 'Bật slideshow'}
+                    >
+                      <ion-icon name={isAutoPlaying ? "pause" : "play"}></ion-icon>
+                    </button>
+                    <div className="slideshow-dots">
+                      {allImages.map((_, index) => (
+                        <button
+                          key={index}
+                          className={`slideshow-dot ${selectedImage === index ? 'active' : ''}`}
+                          onClick={() => handleThumbnailClick(index)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               
               {allImages.length > 1 && (
@@ -172,7 +227,7 @@ const ProductDetail = () => {
                     <div 
                       key={index}
                       className={`thumbnail-item ${selectedImage === index ? 'active' : ''}`}
-                      onClick={() => setSelectedImage(index)}
+                      onClick={() => handleThumbnailClick(index)}
                     >
                       <img src={image} alt={`${product.name} ${index + 1}`} />
                       {selectedImage === index && (
@@ -365,11 +420,17 @@ const ProductDetail = () => {
 
       {/* Image Modal */}
       {showImageModal && (
-        <div className="image-modal-overlay" onClick={() => setShowImageModal(false)}>
+        <div className="image-modal-overlay" onClick={() => {
+          setShowImageModal(false);
+          setIsAutoPlaying(true); // Resume auto play when modal closes
+        }}>
           <div className="image-modal" onClick={(e) => e.stopPropagation()}>
             <button 
               className="image-modal-close" 
-              onClick={() => setShowImageModal(false)}
+              onClick={() => {
+                setShowImageModal(false);
+                setIsAutoPlaying(true); // Resume auto play when modal closes
+              }}
               aria-label="Đóng"
             >
               <ion-icon name="close-outline"></ion-icon>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Checkout = () => {
   const [cart, setCart] = useState({ items: [], total_amount: 0, total_items: 0 });

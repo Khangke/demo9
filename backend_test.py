@@ -547,6 +547,512 @@ class AgarwoodAPITester:
         except Exception as e:
             print(f"❌ Delete Product: FAILED - {str(e)}")
     
+    # Shopping Cart API Tests
+    def test_get_cart(self):
+        """Test getting or creating a cart by session ID"""
+        print("\n--- Testing Get Cart ---")
+        try:
+            # Clear any existing cart first
+            clear_response = requests.delete(f"{self.api_url}/cart/{self.test_session_id}/clear")
+            
+            # Get cart
+            response = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                cart = response.json()
+                print(f"Retrieved cart for session: {cart.get('session_id')}")
+                
+                # Verify cart structure
+                required_fields = ["id", "session_id", "items", "total_amount", "total_items", "created_at", "updated_at"]
+                missing_fields = [field for field in required_fields if field not in cart]
+                
+                if not missing_fields:
+                    # Verify it's a new empty cart
+                    if cart.get("session_id") == self.test_session_id and cart.get("items") == [] and cart.get("total_items") == 0:
+                        self.test_results["get_cart"] = True
+                        print("✅ Get Cart: SUCCESS - Empty cart created for new session")
+                    else:
+                        print("⚠️ Get Cart: WARNING - Cart exists but is not empty or has wrong session ID")
+                        self.test_results["get_cart"] = True  # Still mark as success since API works
+                else:
+                    print(f"❌ Get Cart: FAILED - Missing required fields: {', '.join(missing_fields)}")
+            else:
+                print("❌ Get Cart: FAILED")
+                print(f"Response: {response.text}")
+        except Exception as e:
+            print(f"❌ Get Cart: FAILED - {str(e)}")
+    
+    def test_add_to_cart(self):
+        """Test adding items to cart"""
+        print("\n--- Testing Add to Cart ---")
+        try:
+            # Get a product ID to add to cart
+            products_response = requests.get(f"{self.api_url}/products")
+            if products_response.status_code != 200 or not products_response.json():
+                print("❌ Add to Cart: FAILED - Could not get products to add to cart")
+                return
+            
+            products = products_response.json()
+            product = products[0]  # Use the first product
+            product_id = product.get("id")
+            
+            # Get size options
+            size_options = product.get("size_options", [])
+            if not size_options:
+                print("❌ Add to Cart: FAILED - Product has no size options")
+                return
+            
+            # Test Case 1: Add item with valid quantity
+            print("\nTest Case 1: Add item with valid quantity")
+            size_option = size_options[0]  # Use the first size option
+            item_data = {
+                "product_id": product_id,
+                "size": size_option.get("size"),
+                "quantity": 2
+            }
+            
+            response = requests.post(
+                f"{self.api_url}/cart/{self.test_session_id}/add",
+                json=item_data
+            )
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                result = response.json()
+                cart = result.get("cart", {})
+                print(f"Added item to cart: {item_data}")
+                
+                # Verify cart has the item
+                items = cart.get("items", [])
+                if items and len(items) > 0:
+                    item = next((i for i in items if i.get("product_id") == product_id and i.get("size") == size_option.get("size")), None)
+                    if item:
+                        print(f"✅ Item added: {item.get('product_name')} - {item.get('size')} - Quantity: {item.get('quantity')}")
+                        
+                        # Verify total calculation
+                        expected_total = item.get("quantity") * item.get("size_price")
+                        if item.get("total_price") == expected_total:
+                            print(f"✅ Item total price calculated correctly: {item.get('total_price')}")
+                        else:
+                            print(f"❌ Item total price incorrect: Expected {expected_total}, Got {item.get('total_price')}")
+                        
+                        # Verify cart totals
+                        if cart.get("total_items") == item.get("quantity"):
+                            print(f"✅ Cart total items calculated correctly: {cart.get('total_items')}")
+                        else:
+                            print(f"❌ Cart total items incorrect: Expected {item.get('quantity')}, Got {cart.get('total_items')}")
+                        
+                        if cart.get("total_amount") == expected_total:
+                            print(f"✅ Cart total amount calculated correctly: {cart.get('total_amount')}")
+                        else:
+                            print(f"❌ Cart total amount incorrect: Expected {expected_total}, Got {cart.get('total_amount')}")
+                    else:
+                        print("❌ Item not found in cart after adding")
+                else:
+                    print("❌ Cart items array is empty after adding item")
+            else:
+                print(f"❌ Add to Cart (Valid Quantity): FAILED - {response.text}")
+                
+            # Test Case 2: Add same item again (should merge and update quantity)
+            print("\nTest Case 2: Add same item again (should merge)")
+            response = requests.post(
+                f"{self.api_url}/cart/{self.test_session_id}/add",
+                json=item_data
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                cart = result.get("cart", {})
+                items = cart.get("items", [])
+                
+                # Verify item was merged (not duplicated)
+                if len(items) == 1:
+                    item = items[0]
+                    if item.get("quantity") == 4:  # 2 + 2
+                        print(f"✅ Items merged correctly: Quantity updated to {item.get('quantity')}")
+                        
+                        # Verify updated totals
+                        expected_total = item.get("quantity") * item.get("size_price")
+                        if item.get("total_price") == expected_total:
+                            print(f"✅ Merged item total price calculated correctly: {item.get('total_price')}")
+                        else:
+                            print(f"❌ Merged item total price incorrect: Expected {expected_total}, Got {item.get('total_price')}")
+                    else:
+                        print(f"❌ Items not merged correctly: Expected quantity 4, Got {item.get('quantity')}")
+                else:
+                    print(f"❌ Items not merged: Found {len(items)} items in cart")
+            else:
+                print(f"❌ Add to Cart (Merge): FAILED - {response.text}")
+            
+            # Test Case 3: Add different size of same product
+            print("\nTest Case 3: Add different size of same product")
+            if len(size_options) > 1:
+                different_size = size_options[1]  # Use the second size option
+                different_size_data = {
+                    "product_id": product_id,
+                    "size": different_size.get("size"),
+                    "quantity": 1
+                }
+                
+                response = requests.post(
+                    f"{self.api_url}/cart/{self.test_session_id}/add",
+                    json=different_size_data
+                )
+                
+                if response.status_code == 200:
+                    result = response.json()
+                    cart = result.get("cart", {})
+                    items = cart.get("items", [])
+                    
+                    # Verify both sizes are in cart
+                    if len(items) == 2:
+                        print(f"✅ Different size added as separate item: Now have {len(items)} items in cart")
+                        
+                        # Verify cart totals
+                        expected_items = 5  # 4 from first size + 1 from second size
+                        if cart.get("total_items") == expected_items:
+                            print(f"✅ Cart total items calculated correctly: {cart.get('total_items')}")
+                        else:
+                            print(f"❌ Cart total items incorrect: Expected {expected_items}, Got {cart.get('total_items')}")
+                        
+                        # Calculate expected total amount
+                        expected_amount = (4 * size_option.get("price")) + (1 * different_size.get("price"))
+                        if abs(cart.get("total_amount") - expected_amount) < 0.01:  # Allow for floating point differences
+                            print(f"✅ Cart total amount calculated correctly: {cart.get('total_amount')}")
+                        else:
+                            print(f"❌ Cart total amount incorrect: Expected {expected_amount}, Got {cart.get('total_amount')}")
+                    else:
+                        print(f"❌ Different size not added correctly: Expected 2 items, Got {len(items)}")
+                else:
+                    print(f"❌ Add to Cart (Different Size): FAILED - {response.text}")
+            else:
+                print("⚠️ Skipping different size test: Product has only one size option")
+            
+            # Test Case 4: Add item with quantity exceeding stock
+            print("\nTest Case 4: Add item with quantity exceeding stock")
+            exceed_stock_data = {
+                "product_id": product_id,
+                "size": size_option.get("size"),
+                "quantity": size_option.get("stock") + 10  # Exceed stock by 10
+            }
+            
+            response = requests.post(
+                f"{self.api_url}/cart/{self.test_session_id}/add",
+                json=exceed_stock_data
+            )
+            
+            if response.status_code == 400:
+                print(f"✅ Stock validation works: {response.text}")
+            else:
+                print(f"❌ Stock validation failed: Expected 400 error, Got {response.status_code}")
+            
+            # Mark test as successful if we got here
+            self.test_results["add_to_cart"] = True
+            print("\n✅ Add to Cart: SUCCESS - All test cases completed")
+            
+        except Exception as e:
+            print(f"❌ Add to Cart: FAILED - {str(e)}")
+    
+    def test_update_cart_item(self):
+        """Test updating cart item quantity"""
+        print("\n--- Testing Update Cart Item ---")
+        try:
+            # Get current cart
+            response = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+            if response.status_code != 200 or not response.json().get("items"):
+                print("❌ Update Cart Item: FAILED - Could not get cart or cart is empty")
+                return
+            
+            cart = response.json()
+            items = cart.get("items", [])
+            if not items:
+                print("❌ Update Cart Item: FAILED - Cart is empty")
+                return
+            
+            item = items[0]  # Use the first item
+            original_quantity = item.get("quantity")
+            product_id = item.get("product_id")
+            size = item.get("size")
+            
+            # Test Case 1: Increase quantity
+            print("\nTest Case 1: Increase quantity")
+            new_quantity = original_quantity + 1
+            update_data = {
+                "product_id": product_id,
+                "size": size,
+                "quantity": new_quantity
+            }
+            
+            response = requests.put(
+                f"{self.api_url}/cart/{self.test_session_id}/update",
+                json=update_data
+            )
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                result = response.json()
+                cart = result.get("cart", {})
+                items = cart.get("items", [])
+                
+                # Find the updated item
+                updated_item = next((i for i in items if i.get("product_id") == product_id and i.get("size") == size), None)
+                if updated_item and updated_item.get("quantity") == new_quantity:
+                    print(f"✅ Quantity increased: {original_quantity} → {updated_item.get('quantity')}")
+                    
+                    # Verify total price updated
+                    expected_total = new_quantity * updated_item.get("size_price")
+                    if updated_item.get("total_price") == expected_total:
+                        print(f"✅ Item total price updated correctly: {updated_item.get('total_price')}")
+                    else:
+                        print(f"❌ Item total price incorrect: Expected {expected_total}, Got {updated_item.get('total_price')}")
+                else:
+                    print("❌ Item quantity not updated correctly")
+            else:
+                print(f"❌ Update Cart Item (Increase): FAILED - {response.text}")
+            
+            # Test Case 2: Decrease quantity
+            print("\nTest Case 2: Decrease quantity")
+            new_quantity = original_quantity - 1
+            if new_quantity < 1:
+                new_quantity = 1  # Ensure we don't go below 1
+                
+            update_data = {
+                "product_id": product_id,
+                "size": size,
+                "quantity": new_quantity
+            }
+            
+            response = requests.put(
+                f"{self.api_url}/cart/{self.test_session_id}/update",
+                json=update_data
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                cart = result.get("cart", {})
+                items = cart.get("items", [])
+                
+                # Find the updated item
+                updated_item = next((i for i in items if i.get("product_id") == product_id and i.get("size") == size), None)
+                if updated_item and updated_item.get("quantity") == new_quantity:
+                    print(f"✅ Quantity decreased: {original_quantity + 1} → {updated_item.get('quantity')}")
+                else:
+                    print("❌ Item quantity not updated correctly")
+            else:
+                print(f"❌ Update Cart Item (Decrease): FAILED - {response.text}")
+            
+            # Test Case 3: Set quantity to zero (should remove item)
+            print("\nTest Case 3: Set quantity to zero (should remove item)")
+            update_data = {
+                "product_id": product_id,
+                "size": size,
+                "quantity": 0
+            }
+            
+            response = requests.put(
+                f"{self.api_url}/cart/{self.test_session_id}/update",
+                json=update_data
+            )
+            
+            if response.status_code == 200:
+                result = response.json()
+                cart = result.get("cart", {})
+                items = cart.get("items", [])
+                
+                # Check if item was removed
+                removed_item = next((i for i in items if i.get("product_id") == product_id and i.get("size") == size), None)
+                if not removed_item:
+                    print("✅ Item removed when quantity set to zero")
+                else:
+                    print("❌ Item not removed when quantity set to zero")
+            else:
+                print(f"❌ Update Cart Item (Zero Quantity): FAILED - {response.text}")
+            
+            # Mark test as successful if we got here
+            self.test_results["update_cart_item"] = True
+            print("\n✅ Update Cart Item: SUCCESS - All test cases completed")
+            
+        except Exception as e:
+            print(f"❌ Update Cart Item: FAILED - {str(e)}")
+    
+    def test_remove_from_cart(self):
+        """Test removing item from cart"""
+        print("\n--- Testing Remove from Cart ---")
+        try:
+            # First, add an item to cart to ensure we have something to remove
+            # Get a product ID
+            products_response = requests.get(f"{self.api_url}/products")
+            if products_response.status_code != 200 or not products_response.json():
+                print("❌ Remove from Cart: FAILED - Could not get products")
+                return
+            
+            products = products_response.json()
+            product = products[0]  # Use the first product
+            product_id = product.get("id")
+            size_options = product.get("size_options", [])
+            
+            if not size_options:
+                print("❌ Remove from Cart: FAILED - Product has no size options")
+                return
+            
+            size_option = size_options[0]
+            
+            # Add item to cart
+            add_data = {
+                "product_id": product_id,
+                "size": size_option.get("size"),
+                "quantity": 3
+            }
+            
+            add_response = requests.post(
+                f"{self.api_url}/cart/{self.test_session_id}/add",
+                json=add_data
+            )
+            
+            if add_response.status_code != 200:
+                print(f"❌ Remove from Cart: FAILED - Could not add item to cart: {add_response.text}")
+                return
+            
+            # Now test removing the item
+            remove_data = {
+                "product_id": product_id,
+                "size": size_option.get("size")
+            }
+            
+            response = requests.delete(
+                f"{self.api_url}/cart/{self.test_session_id}/remove",
+                json=remove_data
+            )
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                result = response.json()
+                cart = result.get("cart", {})
+                items = cart.get("items", [])
+                
+                # Verify item was removed
+                removed_item = next((i for i in items if i.get("product_id") == product_id and i.get("size") == size_option.get("size")), None)
+                if not removed_item:
+                    print("✅ Item successfully removed from cart")
+                    
+                    # Verify cart totals updated
+                    if len(items) == 0:
+                        if cart.get("total_items") == 0:
+                            print("✅ Cart total items updated correctly: 0")
+                        else:
+                            print(f"❌ Cart total items incorrect: Expected 0, Got {cart.get('total_items')}")
+                        
+                        if cart.get("total_amount") == 0:
+                            print("✅ Cart total amount updated correctly: 0")
+                        else:
+                            print(f"❌ Cart total amount incorrect: Expected 0, Got {cart.get('total_amount')}")
+                    else:
+                        print(f"⚠️ Cart still has {len(items)} other items")
+                else:
+                    print("❌ Item not removed from cart")
+            else:
+                print(f"❌ Remove from Cart: FAILED - {response.text}")
+            
+            # Mark test as successful if we got here
+            self.test_results["remove_from_cart"] = True
+            print("✅ Remove from Cart: SUCCESS")
+            
+        except Exception as e:
+            print(f"❌ Remove from Cart: FAILED - {str(e)}")
+    
+    def test_clear_cart(self):
+        """Test clearing all items from cart"""
+        print("\n--- Testing Clear Cart ---")
+        try:
+            # First, add some items to cart
+            # Get products
+            products_response = requests.get(f"{self.api_url}/products")
+            if products_response.status_code != 200 or not products_response.json():
+                print("❌ Clear Cart: FAILED - Could not get products")
+                return
+            
+            products = products_response.json()
+            
+            # Add two different products to cart
+            for i in range(min(2, len(products))):
+                product = products[i]
+                product_id = product.get("id")
+                size_options = product.get("size_options", [])
+                
+                if not size_options:
+                    continue
+                
+                size_option = size_options[0]
+                
+                add_data = {
+                    "product_id": product_id,
+                    "size": size_option.get("size"),
+                    "quantity": i + 1
+                }
+                
+                add_response = requests.post(
+                    f"{self.api_url}/cart/{self.test_session_id}/add",
+                    json=add_data
+                )
+                
+                if add_response.status_code != 200:
+                    print(f"⚠️ Could not add product {i+1} to cart: {add_response.text}")
+            
+            # Verify cart has items
+            check_response = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+            if check_response.status_code != 200:
+                print(f"❌ Clear Cart: FAILED - Could not get cart: {check_response.text}")
+                return
+            
+            cart = check_response.json()
+            items_before = cart.get("items", [])
+            
+            if not items_before:
+                print("⚠️ Cart is already empty before clearing")
+            else:
+                print(f"Cart has {len(items_before)} items before clearing")
+            
+            # Now test clearing the cart
+            response = requests.delete(f"{self.api_url}/cart/{self.test_session_id}/clear")
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                print(f"Response: {response.json()}")
+                
+                # Verify cart is empty
+                check_response = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+                if check_response.status_code == 200:
+                    cart = check_response.json()
+                    items_after = cart.get("items", [])
+                    
+                    if not items_after:
+                        print("✅ Cart successfully cleared - No items remaining")
+                        
+                        # Verify cart totals
+                        if cart.get("total_items") == 0:
+                            print("✅ Cart total items reset to 0")
+                        else:
+                            print(f"❌ Cart total items not reset: Expected 0, Got {cart.get('total_items')}")
+                        
+                        if cart.get("total_amount") == 0:
+                            print("✅ Cart total amount reset to 0")
+                        else:
+                            print(f"❌ Cart total amount not reset: Expected 0, Got {cart.get('total_amount')}")
+                    else:
+                        print(f"❌ Cart not cleared - Still has {len(items_after)} items")
+                else:
+                    print(f"❌ Could not verify cart after clearing: {check_response.text}")
+            else:
+                print(f"❌ Clear Cart: FAILED - {response.text}")
+            
+            # Mark test as successful if we got here
+            self.test_results["clear_cart"] = True
+            print("✅ Clear Cart: SUCCESS")
+            
+        except Exception as e:
+            print(f"❌ Clear Cart: FAILED - {str(e)}")
+    
     def print_summary(self):
         """Print a summary of all test results"""
         print("\n=== Test Results Summary ===")

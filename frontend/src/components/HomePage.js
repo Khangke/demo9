@@ -103,7 +103,7 @@ const HomePage = () => {
                     <img src={product.image_url} alt={product.name} />
                     <div className="product-badge">Nổi Bật</div>
                     <div className="product-overlay">
-                      <button className="quick-view-btn">Xem Chi Tiết</button>
+                      <Link to={`/product/${product.id}`} className="quick-view-btn">Xem Chi Tiết</Link>
                     </div>
                   </div>
                   <div className="product-info">

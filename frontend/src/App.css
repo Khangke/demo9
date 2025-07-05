@@ -2304,11 +2304,12 @@ body {
   font-size: 1rem;
 }
 
-/* No Products State */
+/* No Products State Animation */
 .no-products {
   text-align: center;
   padding: 6rem 2rem;
   color: #B8B8B8;
+  animation: fadeInUp 0.8s ease-out;
 }
 
 .no-products ion-icon {
@@ -2316,6 +2317,7 @@ body {
   color: #F4D03F;
   margin-bottom: 1.5rem;
   opacity: 0.6;
+  animation: gentleFloat 3s ease-in-out infinite;
 }
 
 .no-products h3 {
@@ -2323,11 +2325,13 @@ body {
   font-size: 1.5rem;
   margin-bottom: 1rem;
   font-weight: 600;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
 }
 
 .no-products p {
   font-size: 1rem;
   line-height: 1.6;
+  animation: fadeInUp 0.8s ease-out 0.4s both;
 }
 
 /* Product Modal */

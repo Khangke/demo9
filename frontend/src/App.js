@@ -5,6 +5,9 @@ import "./App.css";
 import HomePage from "./components/HomePage";
 import ProductsPage from "./components/ProductsPage";
 import ProductDetail from "./components/ProductDetail";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
+import OrderConfirmation from "./components/OrderConfirmation";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -29,6 +32,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/order-confirmation/:orderId" element={<OrderConfirmation />} />
         </Routes>
         <Footer />
       </div>

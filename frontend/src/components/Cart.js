@@ -54,9 +54,13 @@ const Cart = () => {
       if (response.ok) {
         const data = await response.json();
         setCart(data.cart);
+        showToast(`Đã cập nhật số lượng sản phẩm`, 'success');
+      } else {
+        showToast('Không thể cập nhật số lượng sản phẩm', 'error');
       }
     } catch (error) {
       console.error('Error updating cart:', error);
+      showToast('Có lỗi xảy ra khi cập nhật giỏ hàng', 'error');
     } finally {
       setUpdating(false);
     }
@@ -74,9 +78,13 @@ const Cart = () => {
       if (response.ok) {
         const data = await response.json();
         setCart(data.cart);
+        showToast('Đã xóa sản phẩm khỏi giỏ hàng', 'success');
+      } else {
+        showToast('Không thể xóa sản phẩm', 'error');
       }
     } catch (error) {
       console.error('Error removing item:', error);
+      showToast('Có lỗi xảy ra khi xóa sản phẩm', 'error');
     } finally {
       setUpdating(false);
     }
@@ -93,9 +101,13 @@ const Cart = () => {
 
       if (response.ok) {
         setCart({ items: [], total_amount: 0, total_items: 0 });
+        showToast('Đã xóa tất cả sản phẩm khỏi giỏ hàng', 'success');
+      } else {
+        showToast('Không thể xóa giỏ hàng', 'error');
       }
     } catch (error) {
       console.error('Error clearing cart:', error);
+      showToast('Có lỗi xảy ra khi xóa giỏ hàng', 'error');
     } finally {
       setUpdating(false);
     }

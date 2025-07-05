@@ -90,25 +90,25 @@ const ProductDetail = () => {
 
   const getCurrentStock = () => {
     if (!selectedSize || !product.size_options) return 0;
-    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    const sizeOption = product.size_options.find(option => option.size === selectedSize.size);
     return sizeOption ? sizeOption.stock : 0;
   };
 
   const getSelectedSizePrice = () => {
     if (!selectedSize || !product.size_options) return { price: 0, original_price: null };
-    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    const sizeOption = product.size_options.find(option => option.size === selectedSize.size);
     return sizeOption ? { price: sizeOption.price, original_price: sizeOption.original_price } : { price: 0, original_price: null };
   };
 
   const getCurrentPrice = () => {
     if (!selectedSize || !product.size_options) return product.price;
-    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    const sizeOption = product.size_options.find(option => option.size === selectedSize.size);
     return sizeOption ? sizeOption.price : product.price;
   };
 
   const getCurrentOriginalPrice = () => {
     if (!selectedSize || !product.size_options) return product.original_price;
-    const sizeOption = product.size_options.find(option => option.size === selectedSize);
+    const sizeOption = product.size_options.find(option => option.size === selectedSize.size);
     return sizeOption ? sizeOption.original_price : product.original_price;
   };
 

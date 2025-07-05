@@ -19,7 +19,7 @@ const Checkout = () => {
     total_amount: 2500000.0, 
     total_items: 1 
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const navigate = useNavigate();

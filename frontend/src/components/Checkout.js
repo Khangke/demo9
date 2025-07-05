@@ -257,284 +257,254 @@ const Checkout = () => {
               <div className="checkout-layout-optimized">
                 <div className="checkout-main-optimized">
                   
-                  {/* Combined Information Section */}
+                  {/* Shipping Information Section */}
                   <div className="checkout-section-optimized">
-                    <div className="section-grid">
-                      
-                      {/* Shipping Information */}
-                      <div className="info-section">
-                        <div className="section-header-compact">
-                          <h3>
-                            <ion-icon name="location-outline"></ion-icon>
-                            Thông tin giao hàng
-                          </h3>
+                    <div className="section-header-compact">
+                      <h3>
+                        <ion-icon name="location-outline"></ion-icon>
+                        Thông tin giao hàng
+                      </h3>
+                    </div>
+
+                    <div className="form-grid-compact" 
+                         itemScope 
+                         itemType="https://schema.org/PostalAddress">
+
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="full_name" className="form-label-compact">
+                            Họ và tên <span className="required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="full_name"
+                            name="full_name"
+                            value={formData.full_name}
+                            onChange={handleInputChange}
+                            className={`form-input-compact ${errors.full_name ? 'error' : ''}`}
+                            placeholder="Nhập họ và tên"
+                            itemProp="name"
+                            required
+                          />
+                          {errors.full_name && <span className="error-message-compact">{errors.full_name}</span>}
                         </div>
 
-                        <div className="form-grid-compact" 
-                             itemScope 
-                             itemType="https://schema.org/PostalAddress">
-                          
-                          {/* Address Type Selection */}
-                          <div className="form-group-full">
-                            <label className="form-label-compact">
-                              Loại địa chỉ <span className="optional-badge">Tùy chọn</span>
-                            </label>
-                            <div className="address-type-selector">
-                              {addressOptions.slice(1).map((option) => (
-                                <div 
-                                  key={option.value}
-                                  className={`address-type-option ${selectedAddressType === option.value ? 'selected' : ''}`}
-                                  onClick={() => handleAddressTypeChange(option.value)}
-                                >
-                                  <div className="address-type-icon">
-                                    {option.label.split(' ')[0]}
-                                  </div>
-                                  <div className="address-type-info">
-                                    <span className="address-type-name">{option.label.split(' ').slice(1).join(' ')}</span>
-                                    <span className="address-type-desc">{option.details}</span>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          <div className="form-row">
-                            <div className="form-group">
-                              <label htmlFor="full_name" className="form-label-compact">
-                                Họ và tên <span className="required">*</span>
-                              </label>
-                              <input
-                                type="text"
-                                id="full_name"
-                                name="full_name"
-                                value={formData.full_name}
-                                onChange={handleInputChange}
-                                className={`form-input-compact ${errors.full_name ? 'error' : ''}`}
-                                placeholder="Nhập họ và tên"
-                                itemProp="name"
-                                required
-                              />
-                              {errors.full_name && <span className="error-message-compact">{errors.full_name}</span>}
-                            </div>
-
-                            <div className="form-group">
-                              <label htmlFor="phone" className="form-label-compact">
-                                Số điện thoại <span className="required">*</span>
-                              </label>
-                              <input
-                                type="tel"
-                                id="phone"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleInputChange}
-                                className={`form-input-compact ${errors.phone ? 'error' : ''}`}
-                                placeholder="Nhập số điện thoại"
-                                itemProp="telephone"
-                                required
-                              />
-                              {errors.phone && <span className="error-message-compact">{errors.phone}</span>}
-                            </div>
-                          </div>
-
-                          <div className="form-group">
-                            <label htmlFor="email" className="form-label-compact">
-                              Email <span className="required">*</span>
-                            </label>
-                            <input
-                              type="email"
-                              id="email"
-                              name="email"
-                              value={formData.email}
-                              onChange={handleInputChange}
-                              className={`form-input-compact ${errors.email ? 'error' : ''}`}
-                              placeholder="Nhập địa chỉ email"
-                              itemProp="email"
-                              required
-                            />
-                            {errors.email && <span className="error-message-compact">{errors.email}</span>}
-                          </div>
-
-                          <div className="form-row">
-                            <div className="form-group">
-                              <label htmlFor="city" className="form-label-compact">
-                                Tỉnh/Thành phố <span className="required">*</span>
-                              </label>
-                              <select
-                                id="city"
-                                name="city"
-                                value={formData.city}
-                                onChange={handleInputChange}
-                                className={`form-input-compact ${errors.city ? 'error' : ''}`}
-                                itemProp="addressLocality"
-                                required
-                              >
-                                <option value="">Chọn tỉnh/thành phố</option>
-                                <option value="Hồ Chí Minh">TP. Hồ Chí Minh</option>
-                                <option value="Hà Nội">Hà Nội</option>
-                                <option value="Đà Nẵng">Đà Nẵng</option>
-                                <option value="Cần Thơ">Cần Thơ</option>
-                                <option value="Khánh Hòa">Khánh Hòa</option>
-                                <option value="Quảng Nam">Quảng Nam</option>
-                                <option value="Khác">Tỉnh/thành phố khác</option>
-                              </select>
-                              {errors.city && <span className="error-message-compact">{errors.city}</span>}
-                            </div>
-
-                            <div className="form-group">
-                              <label htmlFor="district" className="form-label-compact">
-                                Quận/Huyện <span className="required">*</span>
-                              </label>
-                              <input
-                                type="text"
-                                id="district"
-                                name="district"
-                                value={formData.district}
-                                onChange={handleInputChange}
-                                className={`form-input-compact ${errors.district ? 'error' : ''}`}
-                                placeholder="Nhập quận/huyện"
-                                itemProp="addressRegion"
-                                required
-                              />
-                              {errors.district && <span className="error-message-compact">{errors.district}</span>}
-                            </div>
-
-                            <div className="form-group">
-                              <label htmlFor="ward" className="form-label-compact">
-                                Phường/Xã <span className="required">*</span>
-                              </label>
-                              <input
-                                type="text"
-                                id="ward"
-                                name="ward"
-                                value={formData.ward}
-                                onChange={handleInputChange}
-                                className={`form-input-compact ${errors.ward ? 'error' : ''}`}
-                                placeholder="Nhập phường/xã"
-                                required
-                              />
-                              {errors.ward && <span className="error-message-compact">{errors.ward}</span>}
-                            </div>
-                          </div>
-
-                          <div className="form-group">
-                            <label htmlFor="address" className="form-label-compact">
-                              Địa chỉ cụ thể <span className="required">*</span>
-                            </label>
-                            <input
-                              type="text"
-                              id="address"
-                              name="address"
-                              value={formData.address}
-                              onChange={handleInputChange}
-                              className={`form-input-compact ${errors.address ? 'error' : ''}`}
-                              placeholder="Số nhà, tên đường..."
-                              itemProp="streetAddress"
-                              required
-                            />
-                            {errors.address && <span className="error-message-compact">{errors.address}</span>}
-                          </div>
-
-                          <div className="form-group">
-                            <label htmlFor="notes" className="form-label-compact">
-                              Ghi chú đơn hàng
-                            </label>
-                            <textarea
-                              id="notes"
-                              name="notes"
-                              value={formData.notes}
-                              onChange={handleInputChange}
-                              className="form-textarea-compact"
-                              placeholder="Ghi chú thêm (không bắt buộc)"
-                              rows="2"
-                              itemProp="description"
-                            ></textarea>
-                          </div>
+                        <div className="form-group">
+                          <label htmlFor="phone" className="form-label-compact">
+                            Số điện thoại <span className="required">*</span>
+                          </label>
+                          <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            className={`form-input-compact ${errors.phone ? 'error' : ''}`}
+                            placeholder="Nhập số điện thoại"
+                            itemProp="telephone"
+                            required
+                          />
+                          {errors.phone && <span className="error-message-compact">{errors.phone}</span>}
                         </div>
                       </div>
 
-                      {/* Payment Method */}
-                      <div className="info-section">
-                        <div className="section-header-compact">
-                          <h3>
-                            <ion-icon name="card-outline"></ion-icon>
-                            Phương thức thanh toán
-                          </h3>
+                      <div className="form-group">
+                        <label htmlFor="email" className="form-label-compact">
+                          Email <span className="required">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          className={`form-input-compact ${errors.email ? 'error' : ''}`}
+                          placeholder="Nhập địa chỉ email"
+                          itemProp="email"
+                          required
+                        />
+                        {errors.email && <span className="error-message-compact">{errors.email}</span>}
+                      </div>
+
+                      <div className="form-row">
+                        <div className="form-group">
+                          <label htmlFor="city" className="form-label-compact">
+                            Tỉnh/Thành phố <span className="required">*</span>
+                          </label>
+                          <select
+                            id="city"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleInputChange}
+                            className={`form-input-compact ${errors.city ? 'error' : ''}`}
+                            itemProp="addressLocality"
+                            required
+                          >
+                            <option value="">Chọn tỉnh/thành phố</option>
+                            <option value="Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="Đà Nẵng">Đà Nẵng</option>
+                            <option value="Cần Thơ">Cần Thơ</option>
+                            <option value="Khánh Hòa">Khánh Hòa</option>
+                            <option value="Quảng Nam">Quảng Nam</option>
+                            <option value="Khác">Tỉnh/thành phố khác</option>
+                          </select>
+                          {errors.city && <span className="error-message-compact">{errors.city}</span>}
                         </div>
 
-                        <div className="payment-methods-compact"
-                             itemScope 
-                             itemType="https://schema.org/PaymentMethod">
-                          <div className="payment-option-compact">
-                            <label className="payment-label-compact">
-                              <input
-                                type="radio"
-                                name="payment_method"
-                                value="cod"
-                                checked={formData.payment_method === 'cod'}
-                                onChange={handleInputChange}
-                                className="payment-radio-compact"
-                              />
-                              <div className="payment-content-compact">
-                                <div className="payment-icon-compact">
-                                  <ion-icon name="cash-outline"></ion-icon>
-                                </div>
-                                <div className="payment-info-compact">
-                                  <span className="payment-name">Thanh toán khi nhận hàng</span>
-                                  <span className="payment-desc">Phí COD: 30,000 VNĐ</span>
-                                </div>
-                                <div className="payment-badge-compact popular">Phổ biến</div>
-                              </div>
-                            </label>
-                          </div>
-
-                          <div className="payment-option-compact">
-                            <label className="payment-label-compact">
-                              <input
-                                type="radio"
-                                name="payment_method"
-                                value="bank_transfer"
-                                checked={formData.payment_method === 'bank_transfer'}
-                                onChange={handleInputChange}
-                                className="payment-radio-compact"
-                              />
-                              <div className="payment-content-compact">
-                                <div className="payment-icon-compact">
-                                  <ion-icon name="card-outline"></ion-icon>
-                                </div>
-                                <div className="payment-info-compact">
-                                  <span className="payment-name">Chuyển khoản ngân hàng</span>
-                                  <span className="payment-desc">Miễn phí vận chuyển</span>
-                                </div>
-                                <div className="payment-badge-compact recommended">Khuyến nghị</div>
-                              </div>
-                            </label>
-                          </div>
+                        <div className="form-group">
+                          <label htmlFor="district" className="form-label-compact">
+                            Quận/Huyện <span className="required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="district"
+                            name="district"
+                            value={formData.district}
+                            onChange={handleInputChange}
+                            className={`form-input-compact ${errors.district ? 'error' : ''}`}
+                            placeholder="Nhập quận/huyện"
+                            itemProp="addressRegion"
+                            required
+                          />
+                          {errors.district && <span className="error-message-compact">{errors.district}</span>}
                         </div>
 
-                        {formData.payment_method === 'bank_transfer' && (
-                          <div className="bank-info-compact">
-                            <div className="bank-info-header-compact">
-                              <ion-icon name="information-circle-outline"></ion-icon>
-                              <span>Thông tin chuyển khoản</span>
-                            </div>
-                            <div className="bank-details-compact">
-                              <div className="bank-item-compact">
-                                <span className="bank-label-compact">Ngân hàng:</span>
-                                <span className="bank-value-compact">Vietcombank</span>
-                              </div>
-                              <div className="bank-item-compact">
-                                <span className="bank-label-compact">Số TK:</span>
-                                <span className="bank-value-compact">1234567890</span>
-                              </div>
-                              <div className="bank-item-compact">
-                                <span className="bank-label-compact">Chủ TK:</span>
-                                <span className="bank-value-compact">KHANG TRAM HUONG</span>
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                        <div className="form-group">
+                          <label htmlFor="ward" className="form-label-compact">
+                            Phường/Xã <span className="required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="ward"
+                            name="ward"
+                            value={formData.ward}
+                            onChange={handleInputChange}
+                            className={`form-input-compact ${errors.ward ? 'error' : ''}`}
+                            placeholder="Nhập phường/xã"
+                            required
+                          />
+                          {errors.ward && <span className="error-message-compact">{errors.ward}</span>}
+                        </div>
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="address" className="form-label-compact">
+                          Địa chỉ cụ thể <span className="required">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          id="address"
+                          name="address"
+                          value={formData.address}
+                          onChange={handleInputChange}
+                          className={`form-input-compact ${errors.address ? 'error' : ''}`}
+                          placeholder="Số nhà, tên đường..."
+                          itemProp="streetAddress"
+                          required
+                        />
+                        {errors.address && <span className="error-message-compact">{errors.address}</span>}
+                      </div>
+
+                      <div className="form-group">
+                        <label htmlFor="notes" className="form-label-compact">
+                          Ghi chú đơn hàng
+                        </label>
+                        <textarea
+                          id="notes"
+                          name="notes"
+                          value={formData.notes}
+                          onChange={handleInputChange}
+                          className="form-textarea-compact"
+                          placeholder="Ghi chú thêm (không bắt buộc)"
+                          rows="2"
+                          itemProp="description"
+                        ></textarea>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Payment Method Section */}
+                  <div className="checkout-section-optimized">
+                    <div className="section-header-compact">
+                      <h3>
+                        <ion-icon name="card-outline"></ion-icon>
+                        Phương thức thanh toán
+                      </h3>
+                    </div>
+
+                    <div className="payment-methods-compact"
+                         itemScope 
+                         itemType="https://schema.org/PaymentMethod">
+                      <div className="payment-option-compact">
+                        <label className="payment-label-compact">
+                          <input
+                            type="radio"
+                            name="payment_method"
+                            value="cod"
+                            checked={formData.payment_method === 'cod'}
+                            onChange={handleInputChange}
+                            className="payment-radio-compact"
+                          />
+                          <div className="payment-content-compact">
+                            <div className="payment-icon-compact">
+                              <ion-icon name="cash-outline"></ion-icon>
+                            </div>
+                            <div className="payment-info-compact">
+                              <span className="payment-name">Thanh toán khi nhận hàng</span>
+                              <span className="payment-desc">Phí COD: 30,000 VNĐ</span>
+                            </div>
+                            <div className="payment-badge-compact popular">Phổ biến</div>
+                          </div>
+                        </label>
+                      </div>
+
+                      <div className="payment-option-compact">
+                        <label className="payment-label-compact">
+                          <input
+                            type="radio"
+                            name="payment_method"
+                            value="bank_transfer"
+                            checked={formData.payment_method === 'bank_transfer'}
+                            onChange={handleInputChange}
+                            className="payment-radio-compact"
+                          />
+                          <div className="payment-content-compact">
+                            <div className="payment-icon-compact">
+                              <ion-icon name="card-outline"></ion-icon>
+                            </div>
+                            <div className="payment-info-compact">
+                              <span className="payment-name">Chuyển khoản ngân hàng</span>
+                              <span className="payment-desc">Miễn phí vận chuyển</span>
+                            </div>
+                            <div className="payment-badge-compact recommended">Khuyến nghị</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+
+                    {formData.payment_method === 'bank_transfer' && (
+                      <div className="bank-info-compact">
+                        <div className="bank-info-header-compact">
+                          <ion-icon name="information-circle-outline"></ion-icon>
+                          <span>Thông tin chuyển khoản</span>
+                        </div>
+                        <div className="bank-details-compact">
+                          <div className="bank-item-compact">
+                            <span className="bank-label-compact">Ngân hàng:</span>
+                            <span className="bank-value-compact">Vietcombank</span>
+                          </div>
+                          <div className="bank-item-compact">
+                            <span className="bank-label-compact">Số TK:</span>
+                            <span className="bank-value-compact">1234567890</span>
+                          </div>
+                          <div className="bank-item-compact">
+                            <span className="bank-label-compact">Chủ TK:</span>
+                            <span className="bank-value-compact">KHANG TRAM HUONG</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 

@@ -450,6 +450,11 @@ async def get_order(order_id: str):
     order = await db.orders.find_one({"id": order_id})
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
+    
+    # Convert MongoDB _id to string
+    if "_id" in order:
+        order["_id"] = str(order["_id"])
+    
     return Order(**order)
 
 @api_router.get("/orders/number/{order_number}", response_model=Order)
@@ -458,6 +463,11 @@ async def get_order_by_number(order_number: str):
     order = await db.orders.find_one({"order_number": order_number})
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
+    
+    # Convert MongoDB _id to string
+    if "_id" in order:
+        order["_id"] = str(order["_id"])
+    
     return Order(**order)
 
 # Include the router in the main app

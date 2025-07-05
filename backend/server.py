@@ -58,10 +58,13 @@ class ProductCreate(BaseModel):
     description_en: str
     price: float
     original_price: Optional[float] = None
+    size_options: List[SizeOption] = []
     image_url: str
+    additional_images: List[str] = []
     category: str
     stock: int = 0
     featured: bool = False
+    specifications: dict = {}
 
 class ProductUpdate(BaseModel):
     name: Optional[str] = None
@@ -70,10 +73,13 @@ class ProductUpdate(BaseModel):
     description_en: Optional[str] = None
     price: Optional[float] = None
     original_price: Optional[float] = None
+    size_options: Optional[List[SizeOption]] = None
     image_url: Optional[str] = None
+    additional_images: Optional[List[str]] = None
     category: Optional[str] = None
     stock: Optional[int] = None
     featured: Optional[bool] = None
+    specifications: Optional[dict] = None
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")

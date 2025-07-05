@@ -251,31 +251,6 @@ const ProductDetail = () => {
 
   return (
     <div className="product-detail-page">
-      {/* Breadcrumb */}
-      <div className="breadcrumb-nav">
-        <div className="container">
-          <ol className="breadcrumb-list">
-            <li className="breadcrumb-item">
-              <Link to="/" className="breadcrumb-link">
-                <ion-icon name="home-outline"></ion-icon>
-                Trang Chủ
-              </Link>
-            </li>
-            <span className="breadcrumb-separator">›</span>
-            <li className="breadcrumb-item">
-              <Link to="/products" className="breadcrumb-link">
-                <ion-icon name="grid-outline"></ion-icon>
-                Sản Phẩm
-              </Link>
-            </li>
-            <span className="breadcrumb-separator">›</span>
-            <li className="breadcrumb-item">
-              <span className="breadcrumb-current">{product.name}</span>
-            </li>
-          </ol>
-        </div>
-      </div>
-
       {/* Main Product Detail */}
       <div className="product-detail-main">
         <div className="container">

@@ -187,20 +187,17 @@ frontend:
           agent: "main"
           comment: "Verified mobile navigation working perfectly. Desktop shows full navigation bar, mobile/tablet shows hamburger menu. Mobile menu opens/closes smoothly with all navigation links working correctly. Responsive breakpoints at 768px and 480px working as expected."
 
-  - task: "Tối ưu phần chi tiết sản phẩm với size options và pricing"
+  - task: "Tối ưu lại chi tiết sản phẩm với UX/UI tốt hơn và direct product navigation"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/ProductDetail.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "Đã tối ưu hoàn toàn phần chi tiết sản phẩm theo yêu cầu user. Tạo ProductDetail component mới với features: 1) Size options với pricing động theo từng size (Nhỏ 5g, Vừa 10g, Lớn 20g). 2) Image gallery với main image và thumbnails. 3) Price display với current/original price và savings. 4) Stock management thông minh. 5) Quantity selector với +/- controls. 6) Product specifications section. 7) Responsive design với 2-column layout. 8) Enhanced backend model với SizeOption, additional_images, specifications. Layout gọn gàng, hiển thị đầy đủ thông tin và rất đẹp mắt với dark theme + gold accents."
-        - working: true
-          agent: "main"
-          comment: "✅ HOÀN THÀNH XUẤT SẮC! ProductDetail page đã hoạt động hoàn hảo với tất cả tính năng user yêu cầu: 1) Size Options: 3 sizes hiển thị đẹp với pricing động (1.2M-4.8M VND). 2) Image Gallery: Main image + thumbnails với active state. 3) Price Display: Current price, original price, discount % và savings amount. 4) Stock Management: Smart status với color coding. 5) Interactive Elements: Quantity selector, Add to Cart/Buy Now buttons. 6) UI/UX: Responsive layout, smooth animations, professional styling. 7) Backend: Enhanced model với size_options, additional_images, specifications. Giao diện gọn gàng, hiển thị đầy đủ và rất đẹp mắt!"
+          comment: "HOÀN THÀNH TỐI ƯU CHI TIẾT SẢN PHẨM MỚI! Đã thực hiện toàn bộ yêu cầu user: 1) DIRECT NAVIGATION: Loại bỏ button 'Thêm Vào Giỏ Hàng' ở product cards, giờ click vào sản phẩm sẽ đi thẳng đến detail page. 2) OPTIMIZED LAYOUT: Thêm breadcrumb với icons, enhanced product header với rating, improved size selection với stock info và selected indicators. 3) ENHANCED UX: Thêm image modal với navigation, quantity total calculator, better price display với unit info, improved button layouts. 4) BETTER CSS: Redesigned discount badge, enhanced thumbnails với active indicators, responsive image modal, improved section titles với icons. 5) MOBILE OPTIMIZATION: Better responsive breakpoints, improved mobile navigation, optimized touch targets. Giao diện giờ đây gọn gàng, professional và rất user-friendly!"
     implemented: true
     working: true
     file: "/app/frontend/src/App.css"

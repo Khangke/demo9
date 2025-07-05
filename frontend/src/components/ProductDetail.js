@@ -135,12 +135,12 @@ const ProductDetail = () => {
 
   const addToCart = async () => {
     if (!selectedSize) {
-      alert('Vui lòng chọn kích thước sản phẩm');
+      showToast('Vui lòng chọn kích thước sản phẩm', 'warning');
       return;
     }
 
     if (getCurrentStock() < quantity) {
-      alert('Số lượng vượt quá hàng có sẵn');
+      showToast('Số lượng vượt quá hàng có sẵn', 'error');
       return;
     }
 
@@ -157,16 +157,14 @@ const ProductDetail = () => {
       });
 
       if (response.ok) {
-        alert('Đã thêm sản phẩm vào giỏ hàng!');
-        // Optionally navigate to cart
-        // navigate('/cart');
+        showToast(`Đã thêm ${product.name} (${selectedSize.size}) vào giỏ hàng!`, 'success');
       } else {
         const errorData = await response.json();
-        alert(`Lỗi: ${errorData.detail}`);
+        showToast(`Lỗi: ${errorData.detail}`, 'error');
       }
     } catch (error) {
       console.error('Error adding to cart:', error);
-      alert('Có lỗi xảy ra khi thêm vào giỏ hàng');
+      showToast('Có lỗi xảy ra khi thêm vào giỏ hàng', 'error');
     } finally {
       setAddingToCart(false);
     }
@@ -174,12 +172,12 @@ const ProductDetail = () => {
 
   const buyNow = async () => {
     if (!selectedSize) {
-      alert('Vui lòng chọn kích thước sản phẩm');
+      showToast('Vui lòng chọn kích thước sản phẩm', 'warning');
       return;
     }
 
     if (getCurrentStock() < quantity) {
-      alert('Số lượng vượt quá hàng có sẵn');
+      showToast('Số lượng vượt quá hàng có sẵn', 'error');
       return;
     }
 
@@ -196,14 +194,17 @@ const ProductDetail = () => {
       });
 
       if (response.ok) {
-        navigate('/checkout');
+        showToast('Đã thêm sản phẩm vào giỏ hàng. Chuyển đến thanh toán...', 'success');
+        setTimeout(() => {
+          navigate('/checkout');
+        }, 1500);
       } else {
         const errorData = await response.json();
-        alert(`Lỗi: ${errorData.detail}`);
+        showToast(`Lỗi: ${errorData.detail}`, 'error');
       }
     } catch (error) {
       console.error('Error during buy now:', error);
-      alert('Có lỗi xảy ra khi mua hàng');
+      showToast('Có lỗi xảy ra khi mua hàng', 'error');
     }
   };
 

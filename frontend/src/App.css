@@ -4880,8 +4880,10 @@ body {
 
 /* Product Detail Main */
 .product-detail-main {
-  padding: 1rem 0 2rem;
+  padding: 0.8rem 0 1.5rem;
   animation: contentFadeUp 0.7s ease-out 0.2s both;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes contentFadeUp {
@@ -4898,9 +4900,10 @@ body {
 .product-detail-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  max-width: 1000px;
+  gap: 1.2rem;
+  max-width: 950px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* Product Images */

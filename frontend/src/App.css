@@ -3496,7 +3496,9 @@ body {
 }
 
 .product-card-advanced:hover {
-  animation: subtleGlow 3s ease-in-out infinite;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(244, 208, 63, 0.12);
+  border-color: rgba(244, 208, 63, 0.2);
 }
 
 /* Button Animations */

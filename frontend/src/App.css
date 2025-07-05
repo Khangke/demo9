@@ -2550,9 +2550,76 @@ select.form-input-compact:disabled {
   font-size: 0.75rem;
 }
 
-/* Custom scrollbar for order items */
-.order-items-compact::-webkit-scrollbar {
-  width: 4px;
+/* Place Order Button Optimized */
+.place-order-btn-optimized {
+  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
+  color: #1A1A1A;
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  margin: 1.5rem 0 1rem 0;
+  box-shadow: 0 4px 16px rgba(244, 208, 63, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 56px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.place-order-btn-optimized:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(244, 208, 63, 0.4);
+  background: linear-gradient(135deg, #F7DC6F 0%, #F4D03F 100%);
+}
+
+.place-order-btn-optimized:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.place-order-btn-optimized .spinner-compact {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(26, 26, 26, 0.3);
+  border-top: 2px solid #1A1A1A;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.place-order-btn-optimized ion-icon {
+  font-size: 1.2rem;
+}
+
+.place-order-btn-optimized::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.place-order-btn-optimized:hover::before {
+  left: 100%;
+}
+
+@media (max-width: 768px) {
+  .place-order-btn-optimized {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
 }
 
 .order-items-compact::-webkit-scrollbar-track {

@@ -277,16 +277,91 @@ class AgarwoodAPITester:
                 if all_fields_valid:
                     print("✅ Enhanced Data Fields: SUCCESS - All new fields are present with correct types")
                     
-                    # Check size options structure
-                    if product.get("size_options"):
-                        size_option = product.get("size_options")[0]
-                        size_fields = ["size", "price", "stock"]
-                        missing_size_fields = [field for field in size_fields if field not in size_option]
+                    # Detailed verification of size_options
+                    size_options = product.get("size_options", [])
+                    if size_options:
+                        print("\nSize Options:")
+                        size_option_fields = ["size", "price", "stock"]
+                        optional_fields = ["original_price"]
                         
-                        if not missing_size_fields:
-                            print("✅ Size Options Structure: SUCCESS - All required fields present")
+                        for size_option in size_options:
+                            missing_required = [f for f in size_option_fields if f not in size_option]
+                            if missing_required:
+                                print(f"  ❌ Size option missing required fields: {', '.join(missing_required)}")
+                            else:
+                                print(f"  ✅ {size_option.get('size')}: {size_option.get('price')} VND (Stock: {size_option.get('stock')})")
+                                if "original_price" in size_option and size_option.get("original_price"):
+                                    discount = 100 - (size_option.get("price") / size_option.get("original_price") * 100)
+                                    print(f"     Original: {size_option.get('original_price')} VND (Discount: {discount:.1f}%)")
+                        
+                        # Verify different sizes have different prices
+                        sizes = [opt.get("size") for opt in size_options]
+                        prices = [opt.get("price") for opt in size_options]
+                        if len(set(sizes)) == len(sizes) and len(set(prices)) == len(prices):
+                            print("  ✅ Size options have unique sizes and prices")
                         else:
-                            print(f"❌ Size Options Structure: FAILED - Missing fields: {', '.join(missing_size_fields)}")
+                            print("  ❌ Size options may have duplicate sizes or prices")
+                        
+                        # Verify price relationship (larger sizes should cost more)
+                        if len(size_options) > 1:
+                            # Try to extract size values for comparison (assuming format like "Nhỏ (5g)")
+                            try:
+                                size_values = []
+                                for opt in size_options:
+                                    size_str = opt.get("size", "")
+                                    # Extract number from string like "Nhỏ (5g)"
+                                    import re
+                                    match = re.search(r'\((\d+)g\)', size_str)
+                                    if match:
+                                        size_values.append((int(match.group(1)), opt.get("price")))
+                                
+                                if size_values:
+                                    # Sort by size value
+                                    size_values.sort(key=lambda x: x[0])
+                                    prices_increase = all(size_values[i][1] < size_values[i+1][1] for i in range(len(size_values)-1))
+                                    if prices_increase:
+                                        print("  ✅ Prices correctly increase with size")
+                                    else:
+                                        print("  ⚠️ Prices don't consistently increase with size")
+                            except Exception as e:
+                                print(f"  ⚠️ Couldn't verify price-size relationship: {str(e)}")
+                    else:
+                        print("\n❌ Size Options: FAILED - No size options found")
+                    
+                    # Detailed verification of additional_images
+                    additional_images = product.get("additional_images", [])
+                    if additional_images:
+                        print("\nAdditional Images:")
+                        for i, img in enumerate(additional_images):
+                            print(f"  {i+1}. {img}")
+                        print(f"  ✅ Found {len(additional_images)} additional images")
+                        
+                        # Verify all images are valid URLs
+                        valid_urls = all(img.startswith(("http://", "https://")) for img in additional_images)
+                        if valid_urls:
+                            print("  ✅ All images have valid URL format")
+                        else:
+                            print("  ❌ Some images have invalid URL format")
+                    else:
+                        print("\n❌ Additional Images: FAILED - No additional images found")
+                    
+                    # Detailed verification of specifications
+                    specifications = product.get("specifications", {})
+                    if specifications:
+                        print("\nSpecifications:")
+                        for key, value in specifications.items():
+                            print(f"  {key}: {value}")
+                        print(f"  ✅ Found {len(specifications)} specification fields")
+                        
+                        # Check for common specification fields
+                        common_specs = ["origin", "age", "oil_content", "fragrance_notes"]
+                        found_specs = [spec for spec in common_specs if spec in specifications]
+                        if found_specs:
+                            print(f"  ✅ Found common specification fields: {', '.join(found_specs)}")
+                        else:
+                            print("  ⚠️ No common specification fields found")
+                    else:
+                        print("\n❌ Specifications: FAILED - No specifications found")
                 
                 self.test_results["get_product_by_id"] = True
                 print("✅ Get Product by ID: SUCCESS")

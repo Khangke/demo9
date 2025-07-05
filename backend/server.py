@@ -213,6 +213,11 @@ async def get_cart(session_id: str):
         new_cart = Cart(session_id=session_id)
         await db.carts.insert_one(new_cart.dict())
         return new_cart
+    
+    # Convert MongoDB _id to string
+    if "_id" in cart:
+        cart["_id"] = str(cart["_id"])
+    
     return Cart(**cart)
 
 @api_router.post("/cart/{session_id}/add")
@@ -243,6 +248,10 @@ async def add_to_cart(session_id: str, item: dict):
         if not cart:
             cart = Cart(session_id=session_id).dict()
             await db.carts.insert_one(cart)
+        
+        # Convert MongoDB _id to string
+        if "_id" in cart:
+            cart["_id"] = str(cart["_id"])
         
         # Create cart item
         cart_item = CartItem(
@@ -298,6 +307,10 @@ async def update_cart_item(session_id: str, item: dict):
         if not cart:
             raise HTTPException(status_code=404, detail="Cart not found")
         
+        # Convert MongoDB _id to string
+        if "_id" in cart:
+            cart["_id"] = str(cart["_id"])
+        
         # Find and update item
         item_found = False
         for cart_item in cart["items"]:
@@ -338,6 +351,10 @@ async def remove_from_cart(session_id: str, item: dict):
         cart = await db.carts.find_one({"session_id": session_id})
         if not cart:
             raise HTTPException(status_code=404, detail="Cart not found")
+        
+        # Convert MongoDB _id to string
+        if "_id" in cart:
+            cart["_id"] = str(cart["_id"])
         
         # Find and remove item
         cart["items"] = [

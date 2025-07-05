@@ -126,18 +126,60 @@ class AgarwoodAPITester:
                     if not missing_fields:
                         print("\n✅ Enhanced Product Model: SUCCESS - All new fields are present")
                         
-                        # Print details of the new fields
-                        print("\nSize Options:")
-                        for size_option in sample_product.get("size_options", []):
-                            print(f"  {size_option.get('size')}: {size_option.get('price')} VND (Stock: {size_option.get('stock')})")
+                        # Detailed verification of size_options
+                        size_options = sample_product.get("size_options", [])
+                        if size_options:
+                            print("\nSize Options:")
+                            size_option_fields = ["size", "price", "stock"]
+                            optional_fields = ["original_price"]
+                            
+                            for size_option in size_options:
+                                missing_required = [f for f in size_option_fields if f not in size_option]
+                                if missing_required:
+                                    print(f"  ❌ Size option missing required fields: {', '.join(missing_required)}")
+                                else:
+                                    print(f"  ✅ {size_option.get('size')}: {size_option.get('price')} VND (Stock: {size_option.get('stock')})")
+                                    if "original_price" in size_option and size_option.get("original_price"):
+                                        discount = 100 - (size_option.get("price") / size_option.get("original_price") * 100)
+                                        print(f"     Original: {size_option.get('original_price')} VND (Discount: {discount:.1f}%)")
+                            
+                            # Verify different sizes have different prices
+                            sizes = [opt.get("size") for opt in size_options]
+                            prices = [opt.get("price") for opt in size_options]
+                            if len(set(sizes)) == len(sizes) and len(set(prices)) == len(prices):
+                                print("  ✅ Size options have unique sizes and prices")
+                            else:
+                                print("  ❌ Size options may have duplicate sizes or prices")
+                        else:
+                            print("\n❌ Size Options: FAILED - No size options found")
                         
-                        print("\nAdditional Images:")
-                        for img in sample_product.get("additional_images", [])[:2]:  # Show first 2 images
-                            print(f"  {img}")
+                        # Detailed verification of additional_images
+                        additional_images = sample_product.get("additional_images", [])
+                        if additional_images:
+                            print("\nAdditional Images:")
+                            for i, img in enumerate(additional_images):
+                                print(f"  {i+1}. {img}")
+                            print(f"  ✅ Found {len(additional_images)} additional images")
+                        else:
+                            print("\n❌ Additional Images: FAILED - No additional images found")
                         
-                        print("\nSpecifications:")
-                        for key, value in sample_product.get("specifications", {}).items():
-                            print(f"  {key}: {value}")
+                        # Detailed verification of specifications
+                        specifications = sample_product.get("specifications", {})
+                        if specifications:
+                            print("\nSpecifications:")
+                            for key, value in specifications.items():
+                                print(f"  {key}: {value}")
+                            print(f"  ✅ Found {len(specifications)} specification fields")
+                            
+                            # Check for common specification fields
+                            common_specs = ["origin", "age", "oil_content", "fragrance_notes"]
+                            found_specs = [spec for spec in common_specs if spec in specifications]
+                            if found_specs:
+                                print(f"  ✅ Found common specification fields: {', '.join(found_specs)}")
+                            else:
+                                print("  ⚠️ No common specification fields found")
+                        else:
+                            print("\n❌ Specifications: FAILED - No specifications found")
                     else:
                         print(f"\n❌ Enhanced Product Model: FAILED - Missing fields: {', '.join(missing_fields)}")
                 else:

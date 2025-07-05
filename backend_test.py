@@ -26,6 +26,9 @@ class AgarwoodAPITester:
     def __init__(self, api_url):
         self.api_url = api_url
         self.created_product_id = None
+        self.created_order_id = None
+        self.created_order_number = None
+        self.test_session_id = "test_session_123"
         self.test_results = {
             "health_check": False,
             "get_products": False,
@@ -34,7 +37,17 @@ class AgarwoodAPITester:
             "get_product_by_id": False,
             "update_product": False,
             "delete_product": False,
-            "sample_data": False
+            "sample_data": False,
+            # Shopping Cart API tests
+            "get_cart": False,
+            "add_to_cart": False,
+            "update_cart_item": False,
+            "remove_from_cart": False,
+            "clear_cart": False,
+            # Order Management API tests
+            "create_order": False,
+            "get_order_by_id": False,
+            "get_order_by_number": False
         }
         self.sample_product = {
             "name": "Trầm Hương Xông Phòng",

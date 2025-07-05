@@ -43,10 +43,26 @@ class AgarwoodAPITester:
             "description_en": "Premium agarwood room incense, bringing a relaxing and peaceful atmosphere to your home.",
             "price": 450000,
             "original_price": 550000,
+            "size_options": [
+                {"size": "Nhỏ (5g)", "price": 250000, "original_price": 300000, "stock": 15},
+                {"size": "Vừa (10g)", "price": 450000, "original_price": 550000, "stock": 10},
+                {"size": "Lớn (20g)", "price": 850000, "original_price": 950000, "stock": 5}
+            ],
             "image_url": "https://images.unsplash.com/photo-1544816565-aa8c1166648f",
+            "additional_images": [
+                "https://images.unsplash.com/photo-1613750255797-7d4f877615df",
+                "https://images.unsplash.com/photo-1600122646819-75abc00c88a6"
+            ],
             "category": "Xông Phòng",
             "stock": 20,
-            "featured": True
+            "featured": True,
+            "specifications": {
+                "origin": "Phú Yên, Việt Nam",
+                "age": "5-7 năm",
+                "oil_content": "Trung bình",
+                "fragrance_notes": "Thanh nhẹ, thư giãn",
+                "usage": "Xông phòng, thư giãn"
+            }
         }
     
     def run_all_tests(self):

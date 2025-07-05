@@ -278,6 +278,7 @@ test_plan:
     - "Tối ưu lại chi tiết sản phẩm với UX/UI tốt hơn và direct product navigation"
     - "Shopping Cart API endpoints"
     - "Order Management API endpoints"
+    - "Tối ưu phần thanh toán cho gọn gàng và đẹp mắt hơn với layer nhỏ và chuẩn SEO"
 
 agent_communication:
     - agent: "main"

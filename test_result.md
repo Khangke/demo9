@@ -143,6 +143,9 @@ backend:
         - working: true
           agent: "testing"
           comment: "Verified that the sample data initialization includes the enhanced product model structure with size_options, additional_images, and specifications fields. The model structure is correctly implemented, but the sample data in the database has empty arrays/objects for these fields. The API correctly handles these fields when creating or updating products."
+        - working: true
+          agent: "testing"
+          comment: "Conducted detailed testing of the sample product data. The database is correctly initialized with 4 sample agarwood products. Each product has proper Vietnamese names and descriptions. The enhanced product model fields (size_options, additional_images, specifications) are populated with actual data. Size options include different sizes (Nhỏ, Vừa, Lớn) with appropriate pricing and stock information. Additional images contain multiple valid image URLs. Specifications include detailed product information such as origin, age, oil content, and fragrance notes. Featured products are correctly marked and can be filtered using the API. The Vietnamese product data is intact and properly formatted."
 
 frontend:
   - task: "Homepage design with hero banner"

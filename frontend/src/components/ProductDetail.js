@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Toast from "./Toast";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -17,6 +18,7 @@ const ProductDetail = () => {
   const [showImageModal, setShowImageModal] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [addingToCart, setAddingToCart] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const sessionId = localStorage.getItem('session_id') || 
     (() => {
@@ -28,6 +30,14 @@ const ProductDetail = () => {
   useEffect(() => {
     fetchProduct();
   }, [id]);
+
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type });
+  };
+
+  const hideToast = () => {
+    setToast({ show: false, message: '', type: 'success' });
+  };
 
   // Auto slideshow effect
   useEffect(() => {

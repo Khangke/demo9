@@ -118,6 +118,28 @@ class AgarwoodAPITester:
                     sample_product = products[0]
                     for key in ["name", "name_en", "price", "category", "featured"]:
                         print(f"  {key}: {sample_product.get(key)}")
+                    
+                    # Verify new fields exist in the product model
+                    required_fields = ["size_options", "additional_images", "specifications"]
+                    missing_fields = [field for field in required_fields if field not in sample_product]
+                    
+                    if not missing_fields:
+                        print("\n✅ Enhanced Product Model: SUCCESS - All new fields are present")
+                        
+                        # Print details of the new fields
+                        print("\nSize Options:")
+                        for size_option in sample_product.get("size_options", []):
+                            print(f"  {size_option.get('size')}: {size_option.get('price')} VND (Stock: {size_option.get('stock')})")
+                        
+                        print("\nAdditional Images:")
+                        for img in sample_product.get("additional_images", [])[:2]:  # Show first 2 images
+                            print(f"  {img}")
+                        
+                        print("\nSpecifications:")
+                        for key, value in sample_product.get("specifications", {}).items():
+                            print(f"  {key}: {value}")
+                    else:
+                        print(f"\n❌ Enhanced Product Model: FAILED - Missing fields: {', '.join(missing_fields)}")
                 else:
                     print("❌ Sample Data Verification: FAILED - Expected at least 4 products")
                 

@@ -195,15 +195,39 @@ frontend:
 
   - task: "Tối ưu lại chi tiết sản phẩm với UX/UI tốt hơn và direct product navigation"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/components/ProductDetail.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "HOÀN THÀNH TỐI ƯU CHI TIẾT SẢN PHẨM MỚI! Đã thực hiện toàn bộ yêu cầu user: 1) DIRECT NAVIGATION: Loại bỏ button 'Thêm Vào Giỏ Hàng' ở product cards, giờ click vào sản phẩm sẽ đi thẳng đến detail page. 2) OPTIMIZED LAYOUT: Thêm breadcrumb với icons, enhanced product header với rating, improved size selection với stock info và selected indicators. 3) ENHANCED UX: Thêm image modal với navigation, quantity total calculator, better price display với unit info, improved button layouts. 4) BETTER CSS: Redesigned discount badge, enhanced thumbnails với active indicators, responsive image modal, improved section titles với icons. 5) MOBILE OPTIMIZATION: Better responsive breakpoints, improved mobile navigation, optimized touch targets. Giao diện giờ đây gọn gàng, professional và rất user-friendly!"
+
+  - task: "Shopping Cart API endpoints"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
         - working: "NA"
           agent: "main"
-          comment: "HOÀN THÀNH TỐI ƯU CHI TIẾT SẢN PHẨM MỚI! Đã thực hiện toàn bộ yêu cầu user: 1) DIRECT NAVIGATION: Loại bỏ button 'Thêm Vào Giỏ Hàng' ở product cards, giờ click vào sản phẩm sẽ đi thẳng đến detail page. 2) OPTIMIZED LAYOUT: Thêm breadcrumb với icons, enhanced product header với rating, improved size selection với stock info và selected indicators. 3) ENHANCED UX: Thêm image modal với navigation, quantity total calculator, better price display với unit info, improved button layouts. 4) BETTER CSS: Redesigned discount badge, enhanced thumbnails với active indicators, responsive image modal, improved section titles với icons. 5) MOBILE OPTIMIZATION: Better responsive breakpoints, improved mobile navigation, optimized touch targets. Giao diện giờ đây gọn gàng, professional và rất user-friendly!"
+          comment: "ĐÃ HOÀN THÀNH API GIỎ HÀNG TOÀN DIỆN! Thực hiện: 1) CART MODELS: CartItem và Cart models với session-based tracking cho guest users. 2) CART APIS: GET /api/cart/{session_id} (get/create cart), POST /api/cart/{session_id}/add (add items), PUT /api/cart/{session_id}/update (update quantity), DELETE /api/cart/{session_id}/remove (remove items), DELETE /api/cart/{session_id}/clear (clear cart). 3) SMART FEATURES: Auto-calculate totals, check stock availability, handle size options, merge duplicate items, validate product existence. 4) ERROR HANDLING: Comprehensive error handling cho tất cả edge cases. Ready for testing!"
+
+  - task: "Order Management API endpoints"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/server.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "main"
+          comment: "ĐÃ HOÀN THÀNH API QUẢN LÝ ĐƠN HÀNG! Thực hiện: 1) ORDER MODELS: CustomerInfo, OrderItem, và Order models với đầy đủ thông tin khách hàng và đơn hàng. 2) ORDER APIS: POST /api/orders (create order), GET /api/orders/{order_id}, GET /api/orders/number/{order_number}. 3) PAYMENT METHODS: Hỗ trợ COD và bank transfer với auto-calculate shipping fee (30k cho COD). 4) ORDER TRACKING: Auto-generate order number format KTH{date}{unique_id}, track payment_status và order_status. 5) CART INTEGRATION: Auto-clear cart after successful order creation. Ready for testing!"
     implemented: true
     working: true
     file: "/app/frontend/src/App.css"

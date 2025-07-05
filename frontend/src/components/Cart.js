@@ -331,6 +331,14 @@ const Cart = () => {
           )}
         </div>
       </div>
+      
+      {/* Toast Notification */}
+      <Toast 
+        message={toast.message} 
+        type={toast.type} 
+        isVisible={toast.show} 
+        onClose={hideToast}
+      />
     </div>
   );
 };

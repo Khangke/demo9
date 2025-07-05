@@ -3418,7 +3418,7 @@ body {
   }
   
   .filters-wrapper {
-    gap: 1.5rem;
+    gap: 1rem;
   }
   
   .filters-section {
@@ -3430,7 +3430,7 @@ body {
   .filter-group {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
   
   .filter-select {
@@ -3445,7 +3445,11 @@ body {
   
   .products-grid.grid-view {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+  
+  .products-catalog {
+    padding: 1rem 0 4rem;
   }
   
   .product-card-advanced.list-card {

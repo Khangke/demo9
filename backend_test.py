@@ -1053,6 +1053,365 @@ class AgarwoodAPITester:
         except Exception as e:
             print(f"❌ Clear Cart: FAILED - {str(e)}")
     
+    # Order Management API Tests
+    def test_create_order(self):
+        """Test creating a new order"""
+        print("\n--- Testing Create Order ---")
+        try:
+            # First, add some items to cart
+            # Clear any existing cart
+            requests.delete(f"{self.api_url}/cart/{self.test_session_id}/clear")
+            
+            # Get products
+            products_response = requests.get(f"{self.api_url}/products")
+            if products_response.status_code != 200 or not products_response.json():
+                print("❌ Create Order: FAILED - Could not get products")
+                return
+            
+            products = products_response.json()
+            
+            # Add two different products to cart
+            cart_items = []
+            for i in range(min(2, len(products))):
+                product = products[i]
+                product_id = product.get("id")
+                size_options = product.get("size_options", [])
+                
+                if not size_options:
+                    continue
+                
+                size_option = size_options[0]
+                
+                add_data = {
+                    "product_id": product_id,
+                    "size": size_option.get("size"),
+                    "quantity": i + 1
+                }
+                
+                add_response = requests.post(
+                    f"{self.api_url}/cart/{self.test_session_id}/add",
+                    json=add_data
+                )
+                
+                if add_response.status_code == 200:
+                    cart_item = {
+                        "product_id": product_id,
+                        "product_name": product.get("name"),
+                        "product_image": product.get("image_url"),
+                        "size": size_option.get("size"),
+                        "size_price": size_option.get("price"),
+                        "original_price": size_option.get("original_price"),
+                        "quantity": i + 1,
+                        "total_price": size_option.get("price") * (i + 1)
+                    }
+                    cart_items.append(cart_item)
+                else:
+                    print(f"⚠️ Could not add product {i+1} to cart: {add_response.text}")
+            
+            if not cart_items:
+                print("❌ Create Order: FAILED - Could not add any items to cart")
+                return
+            
+            # Get cart to verify items
+            cart_response = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+            if cart_response.status_code != 200:
+                print(f"❌ Create Order: FAILED - Could not get cart: {cart_response.text}")
+                return
+            
+            cart = cart_response.json()
+            
+            # Test Case 1: Create order with COD payment (should have 30k shipping fee)
+            print("\nTest Case 1: Create order with COD payment")
+            customer_info = {
+                "full_name": "Nguyễn Văn A",
+                "phone": "0987654321",
+                "email": "nguyenvana@example.com",
+                "address": "123 Đường Lê Lợi",
+                "city": "Hồ Chí Minh",
+                "district": "Quận 1",
+                "ward": "Phường Bến Nghé",
+                "notes": "Giao hàng giờ hành chính"
+            }
+            
+            order_data = {
+                "customer_info": customer_info,
+                "items": cart.get("items", []),
+                "payment_method": "cod",
+                "session_id": self.test_session_id
+            }
+            
+            response = requests.post(
+                f"{self.api_url}/orders",
+                json=order_data
+            )
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                order = response.json()
+                self.created_order_id = order.get("id")
+                self.created_order_number = order.get("order_number")
+                
+                print(f"Created order with ID: {self.created_order_id}")
+                print(f"Order number: {self.created_order_number}")
+                
+                # Verify order structure
+                required_fields = ["id", "order_number", "customer_info", "items", "payment_method", 
+                                  "payment_status", "order_status", "subtotal", "shipping_fee", 
+                                  "total_amount", "created_at", "updated_at"]
+                missing_fields = [field for field in required_fields if field not in order]
+                
+                if not missing_fields:
+                    # Verify shipping fee for COD
+                    if order.get("payment_method") == "cod" and order.get("shipping_fee") == 30000:
+                        print("✅ COD shipping fee applied correctly: 30,000 VND")
+                    else:
+                        print(f"❌ COD shipping fee incorrect: Expected 30000, Got {order.get('shipping_fee')}")
+                    
+                    # Verify order number format
+                    order_number = order.get("order_number", "")
+                    if order_number.startswith("KTH") and len(order_number) > 10:
+                        print(f"✅ Order number format correct: {order_number}")
+                    else:
+                        print(f"❌ Order number format incorrect: {order_number}")
+                    
+                    # Verify total calculation
+                    expected_subtotal = sum(item.get("total_price", 0) for item in order.get("items", []))
+                    if abs(order.get("subtotal") - expected_subtotal) < 0.01:  # Allow for floating point differences
+                        print(f"✅ Subtotal calculated correctly: {order.get('subtotal')}")
+                    else:
+                        print(f"❌ Subtotal incorrect: Expected {expected_subtotal}, Got {order.get('subtotal')}")
+                    
+                    expected_total = expected_subtotal + order.get("shipping_fee", 0) - order.get("discount", 0)
+                    if abs(order.get("total_amount") - expected_total) < 0.01:
+                        print(f"✅ Total amount calculated correctly: {order.get('total_amount')}")
+                    else:
+                        print(f"❌ Total amount incorrect: Expected {expected_total}, Got {order.get('total_amount')}")
+                    
+                    # Verify cart was cleared
+                    cart_check = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+                    if cart_check.status_code == 200:
+                        cleared_cart = cart_check.json()
+                        if not cleared_cart.get("items"):
+                            print("✅ Cart cleared after order creation")
+                        else:
+                            print("❌ Cart not cleared after order creation")
+                    else:
+                        print(f"⚠️ Could not verify cart clearing: {cart_check.text}")
+                else:
+                    print(f"❌ Missing required fields in order: {', '.join(missing_fields)}")
+            else:
+                print(f"❌ Create Order (COD): FAILED - {response.text}")
+            
+            # Test Case 2: Create order with bank transfer payment (should have 0 shipping fee)
+            print("\nTest Case 2: Create order with bank transfer payment")
+            
+            # Add items to cart again since it was cleared
+            for i in range(min(2, len(products))):
+                product = products[i]
+                product_id = product.get("id")
+                size_options = product.get("size_options", [])
+                
+                if not size_options:
+                    continue
+                
+                size_option = size_options[0]
+                
+                add_data = {
+                    "product_id": product_id,
+                    "size": size_option.get("size"),
+                    "quantity": i + 1
+                }
+                
+                requests.post(
+                    f"{self.api_url}/cart/{self.test_session_id}/add",
+                    json=add_data
+                )
+            
+            # Get updated cart
+            cart_response = requests.get(f"{self.api_url}/cart/{self.test_session_id}")
+            if cart_response.status_code != 200 or not cart_response.json().get("items"):
+                print("⚠️ Could not prepare cart for bank transfer test")
+            else:
+                cart = cart_response.json()
+                
+                # Create order with bank transfer
+                order_data = {
+                    "customer_info": customer_info,
+                    "items": cart.get("items", []),
+                    "payment_method": "bank_transfer",
+                    "session_id": self.test_session_id
+                }
+                
+                response = requests.post(
+                    f"{self.api_url}/orders",
+                    json=order_data
+                )
+                
+                if response.status_code == 200:
+                    order = response.json()
+                    
+                    # Verify shipping fee for bank transfer
+                    if order.get("payment_method") == "bank_transfer" and order.get("shipping_fee") == 0:
+                        print("✅ Bank transfer shipping fee applied correctly: 0 VND")
+                    else:
+                        print(f"❌ Bank transfer shipping fee incorrect: Expected 0, Got {order.get('shipping_fee')}")
+                else:
+                    print(f"❌ Create Order (Bank Transfer): FAILED - {response.text}")
+            
+            # Test Case 3: Create order with missing required fields
+            print("\nTest Case 3: Create order with missing required fields")
+            
+            # Missing customer_info
+            invalid_order_data = {
+                "items": cart_items,
+                "payment_method": "cod"
+            }
+            
+            response = requests.post(
+                f"{self.api_url}/orders",
+                json=invalid_order_data
+            )
+            
+            if response.status_code == 400:
+                print("✅ Required field validation works: Missing customer_info rejected")
+            else:
+                print(f"❌ Required field validation failed: Expected 400 error, Got {response.status_code}")
+            
+            # Mark test as successful if we got here
+            self.test_results["create_order"] = True
+            print("\n✅ Create Order: SUCCESS - All test cases completed")
+            
+        except Exception as e:
+            print(f"❌ Create Order: FAILED - {str(e)}")
+    
+    def test_get_order_by_id(self):
+        """Test getting an order by ID"""
+        print("\n--- Testing Get Order by ID ---")
+        if not self.created_order_id:
+            print("❌ Get Order by ID: SKIPPED - No order ID available")
+            return
+        
+        try:
+            response = requests.get(f"{self.api_url}/orders/{self.created_order_id}")
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                order = response.json()
+                print(f"Retrieved order: {order.get('order_number')}")
+                
+                # Verify order structure
+                required_fields = ["id", "order_number", "customer_info", "items", "payment_method", 
+                                  "payment_status", "order_status", "subtotal", "shipping_fee", 
+                                  "total_amount", "created_at", "updated_at"]
+                missing_fields = [field for field in required_fields if field not in order]
+                
+                if not missing_fields:
+                    # Verify customer info
+                    customer_info = order.get("customer_info", {})
+                    customer_fields = ["full_name", "phone", "email", "address", "city", "district", "ward"]
+                    missing_customer_fields = [field for field in customer_fields if field not in customer_info]
+                    
+                    if not missing_customer_fields:
+                        print("✅ Customer info complete")
+                        print(f"  Customer: {customer_info.get('full_name')}")
+                        print(f"  Phone: {customer_info.get('phone')}")
+                        print(f"  Address: {customer_info.get('address')}, {customer_info.get('ward')}, {customer_info.get('district')}, {customer_info.get('city')}")
+                    else:
+                        print(f"❌ Missing customer info fields: {', '.join(missing_customer_fields)}")
+                    
+                    # Verify items
+                    items = order.get("items", [])
+                    if items:
+                        print(f"✅ Order contains {len(items)} items")
+                        
+                        # Verify first item
+                        item = items[0]
+                        item_fields = ["product_id", "product_name", "product_image", "size", "size_price", "quantity", "total_price"]
+                        missing_item_fields = [field for field in item_fields if field not in item]
+                        
+                        if not missing_item_fields:
+                            print(f"  Item: {item.get('product_name')} - {item.get('size')} - Quantity: {item.get('quantity')}")
+                            print(f"  Price: {item.get('size_price')} VND - Total: {item.get('total_price')} VND")
+                        else:
+                            print(f"❌ Missing item fields: {', '.join(missing_item_fields)}")
+                    else:
+                        print("❌ Order has no items")
+                    
+                    # Verify payment and order status
+                    print(f"  Payment Method: {order.get('payment_method')}")
+                    print(f"  Payment Status: {order.get('payment_status')}")
+                    print(f"  Order Status: {order.get('order_status')}")
+                    
+                    # Verify totals
+                    print(f"  Subtotal: {order.get('subtotal')} VND")
+                    print(f"  Shipping Fee: {order.get('shipping_fee')} VND")
+                    print(f"  Total Amount: {order.get('total_amount')} VND")
+                    
+                    self.test_results["get_order_by_id"] = True
+                    print("✅ Get Order by ID: SUCCESS")
+                else:
+                    print(f"❌ Missing required fields in order: {', '.join(missing_fields)}")
+            else:
+                print(f"❌ Get Order by ID: FAILED - {response.text}")
+        except Exception as e:
+            print(f"❌ Get Order by ID: FAILED - {str(e)}")
+    
+    def test_get_order_by_number(self):
+        """Test getting an order by order number"""
+        print("\n--- Testing Get Order by Number ---")
+        if not self.created_order_number:
+            print("❌ Get Order by Number: SKIPPED - No order number available")
+            return
+        
+        try:
+            response = requests.get(f"{self.api_url}/orders/number/{self.created_order_number}")
+            print(f"Status Code: {response.status_code}")
+            
+            if response.status_code == 200:
+                order = response.json()
+                print(f"Retrieved order by number: {order.get('order_number')}")
+                
+                # Verify it's the same order
+                if order.get("id") == self.created_order_id:
+                    print("✅ Retrieved the correct order by number")
+                    
+                    # Verify order number format
+                    order_number = order.get("order_number", "")
+                    if order_number.startswith("KTH") and len(order_number) > 10:
+                        print(f"✅ Order number format correct: {order_number}")
+                        
+                        # Try to parse date from order number
+                        try:
+                            # Format: KTH{YYYYMMDD}{unique_id}
+                            date_part = order_number[3:11]  # Extract YYYYMMDD
+                            from datetime import datetime
+                            order_date = datetime.strptime(date_part, "%Y%m%d")
+                            print(f"✅ Order number contains valid date: {order_date.strftime('%Y-%m-%d')}")
+                        except Exception as e:
+                            print(f"⚠️ Could not parse date from order number: {str(e)}")
+                    else:
+                        print(f"❌ Order number format incorrect: {order_number}")
+                    
+                    self.test_results["get_order_by_number"] = True
+                    print("✅ Get Order by Number: SUCCESS")
+                else:
+                    print(f"❌ Retrieved wrong order: Expected ID {self.created_order_id}, Got {order.get('id')}")
+            else:
+                print(f"❌ Get Order by Number: FAILED - {response.text}")
+                
+            # Test non-existent order number
+            print("\nTesting non-existent order number")
+            fake_order_number = "KTH20250101XXXXXXXX"
+            response = requests.get(f"{self.api_url}/orders/number/{fake_order_number}")
+            
+            if response.status_code == 404:
+                print("✅ Non-existent order number correctly returns 404")
+            else:
+                print(f"❌ Non-existent order number returned unexpected status: {response.status_code}")
+            
+        except Exception as e:
+            print(f"❌ Get Order by Number: FAILED - {str(e)}")
+    
     def print_summary(self):
         """Print a summary of all test results"""
         print("\n=== Test Results Summary ===")

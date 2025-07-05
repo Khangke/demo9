@@ -193,6 +193,246 @@ async def delete_product(product_id: str):
         raise HTTPException(status_code=404, detail="Product not found")
     return {"message": "Product deleted successfully"}
 
+# Cart API endpoints
+@api_router.get("/cart/{session_id}")
+async def get_cart(session_id: str):
+    """Get cart by session ID"""
+    cart = await db.carts.find_one({"session_id": session_id})
+    if not cart:
+        # Create empty cart if not exists
+        new_cart = Cart(session_id=session_id)
+        await db.carts.insert_one(new_cart.dict())
+        return new_cart
+    return Cart(**cart)
+
+@api_router.post("/cart/{session_id}/add")
+async def add_to_cart(session_id: str, item: dict):
+    """Add item to cart"""
+    try:
+        # Get product details
+        product = await db.products.find_one({"id": item["product_id"]})
+        if not product:
+            raise HTTPException(status_code=404, detail="Product not found")
+        
+        # Find size option
+        size_option = None
+        for size_opt in product.get("size_options", []):
+            if size_opt["size"] == item["size"]:
+                size_option = size_opt
+                break
+        
+        if not size_option:
+            raise HTTPException(status_code=400, detail="Size not found")
+        
+        # Check stock
+        if size_option["stock"] < item["quantity"]:
+            raise HTTPException(status_code=400, detail="Not enough stock")
+        
+        # Get or create cart
+        cart = await db.carts.find_one({"session_id": session_id})
+        if not cart:
+            cart = Cart(session_id=session_id).dict()
+            await db.carts.insert_one(cart)
+        
+        # Create cart item
+        cart_item = CartItem(
+            product_id=item["product_id"],
+            product_name=product["name"],
+            product_image=product["image_url"],
+            size=item["size"],
+            size_price=size_option["price"],
+            original_price=size_option.get("original_price"),
+            quantity=item["quantity"],
+            total_price=size_option["price"] * item["quantity"]
+        )
+        
+        # Check if item already exists in cart
+        existing_item = None
+        for i, cart_item_dict in enumerate(cart.get("items", [])):
+            if (cart_item_dict["product_id"] == item["product_id"] and 
+                cart_item_dict["size"] == item["size"]):
+                existing_item = i
+                break
+        
+        if existing_item is not None:
+            # Update existing item
+            cart["items"][existing_item]["quantity"] += item["quantity"]
+            cart["items"][existing_item]["total_price"] = (
+                cart["items"][existing_item]["quantity"] * size_option["price"]
+            )
+        else:
+            # Add new item
+            cart.setdefault("items", []).append(cart_item.dict())
+        
+        # Recalculate totals
+        cart["total_items"] = sum(item["quantity"] for item in cart["items"])
+        cart["total_amount"] = sum(item["total_price"] for item in cart["items"])
+        cart["updated_at"] = datetime.utcnow()
+        
+        # Update cart in database
+        await db.carts.update_one(
+            {"session_id": session_id},
+            {"$set": cart}
+        )
+        
+        return {"message": "Item added to cart", "cart": cart}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.put("/cart/{session_id}/update")
+async def update_cart_item(session_id: str, item: dict):
+    """Update cart item quantity"""
+    try:
+        cart = await db.carts.find_one({"session_id": session_id})
+        if not cart:
+            raise HTTPException(status_code=404, detail="Cart not found")
+        
+        # Find and update item
+        item_found = False
+        for cart_item in cart["items"]:
+            if (cart_item["product_id"] == item["product_id"] and 
+                cart_item["size"] == item["size"]):
+                
+                if item["quantity"] <= 0:
+                    cart["items"].remove(cart_item)
+                else:
+                    cart_item["quantity"] = item["quantity"]
+                    cart_item["total_price"] = cart_item["size_price"] * item["quantity"]
+                item_found = True
+                break
+        
+        if not item_found:
+            raise HTTPException(status_code=404, detail="Item not found in cart")
+        
+        # Recalculate totals
+        cart["total_items"] = sum(item["quantity"] for item in cart["items"])
+        cart["total_amount"] = sum(item["total_price"] for item in cart["items"])
+        cart["updated_at"] = datetime.utcnow()
+        
+        # Update cart in database
+        await db.carts.update_one(
+            {"session_id": session_id},
+            {"$set": cart}
+        )
+        
+        return {"message": "Cart updated", "cart": cart}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.delete("/cart/{session_id}/remove")
+async def remove_from_cart(session_id: str, item: dict):
+    """Remove item from cart"""
+    try:
+        cart = await db.carts.find_one({"session_id": session_id})
+        if not cart:
+            raise HTTPException(status_code=404, detail="Cart not found")
+        
+        # Find and remove item
+        cart["items"] = [
+            cart_item for cart_item in cart["items"]
+            if not (cart_item["product_id"] == item["product_id"] and 
+                   cart_item["size"] == item["size"])
+        ]
+        
+        # Recalculate totals
+        cart["total_items"] = sum(item["quantity"] for item in cart["items"])
+        cart["total_amount"] = sum(item["total_price"] for item in cart["items"])
+        cart["updated_at"] = datetime.utcnow()
+        
+        # Update cart in database
+        await db.carts.update_one(
+            {"session_id": session_id},
+            {"$set": cart}
+        )
+        
+        return {"message": "Item removed from cart", "cart": cart}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.delete("/cart/{session_id}/clear")
+async def clear_cart(session_id: str):
+    """Clear all items from cart"""
+    try:
+        await db.carts.update_one(
+            {"session_id": session_id},
+            {"$set": {
+                "items": [],
+                "total_items": 0,
+                "total_amount": 0,
+                "updated_at": datetime.utcnow()
+            }}
+        )
+        return {"message": "Cart cleared"}
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Order API endpoints
+@api_router.post("/orders", response_model=Order)
+async def create_order(order_data: dict):
+    """Create a new order"""
+    try:
+        # Validate required fields
+        required_fields = ["customer_info", "items", "payment_method"]
+        for field in required_fields:
+            if field not in order_data:
+                raise HTTPException(status_code=400, detail=f"Missing required field: {field}")
+        
+        # Calculate totals
+        subtotal = sum(item["total_price"] for item in order_data["items"])
+        shipping_fee = 30000 if order_data.get("payment_method") == "cod" else 0  # COD fee
+        total_amount = subtotal + shipping_fee - order_data.get("discount", 0)
+        
+        # Create order
+        order = Order(
+            customer_info=CustomerInfo(**order_data["customer_info"]),
+            items=[OrderItem(**item) for item in order_data["items"]],
+            payment_method=order_data["payment_method"],
+            subtotal=subtotal,
+            shipping_fee=shipping_fee,
+            discount=order_data.get("discount", 0),
+            total_amount=total_amount
+        )
+        
+        # Save to database
+        await db.orders.insert_one(order.dict())
+        
+        # Clear cart if session_id provided
+        if order_data.get("session_id"):
+            await db.carts.update_one(
+                {"session_id": order_data["session_id"]},
+                {"$set": {
+                    "items": [],
+                    "total_items": 0,
+                    "total_amount": 0,
+                    "updated_at": datetime.utcnow()
+                }}
+            )
+        
+        return order
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.get("/orders/{order_id}", response_model=Order)
+async def get_order(order_id: str):
+    """Get order by ID"""
+    order = await db.orders.find_one({"id": order_id})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return Order(**order)
+
+@api_router.get("/orders/number/{order_number}", response_model=Order)
+async def get_order_by_number(order_number: str):
+    """Get order by order number"""
+    order = await db.orders.find_one({"order_number": order_number})
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+    return Order(**order)
+
 # Include the router in the main app
 app.include_router(api_router)
 

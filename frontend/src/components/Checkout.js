@@ -424,21 +424,39 @@ const Checkout = () => {
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="email" className="form-label-compact">
-                          Email <span className="required">*</span>
+                        <label htmlFor="email" className="form-label-enhanced">
+                          <span className="label-text">
+                            Email <span className="required">*</span>
+                          </span>
+                          {getFieldStatus('email') === 'success' && (
+                            <ion-icon name="checkmark-circle" className="field-success-icon"></ion-icon>
+                          )}
                         </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className={`form-input-compact ${errors.email ? 'error' : ''}`}
-                          placeholder="Nhập địa chỉ email"
-                          itemProp="email"
-                          required
-                        />
-                        {errors.email && <span className="error-message-compact">{errors.email}</span>}
+                        <div className="input-wrapper">
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            onFocus={() => handleInputFocus('email')}
+                            onBlur={() => handleInputBlur('email')}
+                            className={`form-input-enhanced ${getFieldStatus('email')}`}
+                            placeholder="your@email.com"
+                            itemProp="email"
+                            required
+                          />
+                          <div className="input-border"></div>
+                        </div>
+                        {errors.email && (
+                          <span className="error-message-enhanced">
+                            <ion-icon name="alert-circle"></ion-icon>
+                            {errors.email}
+                          </span>
+                        )}
+                        {fieldFocus.email && !errors.email && (
+                          <span className="help-text">Email để nhận thông tin đơn hàng</span>
+                        )}
                       </div>
 
                       <div className="form-row">

@@ -1309,16 +1309,17 @@ select.form-input-compact {
 
 .form-input-compact select:focus,
 select.form-input-compact:focus {
-  outline: none;
-  border-color: #F4D03F;
-  box-shadow: 0 0 0 2px rgba(244, 208, 63, 0.1);
-  background: rgba(30, 30, 30, 0.9);
+  outline: none !important;
+  border-color: #F4D03F !important;
+  box-shadow: 0 0 0 2px rgba(244, 208, 63, 0.1) !important;
+  background: rgba(30, 30, 30, 0.95) !important;
+  z-index: 10 !important;
 }
 
 .form-input-compact select:hover,
 select.form-input-compact:hover {
-  border-color: rgba(244, 208, 63, 0.4);
-  background: rgba(30, 30, 30, 0.8);
+  border-color: rgba(244, 208, 63, 0.4) !important;
+  background: rgba(30, 30, 30, 0.85) !important;
 }
 
 /* Option styling for better visibility */

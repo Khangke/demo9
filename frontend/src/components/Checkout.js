@@ -748,10 +748,18 @@ const Checkout = () => {
                     {/* Enhanced Order Button */}
                     <button 
                       type="submit" 
-                      className={`place-order-btn-enhanced ${calculateProgress() === 100 ? 'ready' : 'not-ready'}`}
+                      className={`place-order-btn-enhanced ${
+                        showSuccessMessage ? 'submitting-success' : 
+                        calculateProgress() === 100 ? 'ready' : 'not-ready'
+                      }`}
                       disabled={submitting || calculateProgress() !== 100}
                     >
-                      {submitting ? (
+                      {showSuccessMessage ? (
+                        <>
+                          <div className="spinner-enhanced"></div>
+                          <span>Đang xử lý thành công...</span>
+                        </>
+                      ) : submitting ? (
                         <>
                           <div className="spinner-enhanced"></div>
                           <span>Đang xử lý đơn hàng...</span>

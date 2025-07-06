@@ -306,6 +306,17 @@ const Checkout = () => {
         <link rel="canonical" href={`${window.location.origin}/checkout`} />
       </Helmet>
       
+      {/* Success Message Overlay */}
+      {showSuccessMessage && (
+        <div className="success-message-overlay">
+          <div className="success-message-content">
+            <ion-icon name="checkmark-circle"></ion-icon>
+            <h3>Đang xử lý đơn hàng...</h3>
+            <p>Vui lòng chờ trong giây lát</p>
+          </div>
+        </div>
+      )}
+      
       <div className="checkout-page checkout-page-optimized"
            itemScope 
            itemType="https://schema.org/CheckoutPage">

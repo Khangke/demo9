@@ -24,6 +24,8 @@ const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [showValidation, setShowValidation] = useState(false);
   const [completedFields, setCompletedFields] = useState(new Set());
+  const [addressType, setAddressType] = useState('home');
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({

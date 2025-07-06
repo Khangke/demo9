@@ -1158,6 +1158,33 @@ body {
   gap: 1rem;
 }
 
+/* Fix form label and input spacing issues */
+.form-label-compact {
+  color: #E8E8E8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.form-input-compact {
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(244, 208, 63, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 0.875rem;
+  color: #E8E8E8;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  height: auto;
+  min-height: 44px;
+  line-height: 1.4;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

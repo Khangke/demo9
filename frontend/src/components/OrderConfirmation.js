@@ -430,6 +430,7 @@ const OrderConfirmation = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

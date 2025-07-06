@@ -22,6 +22,8 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
+  const [showValidation, setShowValidation] = useState(false);
+  const [completedFields, setCompletedFields] = useState(new Set());
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -37,6 +39,7 @@ const Checkout = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [fieldFocus, setFieldFocus] = useState({});
 
   const sessionId = localStorage.getItem('session_id') || 'test_session_checkout';
 

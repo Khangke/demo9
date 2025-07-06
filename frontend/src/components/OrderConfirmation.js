@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const OrderConfirmation = () => {
   const { orderId } = useParams();
@@ -7,12 +8,18 @@ const OrderConfirmation = () => {
   const [order, setOrder] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showCelebration, setShowCelebration] = useState(false);
 
   useEffect(() => {
     // If order data is passed via location state (from checkout)
     if (location.state?.order) {
       setOrder(location.state.order);
       setLoading(false);
+      // Show celebration for new orders
+      if (location.state?.isNewOrder) {
+        setShowCelebration(true);
+        setTimeout(() => setShowCelebration(false), 3000);
+      }
     } else {
       // Fetch order data from API
       fetchOrder();

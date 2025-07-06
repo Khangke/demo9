@@ -205,6 +205,9 @@ const Checkout = () => {
 
     setSubmitting(true);
     
+    // Show success message first for better UX
+    setShowSuccessMessage(true);
+    
     try {
       const orderData = {
         customer_info: {
@@ -215,7 +218,8 @@ const Checkout = () => {
           city: formData.city,
           district: formData.district,
           ward: formData.ward,
-          notes: formData.notes
+          notes: formData.notes,
+          address_type: addressType
         },
         items: cart.items.map(item => ({
           product_id: item.product_id,
@@ -231,6 +235,9 @@ const Checkout = () => {
         session_id: sessionId
       };
 
+      // Simulate processing time for better UX
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -245,10 +252,12 @@ const Checkout = () => {
       } else {
         const errorData = await response.json();
         alert(`Lỗi đặt hàng: ${errorData.detail}`);
+        setShowSuccessMessage(false);
       }
     } catch (error) {
       console.error('Error creating order:', error);
       alert('Có lỗi xảy ra khi đặt hàng. Vui lòng thử lại.');
+      setShowSuccessMessage(false);
     } finally {
       setSubmitting(false);
     }

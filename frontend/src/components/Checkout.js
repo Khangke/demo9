@@ -75,6 +75,17 @@ const Checkout = () => {
       [name]: value
     }));
     
+    // Mark field as completed when it has value
+    if (value.trim()) {
+      setCompletedFields(prev => new Set([...prev, name]));
+    } else {
+      setCompletedFields(prev => {
+        const newSet = new Set([...prev]);
+        newSet.delete(name);
+        return newSet;
+      });
+    }
+    
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -82,6 +93,67 @@ const Checkout = () => {
         [name]: ''
       }));
     }
+  };
+
+  const handleInputFocus = (fieldName) => {
+    setFieldFocus(prev => ({
+      ...prev,
+      [fieldName]: true
+    }));
+  };
+
+  const handleInputBlur = (fieldName) => {
+    setFieldFocus(prev => ({
+      ...prev,
+      [fieldName]: false
+    }));
+    
+    // Validate field on blur if validation is shown
+    if (showValidation) {
+      validateSingleField(fieldName);
+    }
+  };
+
+  const validateSingleField = (fieldName) => {
+    const newErrors = { ...errors };
+    const value = formData[fieldName];
+
+    switch (fieldName) {
+      case 'full_name':
+        if (!value.trim()) newErrors.full_name = 'Vui lòng nhập họ tên';
+        else delete newErrors.full_name;
+        break;
+      case 'phone':
+        if (!value.trim()) newErrors.phone = 'Vui lòng nhập số điện thoại';
+        else if (!/^[0-9]{10,11}$/.test(value.replace(/\s/g, ''))) {
+          newErrors.phone = 'Số điện thoại không hợp lệ';
+        } else delete newErrors.phone;
+        break;
+      case 'email':
+        if (!value.trim()) newErrors.email = 'Vui lòng nhập email';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+          newErrors.email = 'Email không hợp lệ';
+        } else delete newErrors.email;
+        break;
+      case 'address':
+        if (!value.trim()) newErrors.address = 'Vui lòng nhập địa chỉ';
+        else delete newErrors.address;
+        break;
+      case 'city':
+        if (!value.trim()) newErrors.city = 'Vui lòng chọn tỉnh/thành phố';
+        else delete newErrors.city;
+        break;
+      case 'district':
+        if (!value.trim()) newErrors.district = 'Vui lòng chọn quận/huyện';
+        else delete newErrors.district;
+        break;
+      case 'ward':
+        if (!value.trim()) newErrors.ward = 'Vui lòng chọn phường/xã';
+        else delete newErrors.ward;
+        break;
+    }
+
+    setErrors(newErrors);
   };
 
   const validateForm = () => {

@@ -1216,10 +1216,19 @@ body {
   gap: 0.5rem;
   min-width: 0;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group-full {
   grid-column: 1 / -1;
+}
+
+/* Specific fix for select elements */
+.form-group select {
+  position: relative !important;
+  z-index: 2 !important;
+  background: rgba(30, 30, 30, 0.9) !important;
 }
 
 .form-label-compact {

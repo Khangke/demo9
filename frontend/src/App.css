@@ -2712,7 +2712,472 @@ select.form-input-compact:disabled {
   opacity: 0.9;
 }
 
-/* Enhanced Mobile Responsiveness */
+/* Order Confirmation Luxury Styles */
+
+/* Celebration Overlay Animation */
+.celebration-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: celebrationFadeIn 0.5s ease-out;
+}
+
+.celebration-content {
+  text-align: center;
+  color: white;
+  position: relative;
+  animation: celebrationBounce 0.8s ease-out;
+}
+
+.celebration-icon {
+  font-size: 4rem;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+  animation: celebrationPulse 2s ease-in-out infinite;
+}
+
+.celebration-text h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.celebration-text p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+.celebration-sparkles {
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  right: -50px;
+  bottom: -50px;
+  pointer-events: none;
+}
+
+.sparkle {
+  position: absolute;
+  font-size: 1.5rem;
+  animation: sparkleFloat 3s ease-in-out infinite;
+}
+
+.sparkle-1 {
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.sparkle-2 {
+  top: 20%;
+  right: 15%;
+  animation-delay: 0.5s;
+}
+
+.sparkle-3 {
+  bottom: 30%;
+  left: 10%;
+  animation-delay: 1s;
+}
+
+.sparkle-4 {
+  bottom: 10%;
+  right: 25%;
+  animation-delay: 1.5s;
+}
+
+@keyframes celebrationFadeIn {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(5px);
+  }
+}
+
+@keyframes celebrationBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(50px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes celebrationPulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 1;
+  }
+}
+
+/* Order Confirmation Page Luxury */
+.order-confirmation-page-luxury {
+  min-height: 100vh;
+  background: 
+    linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 50%, #0A0A0A 100%),
+    radial-gradient(ellipse at center, rgba(244, 208, 63, 0.03) 0%, transparent 70%);
+  animation: luxuryFadeIn 1s ease-out;
+}
+
+@keyframes luxuryFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced Success Banner */
+.success-banner-luxury {
+  background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.success-banner-luxury::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  animation: luxuryGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes luxuryGlow {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.success-content-luxury {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  animation: successSlideUp 0.8s ease-out;
+}
+
+@keyframes successSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon-luxury {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: iconPulse 2s ease-in-out infinite;
+}
+
+.icon-circle ion-icon {
+  font-size: 2.5rem;
+  color: white;
+}
+
+.success-ripple {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  animation: rippleEffect 3s ease-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+}
+
+@keyframes rippleEffect {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.success-text-luxury h1 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.success-text-luxury p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.brand-highlight {
+  background: linear-gradient(135deg, #F4D03F 0%, #F39C12 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.order-number-highlight {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  color: white;
+  font-size: 1rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+}
+
+.order-number-highlight strong {
+  color: #F4D03F;
+  font-weight: 700;
+}
+
+/* Order Details Content Luxury */
+.order-details-content-luxury {
+  padding: 4rem 0;
+}
+
+.order-layout-luxury {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  animation: contentSlideIn 0.8s ease-out 0.3s backwards;
+}
+
+@keyframes contentSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.order-main-luxury {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.order-header-luxury {
+  animation: headerSlideIn 0.8s ease-out 0.4s backwards;
+}
+
+@keyframes headerSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.order-number-card {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+  border: 1px solid rgba(244, 208, 63, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    0 4px 12px rgba(244, 208, 63, 0.1);
+  transition: all 0.3s ease;
+}
+
+.order-number-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 32px rgba(0, 0, 0, 0.4),
+    0 6px 16px rgba(244, 208, 63, 0.15);
+  border-color: rgba(244, 208, 63, 0.3);
+}
+
+.order-number-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #F4D03F;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.order-number-card h2 ion-icon {
+  font-size: 1.6rem;
+  color: #F4D03F;
+}
+
+.order-meta-luxury {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.order-date-luxury,
+.order-status-luxury {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  backdrop-filter: blur(5px);
+}
+
+.order-date-luxury {
+  background: rgba(184, 184, 184, 0.1);
+  color: #B8B8B8;
+  border: 1px solid rgba(184, 184, 184, 0.2);
+}
+
+.order-status-luxury {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  font-weight: 600;
+}
+
+.order-status-luxury.status-pending {
+  background: rgba(255, 193, 7, 0.1);
+  color: #FFC107;
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.order-status-luxury ion-icon,
+.order-date-luxury ion-icon {
+  font-size: 1rem;
+}
+
+/* Mobile Responsiveness for Luxury Design */
+@media (max-width: 1024px) {
+  .order-layout-luxury {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .success-content-luxury {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .success-text-luxury h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .success-banner-luxury {
+    padding: 3rem 0;
+  }
+  
+  .success-text-luxury h1 {
+    font-size: 1.8rem;
+  }
+  
+  .order-number-card {
+    padding: 1.5rem;
+  }
+  
+  .order-meta-luxury {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .celebration-text h2 {
+    font-size: 2rem;
+  }
+  
+  .celebration-text p {
+    font-size: 1rem;
+  }
+}
 @media (max-width: 768px) {
   .checkout-section-enhanced {
     padding: 1.5rem;

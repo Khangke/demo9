@@ -275,15 +275,15 @@ const OrderConfirmation = () => {
                 </div>
               </div>
 
-              {/* Payment Information */}
+              {/* Payment Information - Compact */}
               <div className="info-section">
                 <h3>
                   <ion-icon name="card-outline"></ion-icon>
-                  Thông tin thanh toán
+                  Thanh toán & Giao hàng
                 </h3>
-                <div className="payment-info">
-                  <div className="payment-method">
-                    <label>Phương thức thanh toán:</label>
+                <div className="info-grid">
+                  <div className="info-item">
+                    <label>Phương thức:</label>
                     <span>
                       {order.payment_method === 'cod' ? (
                         <>
@@ -298,43 +298,33 @@ const OrderConfirmation = () => {
                       )}
                     </span>
                   </div>
-                  <div className="payment-status">
-                    <label>Trạng thái thanh toán:</label>
+                  <div className="info-item">
+                    <label>Trạng thái:</label>
                     <span className={`status-${order.payment_status}`}>
                       {getPaymentStatusText(order.payment_status)}
                     </span>
                   </div>
+                  {order.payment_method === 'bank_transfer' && order.payment_status === 'pending' && (
+                    <>
+                      <div className="info-item">
+                        <label>Ngân hàng:</label>
+                        <span>Vietcombank</span>
+                      </div>
+                      <div className="info-item">
+                        <label>Số TK:</label>
+                        <span>1234567890</span>
+                      </div>
+                      <div className="info-item">
+                        <label>Chủ TK:</label>
+                        <span>KHANG TRAM HUONG</span>
+                      </div>
+                      <div className="info-item full-width">
+                        <label>Nội dung CK:</label>
+                        <span>Thanh toan don hang {order.order_number} - {formatPrice(order.total_amount)}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
-
-                {order.payment_method === 'bank_transfer' && order.payment_status === 'pending' && (
-                  <div className="bank-transfer-info">
-                    <h4>
-                      <ion-icon name="information-circle-outline"></ion-icon>
-                      Thông tin chuyển khoản
-                    </h4>
-                    <div className="bank-details">
-                      <div className="bank-item">
-                        <strong>Ngân hàng:</strong> Vietcombank
-                      </div>
-                      <div className="bank-item">
-                        <strong>Số tài khoản:</strong> 1234567890
-                      </div>
-                      <div className="bank-item">
-                        <strong>Chủ tài khoản:</strong> KHANG TRAM HUONG
-                      </div>
-                      <div className="bank-item highlight">
-                        <strong>Nội dung chuyển khoản:</strong> Thanh toan don hang {order.order_number}
-                      </div>
-                      <div className="bank-item highlight">
-                        <strong>Số tiền:</strong> {formatPrice(order.total_amount)}
-                      </div>
-                    </div>
-                    <p className="bank-note">
-                      <ion-icon name="information-circle-outline"></ion-icon>
-                      Vui lòng chuyển khoản đúng số tiền và nội dung để đơn hàng được xử lý nhanh chóng.
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
 

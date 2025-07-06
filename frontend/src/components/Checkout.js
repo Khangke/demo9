@@ -348,15 +348,46 @@ const Checkout = () => {
                 <div className="checkout-main-optimized">
                   
                   {/* Shipping Information Section */}
-                  <div className="checkout-section-optimized">
-                    <div className="section-header-compact">
+                  <div className="checkout-section-enhanced">
+                    <div className="section-header-enhanced">
                       <h3>
                         <ion-icon name="location-outline"></ion-icon>
                         Thông tin giao hàng
                       </h3>
                     </div>
 
-                    <div className="form-grid-compact" 
+                    {/* Address Type Selector */}
+                    <div className="address-type-selector">
+                      <label className="address-type-label">Loại địa chỉ:</label>
+                      <div className="address-type-options">
+                        <button
+                          type="button"
+                          className={`address-type-btn ${addressType === 'home' ? 'active' : ''}`}
+                          onClick={() => setAddressType('home')}
+                        >
+                          <ion-icon name="home-outline"></ion-icon>
+                          <span>Nhà riêng</span>
+                        </button>
+                        <button
+                          type="button"
+                          className={`address-type-btn ${addressType === 'office' ? 'active' : ''}`}
+                          onClick={() => setAddressType('office')}
+                        >
+                          <ion-icon name="business-outline"></ion-icon>
+                          <span>Văn phòng</span>
+                        </button>
+                        <button
+                          type="button"
+                          className={`address-type-btn ${addressType === 'other' ? 'active' : ''}`}
+                          onClick={() => setAddressType('other')}
+                        >
+                          <ion-icon name="location-outline"></ion-icon>
+                          <span>Địa chỉ khác</span>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="form-grid-enhanced" 
                          itemScope 
                          itemType="https://schema.org/PostalAddress">
 

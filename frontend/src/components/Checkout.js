@@ -174,7 +174,23 @@ const Checkout = () => {
     if (!formData.ward.trim()) newErrors.ward = 'Vui lòng chọn phường/xã';
 
     setErrors(newErrors);
+    setShowValidation(true);
     return Object.keys(newErrors).length === 0;
+  };
+
+  // Calculate form completion percentage
+  const calculateProgress = () => {
+    const requiredFields = ['full_name', 'phone', 'email', 'address', 'city', 'district', 'ward'];
+    const completedCount = requiredFields.filter(field => formData[field].trim()).length;
+    return Math.round((completedCount / requiredFields.length) * 100);
+  };
+
+  // Get field status for styling
+  const getFieldStatus = (fieldName) => {
+    if (errors[fieldName]) return 'error';
+    if (completedFields.has(fieldName)) return 'success';
+    if (fieldFocus[fieldName]) return 'focus';
+    return 'default';
   };
 
   const handleSubmit = async (e) => {

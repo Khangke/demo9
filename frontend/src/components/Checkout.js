@@ -351,39 +351,75 @@ const Checkout = () => {
 
                       <div className="form-row">
                         <div className="form-group">
-                          <label htmlFor="full_name" className="form-label-compact">
-                            Họ và tên <span className="required">*</span>
+                          <label htmlFor="full_name" className="form-label-enhanced">
+                            <span className="label-text">
+                              Họ và tên <span className="required">*</span>
+                            </span>
+                            {getFieldStatus('full_name') === 'success' && (
+                              <ion-icon name="checkmark-circle" className="field-success-icon"></ion-icon>
+                            )}
                           </label>
-                          <input
-                            type="text"
-                            id="full_name"
-                            name="full_name"
-                            value={formData.full_name}
-                            onChange={handleInputChange}
-                            className={`form-input-compact ${errors.full_name ? 'error' : ''}`}
-                            placeholder="Nhập họ và tên"
-                            itemProp="name"
-                            required
-                          />
-                          {errors.full_name && <span className="error-message-compact">{errors.full_name}</span>}
+                          <div className="input-wrapper">
+                            <input
+                              type="text"
+                              id="full_name"
+                              name="full_name"
+                              value={formData.full_name}
+                              onChange={handleInputChange}
+                              onFocus={() => handleInputFocus('full_name')}
+                              onBlur={() => handleInputBlur('full_name')}
+                              className={`form-input-enhanced ${getFieldStatus('full_name')}`}
+                              placeholder="Nhập họ và tên đầy đủ"
+                              itemProp="name"
+                              required
+                            />
+                            <div className="input-border"></div>
+                          </div>
+                          {errors.full_name && (
+                            <span className="error-message-enhanced">
+                              <ion-icon name="alert-circle"></ion-icon>
+                              {errors.full_name}
+                            </span>
+                          )}
+                          {fieldFocus.full_name && !errors.full_name && (
+                            <span className="help-text">Nhập họ và tên đầy đủ như trên CMND/CCCD</span>
+                          )}
                         </div>
 
                         <div className="form-group">
-                          <label htmlFor="phone" className="form-label-compact">
-                            Số điện thoại <span className="required">*</span>
+                          <label htmlFor="phone" className="form-label-enhanced">
+                            <span className="label-text">
+                              Số điện thoại <span className="required">*</span>
+                            </span>
+                            {getFieldStatus('phone') === 'success' && (
+                              <ion-icon name="checkmark-circle" className="field-success-icon"></ion-icon>
+                            )}
                           </label>
-                          <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            className={`form-input-compact ${errors.phone ? 'error' : ''}`}
-                            placeholder="Nhập số điện thoại"
-                            itemProp="telephone"
-                            required
-                          />
-                          {errors.phone && <span className="error-message-compact">{errors.phone}</span>}
+                          <div className="input-wrapper">
+                            <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              onFocus={() => handleInputFocus('phone')}
+                              onBlur={() => handleInputBlur('phone')}
+                              className={`form-input-enhanced ${getFieldStatus('phone')}`}
+                              placeholder="0xxx xxx xxx"
+                              itemProp="telephone"
+                              required
+                            />
+                            <div className="input-border"></div>
+                          </div>
+                          {errors.phone && (
+                            <span className="error-message-enhanced">
+                              <ion-icon name="alert-circle"></ion-icon>
+                              {errors.phone}
+                            </span>
+                          )}
+                          {fieldFocus.phone && !errors.phone && (
+                            <span className="help-text">Số điện thoại để liên hệ giao hàng</span>
+                          )}
                         </div>
                       </div>
 

@@ -152,38 +152,44 @@ const OrderConfirmation = () => {
       )}
       
       <div className="order-confirmation-page-luxury">
-      {/* Success Banner */}
-      <div className="success-banner">
+      {/* Enhanced Success Banner */}
+      <div className="success-banner-luxury">
         <div className="container">
-          <div className="success-content">
-            <div className="success-icon">
-              <ion-icon name="checkmark-circle"></ion-icon>
+          <div className="success-content-luxury">
+            <div className="success-icon-luxury">
+              <div className="icon-circle">
+                <ion-icon name="checkmark-circle"></ion-icon>
+              </div>
+              <div className="success-ripple"></div>
             </div>
-            <div className="success-text">
+            <div className="success-text-luxury">
               <h1>Đặt hàng thành công!</h1>
-              <p>Cảm ơn bạn đã tin tưởng và đặt hàng tại Khang Trầm Hương</p>
+              <p>Cảm ơn bạn đã tin tưởng và đặt hàng tại <span className="brand-highlight">Khang Trầm Hương</span></p>
+              <div className="order-number-highlight">
+                Mã đơn hàng: <strong>#{order.order_number}</strong>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="order-details-content">
+      <div className="order-details-content-luxury">
         <div className="container">
-          <div className="order-layout">
+          <div className="order-layout-luxury">
             {/* Order Information */}
-            <div className="order-main">
-              <div className="order-header">
-                <div className="order-number">
+            <div className="order-main-luxury">
+              <div className="order-header-luxury">
+                <div className="order-number-card">
                   <h2>
                     <ion-icon name="receipt-outline"></ion-icon>
-                    Đơn hàng #{order.order_number}
+                    Thông tin đơn hàng
                   </h2>
-                  <div className="order-meta">
-                    <span className="order-date">
+                  <div className="order-meta-luxury">
+                    <span className="order-date-luxury">
                       <ion-icon name="calendar-outline"></ion-icon>
                       Ngày đặt: {formatDate(order.created_at)}
                     </span>
-                    <span className={`order-status status-${order.order_status}`}>
+                    <span className={`order-status-luxury status-${order.order_status}`}>
                       <ion-icon name="information-circle-outline"></ion-icon>
                       {getOrderStatusText(order.order_status)}
                     </span>

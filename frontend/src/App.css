@@ -2462,7 +2462,296 @@ select.form-input-compact:disabled {
   font-size: 0.75rem;
 }
 
-/* Enhanced Checkout UX Styles */
+/* Enhanced Checkout Styles - Luxury UX/UI */
+
+/* Enhanced Checkout Animations */
+@keyframes checkoutFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes checkoutSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes checkoutSlideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes subtleGlow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(244, 208, 63, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(244, 208, 63, 0.4);
+  }
+}
+
+@keyframes successPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+/* Enhanced Section Styling */
+.checkout-section-enhanced {
+  background: linear-gradient(135deg, rgba(30, 30, 30, 0.7) 0%, rgba(20, 20, 20, 0.9) 100%);
+  border: 1px solid rgba(244, 208, 63, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 2px 8px rgba(244, 208, 63, 0.05);
+  transition: all 0.3s ease;
+  animation: checkoutFadeIn 0.6s ease-out;
+}
+
+.checkout-section-enhanced:hover {
+  border-color: rgba(244, 208, 63, 0.2);
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.3),
+    0 3px 12px rgba(244, 208, 63, 0.1);
+  transform: translateY(-2px);
+}
+
+.section-header-enhanced {
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(244, 208, 63, 0.1);
+  padding-bottom: 1rem;
+}
+
+.section-header-enhanced h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #F4D03F;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.section-header-enhanced h3 ion-icon {
+  font-size: 1.3rem;
+  color: #F4D03F;
+}
+
+/* Enhanced Address Type Selector */
+.address-type-selector {
+  margin-bottom: 2rem;
+  animation: checkoutSlideInLeft 0.7s ease-out 0.2s backwards;
+}
+
+.address-type-label {
+  display: block;
+  color: #E8E8E8;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.address-type-options {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.address-type-btn {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  background: linear-gradient(135deg, rgba(40, 40, 40, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
+  border: 2px solid rgba(244, 208, 63, 0.2);
+  border-radius: 12px;
+  color: #B8B8B8;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.address-type-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(244, 208, 63, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.address-type-btn:hover {
+  border-color: rgba(244, 208, 63, 0.4);
+  color: #E8E8E8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(244, 208, 63, 0.15);
+}
+
+.address-type-btn:hover::before {
+  left: 100%;
+}
+
+.address-type-btn.active {
+  background: linear-gradient(135deg, rgba(244, 208, 63, 0.15) 0%, rgba(243, 156, 18, 0.1) 100%);
+  border-color: rgba(244, 208, 63, 0.6);
+  color: #F4D03F;
+  box-shadow: 
+    0 4px 16px rgba(244, 208, 63, 0.2),
+    inset 0 1px 0 rgba(244, 208, 63, 0.1);
+  animation: subtleGlow 2s ease-in-out infinite;
+}
+
+.address-type-btn.active ion-icon {
+  color: #F4D03F;
+  font-size: 1.2rem;
+}
+
+.address-type-btn ion-icon {
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.address-type-btn span {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Enhanced Form Grid */
+.form-grid-enhanced {
+  display: grid;
+  gap: 1.5rem;
+  animation: checkoutSlideInRight 0.7s ease-out 0.3s backwards;
+}
+
+/* Enhanced Order Button with Success State */
+.place-order-btn-enhanced.submitting-success {
+  background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+  color: white;
+  animation: successPulse 1s ease-in-out infinite;
+}
+
+.place-order-btn-enhanced.submitting-success .spinner-enhanced {
+  border-top-color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Success Message Overlay */
+.success-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: checkoutFadeIn 0.3s ease-out;
+}
+
+.success-message-content {
+  background: linear-gradient(135deg, #4CAF50 0%, #45A049 100%);
+  color: white;
+  padding: 2rem 3rem;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+  animation: successPulse 1s ease-in-out infinite;
+}
+
+.success-message-content ion-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.success-message-content h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.success-message-content p {
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  .checkout-section-enhanced {
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .address-type-options {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .address-type-btn {
+    min-width: auto;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  .address-type-btn ion-icon {
+    font-size: 1rem;
+  }
+  
+  .address-type-btn span {
+    font-size: 0.9rem;
+  }
+}
+
+/* Enhanced compact styles for better integration */
+.form-grid-compact {
+  animation: checkoutSlideInRight 0.7s ease-out 0.3s backwards;
+}
+
+.checkout-main-optimized {
+  animation: checkoutSlideInLeft 0.6s ease-out;
+}
+
+.checkout-sidebar-optimized {
+  animation: checkoutSlideInRight 0.6s ease-out 0.1s backwards;
+}
 
 /* Progress Indicator */
 .checkout-progress {

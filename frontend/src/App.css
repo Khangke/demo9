@@ -1267,27 +1267,33 @@ body {
 /* Improved Select dropdown styling */
 .form-input-compact select,
 select.form-input-compact {
-  background: rgba(30, 30, 30, 0.7);
-  border: 1px solid rgba(244, 208, 63, 0.2);
-  border-radius: 8px;
-  padding: 0.75rem 2.75rem 0.75rem 0.875rem;
-  color: #E8E8E8;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  min-height: 44px;
-  line-height: 1.4;
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F4D03F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 0.875rem center;
-  background-size: 1rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
-  box-sizing: border-box;
+  background: rgba(30, 30, 30, 0.7) !important;
+  border: 1px solid rgba(244, 208, 63, 0.2) !important;
+  border-radius: 8px !important;
+  padding: 0.75rem 2.75rem 0.75rem 0.875rem !important;
+  color: #E8E8E8 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  min-height: 44px !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F4D03F' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.875rem center !important;
+  background-size: 1rem !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 .form-input-compact select:focus,

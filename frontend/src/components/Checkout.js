@@ -692,34 +692,45 @@ const Checkout = () => {
                       </div>
                     </div>
 
-                    {/* Single Order Button */}
+                    {/* Enhanced Order Button */}
                     <button 
                       type="submit" 
-                      className="place-order-btn-optimized"
-                      disabled={submitting}
+                      className={`place-order-btn-enhanced ${calculateProgress() === 100 ? 'ready' : 'not-ready'}`}
+                      disabled={submitting || calculateProgress() !== 100}
                     >
                       {submitting ? (
                         <>
-                          <div className="spinner-compact"></div>
-                          <span>Đang xử lý...</span>
+                          <div className="spinner-enhanced"></div>
+                          <span>Đang xử lý đơn hàng...</span>
                         </>
-                      ) : (
+                      ) : calculateProgress() === 100 ? (
                         <>
                           <ion-icon name="checkmark-circle-outline"></ion-icon>
                           <span>Xác nhận đặt hàng</span>
+                          <div className="button-shine"></div>
+                        </>
+                      ) : (
+                        <>
+                          <ion-icon name="information-circle-outline"></ion-icon>
+                          <span>Vui lòng điền đầy đủ thông tin ({calculateProgress()}%)</span>
                         </>
                       )}
                     </button>
 
-                    <div className="payment-security-compact">
-                      <div className="security-items-compact">
-                        <div className="security-item-compact">
-                          <ion-icon name="shield-checkmark-outline"></ion-icon>
-                          <span>Bảo mật SSL</span>
+                    {/* Order Security Features */}
+                    <div className="order-security-enhanced">
+                      <div className="security-features">
+                        <div className="security-item">
+                          <ion-icon name="shield-checkmark"></ion-icon>
+                          <span>Thanh toán an toàn 256-bit SSL</span>
                         </div>
-                        <div className="security-item-compact">
-                          <ion-icon name="lock-closed-outline"></ion-icon>
-                          <span>Thông tin an toàn</span>
+                        <div className="security-item">
+                          <ion-icon name="time"></ion-icon>
+                          <span>Giao hàng trong 24-48h</span>
+                        </div>
+                        <div className="security-item">
+                          <ion-icon name="return-up-back"></ion-icon>
+                          <span>Đổi trả miễn phí trong 7 ngày</span>
                         </div>
                       </div>
                     </div>

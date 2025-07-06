@@ -328,92 +328,86 @@ const OrderConfirmation = () => {
               </div>
             </div>
 
-            {/* Order Summary Sidebar */}
-            <div className="order-sidebar">
-              <div className="order-summary-card">
+            {/* Compact Order Summary Sidebar */}
+            <div className="order-sidebar-compact">
+              <div className="order-summary-card-compact">
                 <h3>
                   <ion-icon name="calculator-outline"></ion-icon>
                   Tóm tắt đơn hàng
                 </h3>
                 
-                <div className="summary-calculations">
-                  <div className="calc-row">
-                    <span>Tạm tính ({order.items.reduce((sum, item) => sum + item.quantity, 0)} sản phẩm)</span>
+                <div className="summary-calculations-compact">
+                  <div className="calc-row-compact">
+                    <span>Tạm tính ({order.items.reduce((sum, item) => sum + item.quantity, 0)} SP)</span>
                     <span>{formatPrice(order.subtotal)}</span>
                   </div>
-                  <div className="calc-row">
-                    <span>Phí vận chuyển</span>
+                  <div className="calc-row-compact">
+                    <span>Phí ship</span>
                     <span>{formatPrice(order.shipping_fee)}</span>
                   </div>
                   {order.discount > 0 && (
-                    <div className="calc-row discount-row">
+                    <div className="calc-row-compact discount-row">
                       <span>Giảm giá</span>
                       <span>-{formatPrice(order.discount)}</span>
                     </div>
                   )}
-                  <div className="calc-divider"></div>
-                  <div className="calc-row total-row">
+                  <div className="calc-divider-compact"></div>
+                  <div className="calc-row-compact total-row">
                     <span>Tổng cộng</span>
-                    <span className="total-amount">{formatPrice(order.total_amount)}</span>
+                    <span className="total-amount-compact">{formatPrice(order.total_amount)}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="order-actions">
-                <Link to="/products" className="continue-shopping-btn">
+              <div className="order-actions-compact">
+                <Link to="/products" className="continue-shopping-btn-compact">
                   <ion-icon name="arrow-back-outline"></ion-icon>
                   Tiếp tục mua sắm
                 </Link>
-                <Link to="/" className="back-home-btn">
+                <Link to="/" className="back-home-btn-compact">
                   <ion-icon name="home-outline"></ion-icon>
                   Về trang chủ
                 </Link>
               </div>
 
-              <div className="order-support">
+              <div className="order-support-compact">
                 <h4>
                   <ion-icon name="headset-outline"></ion-icon>
-                  Cần hỗ trợ?
+                  Hỗ trợ
                 </h4>
-                <div className="support-contacts">
-                  <a href="tel:0123456789" className="support-item">
+                <div className="support-contacts-compact">
+                  <a href="tel:0123456789" className="support-item-compact">
                     <ion-icon name="call-outline"></ion-icon>
-                    <div>
-                      <strong>Hotline</strong>
-                      <span>0123 456 789</span>
-                    </div>
+                    <span>0123 456 789</span>
                   </a>
-                  <a href="mailto:support@khangtramhuong.com" className="support-item">
+                  <a href="mailto:support@khangtramhuong.com" className="support-item-compact">
                     <ion-icon name="mail-outline"></ion-icon>
-                    <div>
-                      <strong>Email</strong>
-                      <span>support@khangtramhuong.com</span>
-                    </div>
+                    <span>support@khangtramhuong.com</span>
                   </a>
                 </div>
               </div>
 
-              <div className="order-next-steps">
+              <div className="order-next-steps-compact">
                 <h4>
                   <ion-icon name="list-outline"></ion-icon>
-                  Các bước tiếp theo
+                  Quy trình
                 </h4>
                 <ul>
                   <li>
                     <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    Chúng tôi sẽ xác nhận đơn hàng trong 2-4 giờ
+                    <span>Xác nhận trong 2-4h</span>
                   </li>
                   <li>
                     <ion-icon name="cube-outline"></ion-icon>
-                    Đóng gói và chuẩn bị hàng trong 1-2 ngày
+                    <span>Đóng gói 1-2 ngày</span>
                   </li>
                   <li>
                     <ion-icon name="car-outline"></ion-icon>
-                    Giao hàng trong 3-7 ngày làm việc
+                    <span>Giao hàng 3-7 ngày</span>
                   </li>
                   <li>
                     <ion-icon name="star-outline"></ion-icon>
-                    Đánh giá sản phẩm sau khi nhận hàng
+                    <span>Đánh giá sản phẩm</span>
                   </li>
                 </ul>
               </div>

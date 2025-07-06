@@ -197,7 +197,7 @@ const OrderConfirmation = () => {
                 </div>
               </div>
 
-              {/* Customer Information */}
+              {/* Customer Information - Compact */}
               <div className="info-section">
                 <h3>
                   <ion-icon name="person-outline"></ion-icon>
@@ -216,11 +216,13 @@ const OrderConfirmation = () => {
                     <label>Email:</label>
                     <span>{order.customer_info.email}</span>
                   </div>
-                  <div className="info-item full-width">
-                    <label>Địa chỉ giao hàng:</label>
-                    <span>
-                      {order.customer_info.address}, {order.customer_info.ward}, {order.customer_info.district}, {order.customer_info.city}
-                    </span>
+                  <div className="info-item">
+                    <label>Địa chỉ:</label>
+                    <span>{order.customer_info.address}, {order.customer_info.ward}</span>
+                  </div>
+                  <div className="info-item">
+                    <label>Khu vực:</label>
+                    <span>{order.customer_info.district}, {order.customer_info.city}</span>
                   </div>
                   {order.customer_info.notes && (
                     <div className="info-item full-width">

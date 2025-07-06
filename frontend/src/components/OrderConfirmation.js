@@ -119,7 +119,39 @@ const OrderConfirmation = () => {
   }
 
   return (
-    <div className="order-confirmation-page">
+    <>
+      <Helmet>
+        <title>Đặt hàng thành công - Khang Trầm Hương | Cảm ơn quý khách</title>
+        <meta name="description" content="Đặt hàng trầm hương thành công. Cảm ơn quý khách đã tin tưởng Khang Trầm Hương. Đơn hàng sẽ được xử lý trong 2-4 giờ." />
+        <meta name="keywords" content="đặt hàng thành công, xác nhận đơn hàng, trầm hương, cảm ơn khách hàng" />
+        <meta property="og:title" content="Đặt hàng thành công - Khang Trầm Hương" />
+        <meta property="og:description" content="Cảm ơn quý khách đã đặt hàng thành công tại Khang Trầm Hương" />
+        <meta property="og:type" content="website" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
+      
+      {/* Celebration Overlay */}
+      {showCelebration && (
+        <div className="celebration-overlay">
+          <div className="celebration-content">
+            <div className="celebration-icon">
+              <ion-icon name="checkmark-circle"></ion-icon>
+            </div>
+            <div className="celebration-text">
+              <h2>🎉 Đặt hàng thành công!</h2>
+              <p>Cảm ơn bạn đã tin tưởng Khang Trầm Hương</p>
+            </div>
+            <div className="celebration-sparkles">
+              <div className="sparkle sparkle-1">✨</div>
+              <div className="sparkle sparkle-2">⭐</div>
+              <div className="sparkle sparkle-3">💫</div>
+              <div className="sparkle sparkle-4">✨</div>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      <div className="order-confirmation-page-luxury">
       {/* Success Banner */}
       <div className="success-banner">
         <div className="container">

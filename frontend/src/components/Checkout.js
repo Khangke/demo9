@@ -308,6 +308,25 @@ const Checkout = () => {
                 Hoàn tất đặt hàng
               </h1>
               <p className="checkout-subtitle">Vui lòng điền thông tin để hoàn tất đơn hàng</p>
+              
+              {/* Progress Indicator */}
+              <div className="checkout-progress">
+                <div className="progress-bar">
+                  <div 
+                    className="progress-fill" 
+                    style={{ width: `${calculateProgress()}%` }}
+                  ></div>
+                </div>
+                <div className="progress-text">
+                  <span>Hoàn thành: {calculateProgress()}%</span>
+                  {calculateProgress() === 100 && (
+                    <span className="progress-complete">
+                      <ion-icon name="checkmark-circle"></ion-icon>
+                      Sẵn sàng đặt hàng
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} 

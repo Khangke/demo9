@@ -29,7 +29,6 @@ const Checkout = () => {
     phone: '',
     email: '',
     address: '',
-    address_type: 'home', // New field for address type
     city: '',
     district: '',
     ward: '',
